@@ -7,19 +7,19 @@ const Producto = db.define('producto', {
 
   nombre: {
     type: DataTypes.STRING,
-    allowNull: false,
+    allowNull: false
   },
   descripcion: {
     type: DataTypes.TEXT,
-    defaultValue: ,
+    allowNull: false
   },
   precio: {
     type: DataTypes.FLOAT,
-    allowNull: false,
+    allowNull: false
   },
   disponibilidad: {
     type: DataTypes.INTEGER,
-    defaultValue: 0,
+    defaultValue: 0
   }
 
 });
