@@ -8,11 +8,11 @@ const ProductosOrden = db.define('productosOrden', {
     },
     descripción: {
         type: Sequelize.TEXT("long"),
-        allowNull: false,
+        allowNull: false
     },
     precio: {
         type: Sequelize. DOUBLE,
-        allowNull: false,
+        allowNull: false
     },
     cantidad: {
         type: Sequelize. NUMBER
