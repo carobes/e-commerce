@@ -1,5 +1,5 @@
-import Sequelize from 'sequelize';
-import db from './db';
+const Sequelize = require('sequelize');
+const db = require('./db');
 
 
 const Ordenes = db.define('ordenes', {
@@ -27,4 +27,4 @@ const Ordenes = db.define('ordenes', {
 
 });
 
-export default Ordenes;
+module.exports = Ordenes;
