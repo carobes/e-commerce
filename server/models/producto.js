@@ -11,9 +11,11 @@ const Producto = db.define('producto', {
   },
   descripcion: {
     type: DataTypes.TEXT,
+    defaultValue: ,
   },
   precio: {
     type: DataTypes.FLOAT,
+    allowNull: false,
   },
   disponibilidad: {
     type: DataTypes.INTEGER,
