@@ -7,7 +7,7 @@ const Estado = db.define('estado', {
 
   estado: {
     DataTypes.STRING,
-    allowNull: false,
+    allowNull: false
   }
 
 });
