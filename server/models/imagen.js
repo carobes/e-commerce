@@ -7,7 +7,7 @@ const Imagen = db.define('imagen', {
 
   ruta: {
     type: DataTypes.STRING,
-    allowNull: false,
+    allowNull: false
   }
 
 });
