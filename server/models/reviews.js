@@ -7,7 +7,7 @@ const Reviews = db.define('productosOrden', {
         allowNull: false
     },
     rating: {
-        type: Sequelize.NUMBER,
+        type: Sequelize.INTEGER,
         allowNull: false
     }
 });

@@ -1,3 +1,4 @@
+const Sequelize = require('sequelize');
 const Carrito = require('./carrito');
 const Categoria = require('./categoria');
 const Estado = require('./estado');
