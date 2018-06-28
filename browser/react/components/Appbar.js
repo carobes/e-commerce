@@ -1,10 +1,15 @@
 import React from 'react';
-import AppBar from '@material-ui/core/AppBar';
-import Toolbar from '@material-ui/core/Toolbar';
-import Typography from '@material-ui/core/Typography';
+import { AppBar, Toolbar, Typography, Divider } from '@material-ui/core';
+import Login from './Login';
 import { withStyles } from '@material-ui/core/styles';
 
 const styles = {
+    root: {
+        flexGrow: 1
+    },
+    flex: {
+        flex: 1
+    },
     colorBar: {
         backgroundColor: '#2196F3',
         color: 'white'
@@ -13,11 +18,16 @@ const styles = {
 
 export default withStyles(styles)(props => {
     const {classes} = props
-    return <AppBar className={classes.colorBar} position="sticky" color="inherit">
+    return ( 
+    <div className={classes.root}>
+    <AppBar className={classes.colorBar} position="static" color="inherit">
         <Toolbar>
-          <Typography variant="title" color="inherit">
+          <Typography className={classes.flex} variant="title" color="inherit">
             TonE-Commerce
           </Typography>
+          <Login />
         </Toolbar>
       </AppBar>
+    </div>
+    )
 })
