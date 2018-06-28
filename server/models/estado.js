@@ -6,7 +6,7 @@ const DataTypes = db.Sequelize;
 const Estado = db.define('estado', {
 
   estado: {
-    DataTypes.STRING,
+    type: DataTypes.STRING,
     allowNull: false
   }
 
