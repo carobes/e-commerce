@@ -11,11 +11,11 @@ const ProductosOrden = db.define('productosOrden', {
         allowNull: false
     },
     precio: {
-        type: Sequelize. DOUBLE,
+        type: Sequelize.DOUBLE,
         allowNull: false
     },
     cantidad: {
-        type: Sequelize. NUMBER
+        type: Sequelize.INTEGER
     }
 });
 
