@@ -1,8 +1,9 @@
 module.exports = {
+    mode: 'development',
     entry: ['./react/index.js'],
     output: {
         filename: "bundle.js",
-        path: __dirname + "./public"
+        path: __dirname + "/public"
     },
     context: __dirname,
     devtool: 'source-map',
