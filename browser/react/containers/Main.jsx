@@ -1,8 +1,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import Button from '@material-ui/core/Button';
-import { Login } from '../components/Loggin';
-import withStyles from '../components/Loggin'
+import { withStyles } from '@material-ui/core/styles';
+import { Login } from '../components/Login';
+import Carrito from '../components/Carrito';
+
 
 
 
@@ -18,6 +19,7 @@ export default class Main extends React.Component {
         return (
             <div>
                 <Login />
+                <Carrito />
             </div>
         )
     }
