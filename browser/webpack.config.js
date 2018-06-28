@@ -1,21 +1,22 @@
 module.exports = {
-    devtool: 'source-map',
     entry: ['./react/index.js'],
+    output: {
+        filename: "bundle.js",
+        path: __dirname + "./public"
+    },
+    context: __dirname,
+    devtool: 'source-map',
     resolve: {
         extensions: ['.js', '.jsx']
     },
     module: {
-        loaders: [
+        rules: [
             {
                 test: /(\.js|\.jsx)$/,
                 loader: 'babel-loader',
                 exclude: /node_modules/,
-                query: { presets: ['env', 'stage-0', 'react'] }
+                query: { presets: ['react', 'env', 'stage-0'] }
             }
         ]
-    },
-    output: {
-        filename: "bundle.js",
-        path: __dirname + '/public'
     }
 }

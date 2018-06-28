@@ -12,8 +12,8 @@ app.use(bodyParser.json());
 app.use(routes);
 
 app.get('/', function (req, res, next) {
-    const indexFilePath = path.resolve(`${__dirname}/../browser/index.html`)
-    res.sendfile(indexFilePath)
+  const indexFilePath = path.resolve(`${__dirname}/../browser/index.html`)
+  res.sendfile(indexFilePath)
 })
 
 app.use((err, req, res, next) => {
