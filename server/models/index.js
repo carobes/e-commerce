@@ -9,8 +9,8 @@ const ProductosOrden = require('./productosOrden');
 const Reviews = require('./reviews');
 const Users = require('./users');
 
-Producto.belongsToMany(Categoria, {through: 'productoCategoria'});
-Categoria.belongsToMany(Producto, {through: 'productoCategoria'});
+Producto.belongsToMany(Categoria, {as: 'Category', through: 'productoCategoria'});
+Categoria.belongsToMany(Producto, {as: 'Category', through: 'productoCategoria'});
 
 Producto.belongsToMany(Carrito, {through: 'productoCarrito'});
 Carrito.belongsToMany(Producto, {through: 'productoCarrito'});
