@@ -19,8 +19,6 @@ export default withStyles(styles)(props => {
             <IconButton className={classes.button} aria-label="Add to shopping cart">
                 <AddShoppingCartIcon />
             </IconButton>
-
-
         </div>
     );
 })
