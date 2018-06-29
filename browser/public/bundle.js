@@ -67263,6 +67263,128 @@ exports.default = (0, _styles.withStyles)(styles)(function (props) {
 
 /***/ }),
 
+/***/ "./react/components/Sidebar.js":
+/*!*************************************!*\
+  !*** ./react/components/Sidebar.js ***!
+  \*************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _react = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+
+var _react2 = _interopRequireDefault(_react);
+
+var _propTypes = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
+
+var _propTypes2 = _interopRequireDefault(_propTypes);
+
+var _styles = __webpack_require__(/*! @material-ui/core/styles */ "./node_modules/@material-ui/core/styles/index.js");
+
+var _Paper = __webpack_require__(/*! @material-ui/core/Paper */ "./node_modules/@material-ui/core/Paper/index.js");
+
+var _Paper2 = _interopRequireDefault(_Paper);
+
+var _Grid = __webpack_require__(/*! @material-ui/core/Grid */ "./node_modules/@material-ui/core/Grid/index.js");
+
+var _Grid2 = _interopRequireDefault(_Grid);
+
+var _Button = __webpack_require__(/*! @material-ui/core/Button */ "./node_modules/@material-ui/core/Button/index.js");
+
+var _Button2 = _interopRequireDefault(_Button);
+
+var _FormLabel = __webpack_require__(/*! @material-ui/core/FormLabel */ "./node_modules/@material-ui/core/FormLabel/index.js");
+
+var _FormLabel2 = _interopRequireDefault(_FormLabel);
+
+var _FormControl = __webpack_require__(/*! @material-ui/core/FormControl */ "./node_modules/@material-ui/core/FormControl/index.js");
+
+var _FormControl2 = _interopRequireDefault(_FormControl);
+
+var _FormGroup = __webpack_require__(/*! @material-ui/core/FormGroup */ "./node_modules/@material-ui/core/FormGroup/index.js");
+
+var _FormGroup2 = _interopRequireDefault(_FormGroup);
+
+var _FormControlLabel = __webpack_require__(/*! @material-ui/core/FormControlLabel */ "./node_modules/@material-ui/core/FormControlLabel/index.js");
+
+var _FormControlLabel2 = _interopRequireDefault(_FormControlLabel);
+
+var _FormHelperText = __webpack_require__(/*! @material-ui/core/FormHelperText */ "./node_modules/@material-ui/core/FormHelperText/index.js");
+
+var _FormHelperText2 = _interopRequireDefault(_FormHelperText);
+
+var _Checkbox = __webpack_require__(/*! @material-ui/core/Checkbox */ "./node_modules/@material-ui/core/Checkbox/index.js");
+
+var _Checkbox2 = _interopRequireDefault(_Checkbox);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var styles = function styles(theme) {
+  return {
+    button: {
+      margin: theme.spacing.unit
+    },
+    extendedIcon: {
+      marginRight: theme.spacing.unit
+    }
+  };
+};
+
+function Sidebar(_ref) {
+  var categorias = _ref.categorias,
+      classes = _ref.classes,
+      handleChange = _ref.handleChange,
+      handleSubmit = _ref.handleSubmit;
+
+  return _react2.default.createElement(
+    _FormControl2.default,
+    { component: 'fieldset' },
+    _react2.default.createElement(
+      _FormLabel2.default,
+      { component: 'legend' },
+      'Selecciona Categor\xEDas'
+    ),
+    _react2.default.createElement(
+      _FormGroup2.default,
+      null,
+      Object.keys(categorias).map(function (etiqueta) {
+        return _react2.default.createElement(_FormControlLabel2.default, { key: etiqueta,
+          control: _react2.default.createElement(_Checkbox2.default, {
+            checked: categorias[etiqueta],
+            onChange: handleChange(etiqueta),
+            value: etiqueta
+          }),
+          label: etiqueta
+        });
+      }),
+      _react2.default.createElement(
+        _Button2.default,
+        { variant: 'extendedFab', 'aria-label': 'delete', className: classes.button, onClick: handleSubmit },
+        'Filtrar'
+      )
+    ),
+    _react2.default.createElement(
+      _FormHelperText2.default,
+      null,
+      'Se cuidadoso...'
+    )
+  );
+}
+
+Sidebar.propTypes = {
+  classes: _propTypes2.default.object.isRequired
+};
+
+exports.default = (0, _styles.withStyles)(styles)(Sidebar);
+
+/***/ }),
+
 /***/ "./react/containers/Main.js":
 /*!**********************************!*\
   !*** ./react/containers/Main.js ***!
@@ -67325,6 +67447,95 @@ exports.default = Main;
 
 /***/ }),
 
+/***/ "./react/containers/SidebarContainer.js":
+/*!**********************************************!*\
+  !*** ./react/containers/SidebarContainer.js ***!
+  \**********************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+
+var _react2 = _interopRequireDefault(_react);
+
+var _Sidebar = __webpack_require__(/*! ../components/Sidebar */ "./react/components/Sidebar.js");
+
+var _Sidebar2 = _interopRequireDefault(_Sidebar);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var SidebarContainer = function (_React$Component) {
+  _inherits(SidebarContainer, _React$Component);
+
+  function SidebarContainer(props) {
+    _classCallCheck(this, SidebarContainer);
+
+    var _this = _possibleConstructorReturn(this, (SidebarContainer.__proto__ || Object.getPrototypeOf(SidebarContainer)).call(this, props));
+
+    _this.handleChange = function (name) {
+      return function (event) {
+        var valor = event.target.checked;
+        var nuevoValorEtiqueta = {};
+        nuevoValorEtiqueta[name] = valor;
+        var nuevoStateCategorias = Object.assign({}, _this.state.categorias, nuevoValorEtiqueta);
+        _this.setState({ categorias: nuevoStateCategorias });
+      };
+    };
+
+    _this.handleSubmit = function (event) {
+      event.preventDefault();
+      var categorias = _this.state.categorias;
+      var filtros_arr = Object.keys(categorias).filter(function (categoria) {
+        if (categorias[categoria]) return categoria;
+      });
+      _this.setState({ filtros: filtros_arr }, function () {
+        return console.log(_this.state.filtros);
+      });
+    };
+
+    _this.state = {
+      categorias: {
+        herramientas: true,
+        tecnologia: true,
+        vestimenta: false,
+        calzado: true
+      },
+      filtros: []
+    };
+    _this.handleChange = _this.handleChange.bind(_this);
+    _this.handleSubmit = _this.handleSubmit.bind(_this);
+    return _this;
+  }
+
+  _createClass(SidebarContainer, [{
+    key: 'render',
+    value: function render() {
+      return _react2.default.createElement(_Sidebar2.default, { categorias: this.state.categorias, handleChange: this.handleChange, handleSubmit: this.handleSubmit });
+    }
+  }]);
+
+  return SidebarContainer;
+}(_react2.default.Component);
+
+exports.default = SidebarContainer;
+
+/***/ }),
+
 /***/ "./react/index.js":
 /*!************************!*\
   !*** ./react/index.js ***!
@@ -67349,12 +67560,16 @@ var _Main = __webpack_require__(/*! ./containers/Main */ "./react/containers/Mai
 
 var _Main2 = _interopRequireDefault(_Main);
 
+var _SidebarContainer = __webpack_require__(/*! ./containers/SidebarContainer */ "./react/containers/SidebarContainer.js");
+
+var _SidebarContainer2 = _interopRequireDefault(_SidebarContainer);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 _reactDom2.default.render(_react2.default.createElement(
     _reactRouterDom.BrowserRouter,
     null,
-    _react2.default.createElement(_reactRouterDom.Route, { path: '/', component: _Main2.default })
+    _react2.default.createElement(_reactRouterDom.Route, { path: '/', component: _SidebarContainer2.default })
 ), document.getElementById('app'));
 
 /***/ }),
