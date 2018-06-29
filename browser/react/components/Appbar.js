@@ -18,18 +18,19 @@ const styles = {
 }
 
 export default withStyles(styles)(props => {
-    const {classes} = props
-    return ( 
-    <div className={classes.root}>
-    <AppBar className={classes.colorBar} position="static" color="inherit">
-        <Toolbar>
-          <Typography className={classes.flex} variant="title" color="inherit">
-            TonE-Commerce
+    const { classes } = props
+    return (
+        <div className={classes.root}>
+            <AppBar className={classes.colorBar} position="static" color="inherit">
+                <Toolbar>
+                    <Typography className={classes.flex} variant="title" color="inherit">
+                        TonE-Commerce
           </Typography>
-          <Carrito />
-          <Login />
-        </Toolbar>
-      </AppBar>
-    </div>
+                    <Search setSearch={this.setSearch} search={this.state.search} handleSubmit={this.handleSubmit} />
+                    <Carrito />
+                    <Login />
+                </Toolbar>
+            </AppBar>
+        </div>
     )
 })
