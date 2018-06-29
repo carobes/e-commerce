@@ -30526,6 +30526,35 @@ exports.default = _default;
 
 /***/ }),
 
+/***/ "./node_modules/@material-ui/icons/ShoppingCart.js":
+/*!*********************************************************!*\
+  !*** ./node_modules/@material-ui/icons/ShoppingCart.js ***!
+  \*********************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var _interopRequireDefault = __webpack_require__(/*! @babel/runtime/helpers/builtin/interopRequireDefault */ "./node_modules/@babel/runtime/helpers/builtin/interopRequireDefault.js");
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+var _react = _interopRequireDefault(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
+
+var _createSvgIcon = _interopRequireDefault(__webpack_require__(/*! ./utils/createSvgIcon */ "./node_modules/@material-ui/icons/utils/createSvgIcon.js"));
+
+var _default = (0, _createSvgIcon.default)(_react.default.createElement("g", null, _react.default.createElement("path", {
+  d: "M7 18c-1.1 0-1.99.9-1.99 2S5.9 22 7 22s2-.9 2-2-.9-2-2-2zM1 2v2h2l3.6 7.59-1.35 2.45c-.16.28-.25.61-.25.96 0 1.1.9 2 2 2h12v-2H7.42c-.14 0-.25-.11-.25-.25l.03-.12.9-1.63h7.45c.75 0 1.41-.41 1.75-1.03l3.58-6.49c.08-.14.12-.31.12-.48 0-.55-.45-1-1-1H5.21l-.94-2H1zm16 16c-1.1 0-1.99.9-1.99 2s.89 2 1.99 2 2-.9 2-2-.9-2-2-2z"
+})), 'ShoppingCart');
+
+exports.default = _default;
+
+/***/ }),
+
 /***/ "./node_modules/@material-ui/icons/utils/createSvgIcon.js":
 /*!****************************************************************!*\
   !*** ./node_modules/@material-ui/icons/utils/createSvgIcon.js ***!
@@ -67182,9 +67211,9 @@ var _IconButton = __webpack_require__(/*! @material-ui/core/IconButton */ "./nod
 
 var _IconButton2 = _interopRequireDefault(_IconButton);
 
-var _AddShoppingCart = __webpack_require__(/*! @material-ui/icons/AddShoppingCart */ "./node_modules/@material-ui/icons/AddShoppingCart.js");
+var _ShoppingCart = __webpack_require__(/*! @material-ui/icons/ShoppingCart */ "./node_modules/@material-ui/icons/ShoppingCart.js");
 
-var _AddShoppingCart2 = _interopRequireDefault(_AddShoppingCart);
+var _ShoppingCart2 = _interopRequireDefault(_ShoppingCart);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -67204,7 +67233,7 @@ exports.default = (0, _styles.withStyles)(styles)(function (props) {
         _react2.default.createElement(
             _IconButton2.default,
             { className: classes.button, 'aria-label': 'Add to shopping cart' },
-            _react2.default.createElement(_AddShoppingCart2.default, null)
+            _react2.default.createElement(_ShoppingCart2.default, null)
         )
     );
 });
@@ -67263,6 +67292,96 @@ exports.default = (0, _styles.withStyles)(styles)(function (props) {
 
 /***/ }),
 
+/***/ "./react/components/Products.js":
+/*!**************************************!*\
+  !*** ./react/components/Products.js ***!
+  \**************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _react = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+
+var _react2 = _interopRequireDefault(_react);
+
+var _core = __webpack_require__(/*! @material-ui/core */ "./node_modules/@material-ui/core/index.es.js");
+
+var _AddShoppingCart = __webpack_require__(/*! @material-ui/icons/AddShoppingCart */ "./node_modules/@material-ui/icons/AddShoppingCart.js");
+
+var _AddShoppingCart2 = _interopRequireDefault(_AddShoppingCart);
+
+var _styles = __webpack_require__(/*! @material-ui/core/styles */ "./node_modules/@material-ui/core/styles/index.js");
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var styles = {
+    media: {
+        height: 0,
+        paddingTop: '56.25%' // 16:9
+    }
+};
+
+exports.default = (0, _styles.withStyles)(styles)(function (props) {
+    var classes = props.classes;
+
+    return _react2.default.createElement(
+        'div',
+        null,
+        _react2.default.createElement(
+            _core.Grid,
+            { container: true, spacing: 16 },
+            [0, 1, 3].map(function (value) {
+                return _react2.default.createElement(
+                    _core.Grid,
+                    { key: value, item: true, xs: 4 },
+                    _react2.default.createElement(
+                        _core.Card,
+                        { className: classes.card },
+                        _react2.default.createElement(_core.CardMedia, {
+                            component: 'a',
+                            href: '/',
+                            className: classes.media,
+                            image: '/img/NIK_9984_edited_nik_800.jpg',
+                            title: 'Contemplative Reptile'
+                        }),
+                        _react2.default.createElement(
+                            _core.CardContent,
+                            null,
+                            _react2.default.createElement(
+                                _core.Typography,
+                                { gutterBottom: true, variant: 'headline', component: 'h2' },
+                                'Lizard'
+                            ),
+                            _react2.default.createElement(
+                                _core.Typography,
+                                { component: 'p' },
+                                'Lizards are a widespread group of squamate reptiles, with over 6,000 species, ranging across all continents except Antarctica'
+                            )
+                        ),
+                        _react2.default.createElement(
+                            _core.CardActions,
+                            null,
+                            _react2.default.createElement(
+                                _core.IconButton,
+                                { size: 'small', color: 'secondary' },
+                                _react2.default.createElement(_AddShoppingCart2.default, null)
+                            )
+                        )
+                    )
+                );
+            })
+        )
+    );
+});
+
+/***/ }),
+
 /***/ "./react/containers/Main.js":
 /*!**********************************!*\
   !*** ./react/containers/Main.js ***!
@@ -67286,6 +67405,10 @@ var _react2 = _interopRequireDefault(_react);
 var _Appbar = __webpack_require__(/*! ../components/Appbar */ "./react/components/Appbar.js");
 
 var _Appbar2 = _interopRequireDefault(_Appbar);
+
+var _Products = __webpack_require__(/*! ../components/Products */ "./react/components/Products.js");
+
+var _Products2 = _interopRequireDefault(_Products);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -67313,7 +67436,9 @@ var Main = function (_React$Component) {
             return _react2.default.createElement(
                 'div',
                 null,
-                _react2.default.createElement(_Appbar2.default, null)
+                _react2.default.createElement(_Appbar2.default, null),
+                _react2.default.createElement('br', null),
+                _react2.default.createElement(_Products2.default, null)
             );
         }
     }]);

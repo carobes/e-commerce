@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { withStyles } from '@material-ui/core/styles';
 import IconButton from '@material-ui/core/IconButton';
-import AddShoppingCartIcon from '@material-ui/icons/AddShoppingCart';
+import ShoppingCart from '@material-ui/icons/ShoppingCart';
 
 
 const styles = {
@@ -17,7 +17,7 @@ export default withStyles(styles)(props => {
     return (
         <div>
             <IconButton className={classes.button} aria-label="Add to shopping cart">
-                <AddShoppingCartIcon />
+                <ShoppingCart />
             </IconButton>
         </div>
     );
