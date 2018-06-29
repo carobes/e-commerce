@@ -1,4 +1,4 @@
-const {Producto, Imagen, Categoria, Reviews, Users} = require('./models/index')
+const {Producto, Imagen, Categoria, Reviews, Users, Estado, Ordenes, ProductosOrden} = require('./models/index')
 
 
 
@@ -111,16 +111,79 @@ const usuarios = [{
     admin: true
 }]
 
+const estados =  [{
+  estado: 'Creado'
+},{
+  estado: 'Procesando'
+},{
+  estado: 'Cancelado'
+},{
+  estado: 'Completado'
+}]
+
+
+const ordenes = [
+  {detalle: {
+    fecha: 08/08/18,
+    direccion: 'Av. Siempreviva 1234',
+    mail: "soyelmaildelcheckout@gmail.com",
+    productosOrdens: [
+        {nombre: 'Producto 1',
+        descripcion: 'Soy el producto uno',
+        precio: 20,
+        cantidad: 1}
+    ]},
+    asociacion: {include: [ ProductosOrden ]
+  },
+  usuario: "Alan",
+  estado: "Completado"},
+  {detalle: {
+    fecha: 04/05/18,
+    direccion: 'Av. Siempreviva 1234',
+    mail: "soyelmaildelcheckout@gmail.com",
+    productosOrdens: [
+        {nombre: 'Producto 3',
+        descripcion: 'Soy el producto tres',
+        precio: 150,
+        cantidad: 1},
+        {nombre: 'Producto 2',
+        descripcion: 'Soy el producto dos',
+        precio: 50,
+        cantidad: 1}
+    ]},
+    asociacion: {include: [ ProductosOrden ]
+  },
+  usuario: "Alan",
+  estado: "Cancelado"},
+  {detalle: {
+    fecha: 07/01/18,
+    direccion: 'Elm Street 1428',
+    mail: "soyotromaildelcheckout@gmail.com",
+    productosOrdens: [
+        {nombre: 'Producto 2',
+        descripcion: 'Soy el producto dos',
+        precio: 50,
+        cantidad: 1}
+    ]},
+    asociacion: {include: [ ProductosOrden ]
+  },
+  usuario: "Toni",
+  estado: "Procesando"}
+]
+
 function seed(){
     var pcat = categorias.map((categ) => Categoria.create(categ))
     var pprod = productos.map((producto) => Producto.create(producto.detalle, producto.asociacion))
     var puser = usuarios.map((usuario) => Users.create(usuario))
+    var pestado = estados.map((estado) => Estado.create(estado))
+    var porden = ordenes.map((orden) => Ordenes.create(orden.detalle, orden.asociacion))
    
 
-    Promise.all([...pcat,...pprod,...puser]).then(() => {
+    Promise.all([...pcat,...pprod,...puser,...pestado,...porden]).then(() => {
         catprod.map(obj => Producto.findOne({where:{nombre:obj.nombreprod}}).then(foundProd => obj.categorias.map(cat => Categoria.findOne({where:{categoria:cat.nombrecat}}).then(foundCat => foundProd.addCategory(foundCat.id)))))
     })
     .then(() => {reviews.map((review) => Producto.findOne({where:{nombre:review.producto}}).then((foundProd) => Users.findOne({where: {nombre: review.usuario}}).then((foundUser) => Reviews.create(review.detalle).then((reviewCreated) => {reviewCreated.setProducto(foundProd); reviewCreated.setUsuario(foundUser)}))))})
+    .then(() => {ordenes.map((orden) => Users.findOne({where:{nombre:orden.usuario}}).then((foundUser) => Estado.findOne({where:{estado:orden.estado}}).then(foundEstado => Ordenes.create(orden.detalle, orden.asociacion).then(ordenCreated => {ordenCreated.setUsuario(foundUser);ordenCreated.setStatus(foundEstado)}))))})
 }
 
 module.exports = seed;

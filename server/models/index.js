@@ -21,9 +21,11 @@ Reviews.belongsTo(Producto, {as: "producto"});
 
 Reviews.belongsTo(Users, {as: "usuario"});
 
+Ordenes.belongsTo(Users, {as: "usuario"});
+
 Carrito.belongsTo(Users);
 
-Ordenes.hasMany(Estado);
+Ordenes.belongsTo(Estado, {as: "status"});
 
 Ordenes.hasMany(ProductosOrden);
 
