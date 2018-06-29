@@ -1,7 +1,7 @@
 var db = require('./db.js');
 var Sequelize = require('sequelize');
 
-const Reviews = db.define('productosOrden', {    
+const Reviews = db.define('reviews', {    
     comentario: {
         type: Sequelize.TEXT("long"),
         allowNull: false
