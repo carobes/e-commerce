@@ -1,5 +1,6 @@
 import React from 'react';
 import Appbar from '../components/Appbar'
+import SidebarContainer from '../containers/SidebarContainer';
 
 export default class Main extends React.Component {
     constructor() {
@@ -13,6 +14,7 @@ export default class Main extends React.Component {
         return (
             <div>
                 <Appbar />
+                <SidebarContainer />
             </div>
         )
     }

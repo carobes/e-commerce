@@ -67409,6 +67409,10 @@ var _Appbar = __webpack_require__(/*! ../components/Appbar */ "./react/component
 
 var _Appbar2 = _interopRequireDefault(_Appbar);
 
+var _SidebarContainer = __webpack_require__(/*! ../containers/SidebarContainer */ "./react/containers/SidebarContainer.js");
+
+var _SidebarContainer2 = _interopRequireDefault(_SidebarContainer);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -67435,7 +67439,8 @@ var Main = function (_React$Component) {
             return _react2.default.createElement(
                 'div',
                 null,
-                _react2.default.createElement(_Appbar2.default, null)
+                _react2.default.createElement(_Appbar2.default, null),
+                _react2.default.createElement(_SidebarContainer2.default, null)
             );
         }
     }]);
