@@ -30497,6 +30497,35 @@ exports.default = _default;
 
 /***/ }),
 
+/***/ "./node_modules/@material-ui/icons/AddShoppingCart.js":
+/*!************************************************************!*\
+  !*** ./node_modules/@material-ui/icons/AddShoppingCart.js ***!
+  \************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var _interopRequireDefault = __webpack_require__(/*! @babel/runtime/helpers/builtin/interopRequireDefault */ "./node_modules/@babel/runtime/helpers/builtin/interopRequireDefault.js");
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+var _react = _interopRequireDefault(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
+
+var _createSvgIcon = _interopRequireDefault(__webpack_require__(/*! ./utils/createSvgIcon */ "./node_modules/@material-ui/icons/utils/createSvgIcon.js"));
+
+var _default = (0, _createSvgIcon.default)(_react.default.createElement("g", null, _react.default.createElement("path", {
+  d: "M11 9h2V6h3V4h-3V1h-2v3H8v2h3v3zm-4 9c-1.1 0-1.99.9-1.99 2S5.9 22 7 22s2-.9 2-2-.9-2-2-2zm10 0c-1.1 0-1.99.9-1.99 2s.89 2 1.99 2 2-.9 2-2-.9-2-2-2zm-9.83-3.25l.03-.12.9-1.63h7.45c.75 0 1.41-.41 1.75-1.03l3.86-7.01L19.42 4h-.01l-1.1 2-2.76 5H8.53l-.13-.27L6.16 6l-.95-2-.94-2H1v2h2l3.6 7.59-1.35 2.45c-.16.28-.25.61-.25.96 0 1.1.9 2 2 2h12v-2H7.42c-.13 0-.25-.11-.25-.25z"
+})), 'AddShoppingCart');
+
+exports.default = _default;
+
+/***/ }),
+
 /***/ "./node_modules/@material-ui/icons/Search.js":
 /*!***************************************************!*\
   !*** ./node_modules/@material-ui/icons/Search.js ***!
@@ -67083,6 +67112,139 @@ module.exports = function(originalModule) {
 
 /***/ }),
 
+/***/ "./react/components/Appbar.js":
+/*!************************************!*\
+  !*** ./react/components/Appbar.js ***!
+  \************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _react = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+
+var _react2 = _interopRequireDefault(_react);
+
+var _core = __webpack_require__(/*! @material-ui/core */ "./node_modules/@material-ui/core/index.es.js");
+
+var _Login = __webpack_require__(/*! ./Login */ "./react/components/Login.js");
+
+var _Login2 = _interopRequireDefault(_Login);
+
+var _styles = __webpack_require__(/*! @material-ui/core/styles */ "./node_modules/@material-ui/core/styles/index.js");
+
+var _Carrito = __webpack_require__(/*! ./Carrito */ "./react/components/Carrito.js");
+
+var _Carrito2 = _interopRequireDefault(_Carrito);
+
+var _Search = __webpack_require__(/*! ./Search */ "./react/components/Search.js");
+
+var _Search2 = _interopRequireDefault(_Search);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var styles = {
+    root: {
+        flexGrow: 1
+    },
+    flex: {
+        flex: 1
+    },
+    colorBar: {
+        backgroundColor: '#2196F3',
+        color: 'white'
+    }
+};
+
+exports.default = (0, _styles.withStyles)(styles)(function (props) {
+    var classes = props.classes;
+
+    return _react2.default.createElement(
+        'div',
+        { className: classes.root },
+        _react2.default.createElement(
+            _core.AppBar,
+            { className: classes.colorBar, position: 'static', color: 'inherit' },
+            _react2.default.createElement(
+                _core.Toolbar,
+                null,
+                _react2.default.createElement(
+                    _core.Typography,
+                    { className: classes.flex, variant: 'title', color: 'inherit' },
+                    'TonE-Commerce'
+                ),
+                _react2.default.createElement(_Search2.default, { setSearch: props.setSearch, search: props.search, handleSubmit: props.handleSubmit }),
+                _react2.default.createElement(_Carrito2.default, null),
+                _react2.default.createElement(_Login2.default, null)
+            )
+        )
+    );
+});
+
+/***/ }),
+
+/***/ "./react/components/Carrito.js":
+/*!*************************************!*\
+  !*** ./react/components/Carrito.js ***!
+  \*************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _react = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+
+var _react2 = _interopRequireDefault(_react);
+
+var _reactDom = __webpack_require__(/*! react-dom */ "./node_modules/react-dom/index.js");
+
+var _reactDom2 = _interopRequireDefault(_reactDom);
+
+var _styles = __webpack_require__(/*! @material-ui/core/styles */ "./node_modules/@material-ui/core/styles/index.js");
+
+var _IconButton = __webpack_require__(/*! @material-ui/core/IconButton */ "./node_modules/@material-ui/core/IconButton/index.js");
+
+var _IconButton2 = _interopRequireDefault(_IconButton);
+
+var _AddShoppingCart = __webpack_require__(/*! @material-ui/icons/AddShoppingCart */ "./node_modules/@material-ui/icons/AddShoppingCart.js");
+
+var _AddShoppingCart2 = _interopRequireDefault(_AddShoppingCart);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var styles = {
+    button: {
+        color: "white"
+    }
+};
+
+exports.default = (0, _styles.withStyles)(styles)(function (props) {
+    var classes = props.classes;
+
+
+    return _react2.default.createElement(
+        'div',
+        null,
+        _react2.default.createElement(
+            _IconButton2.default,
+            { className: classes.button, 'aria-label': 'Add to shopping cart' },
+            _react2.default.createElement(_AddShoppingCart2.default, null)
+        )
+    );
+});
+
+/***/ }),
+
 /***/ "./react/components/Input.js":
 /*!***********************************!*\
   !*** ./react/components/Input.js ***!
@@ -67178,6 +67340,58 @@ exports.default = (0, _styles.withStyles)(styles)(function (props) {
 
 /***/ }),
 
+/***/ "./react/components/Login.js":
+/*!***********************************!*\
+  !*** ./react/components/Login.js ***!
+  \***********************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _react = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+
+var _react2 = _interopRequireDefault(_react);
+
+var _Button = __webpack_require__(/*! @material-ui/core/Button */ "./node_modules/@material-ui/core/Button/index.js");
+
+var _Button2 = _interopRequireDefault(_Button);
+
+var _styles = __webpack_require__(/*! @material-ui/core/styles */ "./node_modules/@material-ui/core/styles/index.js");
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var styles = {
+    buttonLogin: {
+        backgroundColor: '#6eb4ea',
+        color: 'white',
+        '&:hover': {
+            color: 'white'
+        }
+    }
+};
+
+exports.default = (0, _styles.withStyles)(styles)(function (props) {
+    var classes = props.classes;
+
+    return _react2.default.createElement(
+        'div',
+        null,
+        _react2.default.createElement(
+            _Button2.default,
+            { className: classes.buttonLogin, size: 'medium' },
+            'Login'
+        )
+    );
+});
+
+/***/ }),
+
 /***/ "./react/components/Search.js":
 /*!************************************!*\
   !*** ./react/components/Search.js ***!
@@ -67242,10 +67456,132 @@ exports.default = (0, _core.withStyles)(styles)(function (props) {
 
 /***/ }),
 
-/***/ "./react/containers/Main.jsx":
-/*!***********************************!*\
-  !*** ./react/containers/Main.jsx ***!
-  \***********************************/
+/***/ "./react/components/Sidebar.js":
+/*!*************************************!*\
+  !*** ./react/components/Sidebar.js ***!
+  \*************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _react = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+
+var _react2 = _interopRequireDefault(_react);
+
+var _propTypes = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
+
+var _propTypes2 = _interopRequireDefault(_propTypes);
+
+var _styles = __webpack_require__(/*! @material-ui/core/styles */ "./node_modules/@material-ui/core/styles/index.js");
+
+var _Paper = __webpack_require__(/*! @material-ui/core/Paper */ "./node_modules/@material-ui/core/Paper/index.js");
+
+var _Paper2 = _interopRequireDefault(_Paper);
+
+var _Grid = __webpack_require__(/*! @material-ui/core/Grid */ "./node_modules/@material-ui/core/Grid/index.js");
+
+var _Grid2 = _interopRequireDefault(_Grid);
+
+var _Button = __webpack_require__(/*! @material-ui/core/Button */ "./node_modules/@material-ui/core/Button/index.js");
+
+var _Button2 = _interopRequireDefault(_Button);
+
+var _FormLabel = __webpack_require__(/*! @material-ui/core/FormLabel */ "./node_modules/@material-ui/core/FormLabel/index.js");
+
+var _FormLabel2 = _interopRequireDefault(_FormLabel);
+
+var _FormControl = __webpack_require__(/*! @material-ui/core/FormControl */ "./node_modules/@material-ui/core/FormControl/index.js");
+
+var _FormControl2 = _interopRequireDefault(_FormControl);
+
+var _FormGroup = __webpack_require__(/*! @material-ui/core/FormGroup */ "./node_modules/@material-ui/core/FormGroup/index.js");
+
+var _FormGroup2 = _interopRequireDefault(_FormGroup);
+
+var _FormControlLabel = __webpack_require__(/*! @material-ui/core/FormControlLabel */ "./node_modules/@material-ui/core/FormControlLabel/index.js");
+
+var _FormControlLabel2 = _interopRequireDefault(_FormControlLabel);
+
+var _FormHelperText = __webpack_require__(/*! @material-ui/core/FormHelperText */ "./node_modules/@material-ui/core/FormHelperText/index.js");
+
+var _FormHelperText2 = _interopRequireDefault(_FormHelperText);
+
+var _Checkbox = __webpack_require__(/*! @material-ui/core/Checkbox */ "./node_modules/@material-ui/core/Checkbox/index.js");
+
+var _Checkbox2 = _interopRequireDefault(_Checkbox);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var styles = function styles(theme) {
+  return {
+    button: {
+      margin: theme.spacing.unit
+    },
+    extendedIcon: {
+      marginRight: theme.spacing.unit
+    }
+  };
+};
+
+function Sidebar(_ref) {
+  var categorias = _ref.categorias,
+      classes = _ref.classes,
+      handleChange = _ref.handleChange,
+      handleSubmit = _ref.handleSubmit;
+
+  return _react2.default.createElement(
+    _FormControl2.default,
+    { component: 'fieldset' },
+    _react2.default.createElement(
+      _FormLabel2.default,
+      { component: 'legend' },
+      'Selecciona Categor\xEDas'
+    ),
+    _react2.default.createElement(
+      _FormGroup2.default,
+      null,
+      Object.keys(categorias).map(function (etiqueta) {
+        return _react2.default.createElement(_FormControlLabel2.default, { key: etiqueta,
+          control: _react2.default.createElement(_Checkbox2.default, {
+            checked: categorias[etiqueta],
+            onChange: handleChange(etiqueta),
+            value: etiqueta
+          }),
+          label: etiqueta
+        });
+      }),
+      _react2.default.createElement(
+        _Button2.default,
+        { variant: 'extendedFab', 'aria-label': 'delete', className: classes.button, onClick: handleSubmit },
+        'Filtrar'
+      )
+    ),
+    _react2.default.createElement(
+      _FormHelperText2.default,
+      null,
+      'Se cuidadoso...'
+    )
+  );
+}
+
+Sidebar.propTypes = {
+  classes: _propTypes2.default.object.isRequired
+};
+
+exports.default = (0, _styles.withStyles)(styles)(Sidebar);
+
+/***/ }),
+
+/***/ "./react/containers/Main.js":
+/*!**********************************!*\
+  !*** ./react/containers/Main.js ***!
+  \**********************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -67262,13 +67598,13 @@ var _react = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 
 var _react2 = _interopRequireDefault(_react);
 
-var _reactDom = __webpack_require__(/*! react-dom */ "./node_modules/react-dom/index.js");
+var _Appbar = __webpack_require__(/*! ../components/Appbar */ "./react/components/Appbar.js");
 
-var _reactDom2 = _interopRequireDefault(_reactDom);
+var _Appbar2 = _interopRequireDefault(_Appbar);
 
-var _Search = __webpack_require__(/*! ../components/Search */ "./react/components/Search.js");
+var _SidebarContainer = __webpack_require__(/*! ../containers/SidebarContainer */ "./react/containers/SidebarContainer.js");
 
-var _Search2 = _interopRequireDefault(_Search);
+var _SidebarContainer2 = _interopRequireDefault(_SidebarContainer);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -67325,7 +67661,8 @@ var Main = function (_React$Component) {
             return _react2.default.createElement(
                 'div',
                 null,
-                _react2.default.createElement(_Search2.default, { setSearch: this.setSearch, search: this.state.search, handleSubmit: this.handleSubmit })
+                _react2.default.createElement(_Appbar2.default, { setSearch: this.setSearch, search: this.state.search, handleSubmit: this.handleSubmit }),
+                _react2.default.createElement(_SidebarContainer2.default, null)
             );
         }
     }]);
@@ -67334,6 +67671,95 @@ var Main = function (_React$Component) {
 }(_react2.default.Component);
 
 exports.default = Main;
+
+/***/ }),
+
+/***/ "./react/containers/SidebarContainer.js":
+/*!**********************************************!*\
+  !*** ./react/containers/SidebarContainer.js ***!
+  \**********************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+
+var _react2 = _interopRequireDefault(_react);
+
+var _Sidebar = __webpack_require__(/*! ../components/Sidebar */ "./react/components/Sidebar.js");
+
+var _Sidebar2 = _interopRequireDefault(_Sidebar);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var SidebarContainer = function (_React$Component) {
+  _inherits(SidebarContainer, _React$Component);
+
+  function SidebarContainer(props) {
+    _classCallCheck(this, SidebarContainer);
+
+    var _this = _possibleConstructorReturn(this, (SidebarContainer.__proto__ || Object.getPrototypeOf(SidebarContainer)).call(this, props));
+
+    _this.handleChange = function (name) {
+      return function (event) {
+        var valor = event.target.checked;
+        var nuevoValorEtiqueta = {};
+        nuevoValorEtiqueta[name] = valor;
+        var nuevoStateCategorias = Object.assign({}, _this.state.categorias, nuevoValorEtiqueta);
+        _this.setState({ categorias: nuevoStateCategorias });
+      };
+    };
+
+    _this.handleSubmit = function (event) {
+      event.preventDefault();
+      var categorias = _this.state.categorias;
+      var filtros_arr = Object.keys(categorias).filter(function (categoria) {
+        if (categorias[categoria]) return categoria;
+      });
+      _this.setState({ filtros: filtros_arr }, function () {
+        return console.log(_this.state.filtros);
+      });
+    };
+
+    _this.state = {
+      categorias: {
+        herramientas: true,
+        tecnologia: true,
+        vestimenta: false,
+        calzado: true
+      },
+      filtros: []
+    };
+    _this.handleChange = _this.handleChange.bind(_this);
+    _this.handleSubmit = _this.handleSubmit.bind(_this);
+    return _this;
+  }
+
+  _createClass(SidebarContainer, [{
+    key: 'render',
+    value: function render() {
+      return _react2.default.createElement(_Sidebar2.default, { categorias: this.state.categorias, handleChange: this.handleChange, handleSubmit: this.handleSubmit });
+    }
+  }]);
+
+  return SidebarContainer;
+}(_react2.default.Component);
+
+exports.default = SidebarContainer;
 
 /***/ }),
 
@@ -67357,9 +67783,13 @@ var _reactDom2 = _interopRequireDefault(_reactDom);
 
 var _reactRouterDom = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/es/index.js");
 
-var _Main = __webpack_require__(/*! ./containers/Main */ "./react/containers/Main.jsx");
+var _Main = __webpack_require__(/*! ./containers/Main */ "./react/containers/Main.js");
 
 var _Main2 = _interopRequireDefault(_Main);
+
+var _SidebarContainer = __webpack_require__(/*! ./containers/SidebarContainer */ "./react/containers/SidebarContainer.js");
+
+var _SidebarContainer2 = _interopRequireDefault(_SidebarContainer);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 

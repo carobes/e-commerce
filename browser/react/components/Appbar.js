@@ -1,8 +1,9 @@
 import React from 'react';
 import { AppBar, Toolbar, Typography } from '@material-ui/core';
 import Login from './Login';
-import Carrito from './Carrito'
 import { withStyles } from '@material-ui/core/styles';
+import Carrito from './Carrito'
+import Search from './Search'
 
 const styles = {
     root: {
@@ -26,7 +27,7 @@ export default withStyles(styles)(props => {
                     <Typography className={classes.flex} variant="title" color="inherit">
                         TonE-Commerce
           </Typography>
-                    <Search setSearch={this.setSearch} search={this.state.search} handleSubmit={this.handleSubmit} />
+                    <Search setSearch={props.setSearch} search={props.search} handleSubmit={props.handleSubmit} />
                     <Carrito />
                     <Login />
                 </Toolbar>

@@ -1,5 +1,6 @@
 import React from 'react';
 import Appbar from '../components/Appbar'
+import SidebarContainer from '../containers/SidebarContainer';
 
 export default class Main extends React.Component {
     constructor() {
@@ -40,7 +41,8 @@ export default class Main extends React.Component {
     render() {
         return (
             <div>
-                <Appbar />
+                <Appbar setSearch={this.setSearch} search={this.state.search} handleSubmit={this.handleSubmit} />
+                <SidebarContainer />
             </div>
         )
     }
