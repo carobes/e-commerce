@@ -1,6 +1,8 @@
 import React from 'react';
 import Appbar from '../components/Appbar'
 import Products from '../components/Products'
+import SidebarContainer from './SidebarContainer'
+import { Grid } from '@material-ui/core'
 
 export default class Main extends React.Component {
     constructor() {
@@ -44,8 +46,14 @@ export default class Main extends React.Component {
                 <Appbar setSearch={this.setSearch} search={this.state.search} handleSubmit={this.handleSubmit}/>
             
             <br />
-            
-                <Products />
+            <Grid container spacing={16}>
+                <Grid item xs={2}>
+                    <SidebarContainer />
+                </Grid>
+                <Grid item xs={10}>
+                    <Products />
+                </Grid>
+            </Grid>
             </div>
         )
     }
