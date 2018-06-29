@@ -176,10 +176,9 @@ function seed(){
     var pprod = productos.map((producto) => Producto.create(producto.detalle, producto.asociacion))
     var puser = usuarios.map((usuario) => Users.create(usuario))
     var pestado = estados.map((estado) => Estado.create(estado))
-    var porden = ordenes.map((orden) => Ordenes.create(orden.detalle, orden.asociacion))
    
 
-    Promise.all([...pcat,...pprod,...puser,...pestado,...porden]).then(() => {
+    Promise.all([...pcat,...pprod,...puser,...pestado]).then(() => {
         catprod.map(obj => Producto.findOne({where:{nombre:obj.nombreprod}}).then(foundProd => obj.categorias.map(cat => Categoria.findOne({where:{categoria:cat.nombrecat}}).then(foundCat => foundProd.addCategory(foundCat.id)))))
     })
     .then(() => {reviews.map((review) => Producto.findOne({where:{nombre:review.producto}}).then((foundProd) => Users.findOne({where: {nombre: review.usuario}}).then((foundUser) => Reviews.create(review.detalle).then((reviewCreated) => {reviewCreated.setProducto(foundProd); reviewCreated.setUsuario(foundUser)}))))})
