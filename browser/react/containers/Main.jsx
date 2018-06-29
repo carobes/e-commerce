@@ -11,7 +11,7 @@ export default class Main extends React.Component {
     render() {
         return (
             <div>
-                <h1>Hola</h1>
+                <h1>Chao</h1>
             </div>
         )
     }
