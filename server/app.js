@@ -4,6 +4,8 @@ const path = require('path');
 const routes = require('./routes');
 const db = require('./models/db');
 const seed = require('./seed')
+const {Producto, Imagen, Categoria} = require('./models/index')
+
 
 const app = express();
 
@@ -23,4 +25,4 @@ app.use((err, req, res, next) => {
 
 db.sync({ force: true })
   .then(() => app.listen(3000, () => console.log('Listening on PORT 3000')))
-  .then(() => seed());
+  .then(() => seed())
