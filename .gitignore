@@ -36,6 +36,10 @@ build/Release
 node_modules/
 jspm_packages/
 
+#Ignore bundle files
+bundle.js
+bundle.js.map
+
 # TypeScript v1 declaration files
 typings/
 
