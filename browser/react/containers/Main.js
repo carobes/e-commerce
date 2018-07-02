@@ -1,15 +1,18 @@
 import React from 'react';
+import { Route, Link, Redirect, Switch } from 'react-router-dom';
 import Appbar from '../components/Appbar'
 import Products from '../components/Products'
 import SidebarContainer from './SidebarContainer'
 import { Grid } from '@material-ui/core'
+import SingleProduct from '../components/SingleProduct'
 
 export default class Main extends React.Component {
     constructor() {
         super();
         this.state = {
             search: "",
-            products: []
+            products: [],
+
 
         }
         this.setSearch = this.setSearch.bind(this)
@@ -43,17 +46,27 @@ export default class Main extends React.Component {
     render() {
         return (
             <div>
-                <Appbar setSearch={this.setSearch} search={this.state.search} handleSubmit={this.handleSubmit}/>
-            
-            <br />
-            <Grid container spacing={16}>
-                <Grid item xs={2}>
-                    <SidebarContainer />
+                <Appbar setSearch={this.setSearch} search={this.state.search} handleSubmit={this.handleSubmit} />
+                <br />
+                <Grid container spacing={16}>
+                    <Grid item xs={2}>
+                        <SidebarContainer />
+                    </Grid>
+                    <Grid item xs={10}>
+                        <Switch>
+                            <Route
+                                exact path='/products' render={() =>
+                                    <Products />
+                                } />
+                            <Route
+                                exact path='/products/reptil' render={() =>
+                                    <SingleProduct />
+                                } />
+
+                            <Redirect from="/" to="/products" />
+                        </Switch>
+                    </Grid>
                 </Grid>
-                <Grid item xs={10}>
-                    <Products />
-                </Grid>
-            </Grid>
             </div>
         )
     }
