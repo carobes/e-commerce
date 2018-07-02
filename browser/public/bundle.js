@@ -67211,6 +67211,198 @@ exports.default = (0, _styles.withStyles)(styles)(function (props) {
 
 /***/ }),
 
+/***/ "./react/components/Carro.js":
+/*!***********************************!*\
+  !*** ./react/components/Carro.js ***!
+  \***********************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _react = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+
+var _react2 = _interopRequireDefault(_react);
+
+var _propTypes = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
+
+var _propTypes2 = _interopRequireDefault(_propTypes);
+
+var _styles = __webpack_require__(/*! @material-ui/core/styles */ "./node_modules/@material-ui/core/styles/index.js");
+
+var _Table = __webpack_require__(/*! @material-ui/core/Table */ "./node_modules/@material-ui/core/Table/index.js");
+
+var _Table2 = _interopRequireDefault(_Table);
+
+var _TableBody = __webpack_require__(/*! @material-ui/core/TableBody */ "./node_modules/@material-ui/core/TableBody/index.js");
+
+var _TableBody2 = _interopRequireDefault(_TableBody);
+
+var _TableCell = __webpack_require__(/*! @material-ui/core/TableCell */ "./node_modules/@material-ui/core/TableCell/index.js");
+
+var _TableCell2 = _interopRequireDefault(_TableCell);
+
+var _TableHead = __webpack_require__(/*! @material-ui/core/TableHead */ "./node_modules/@material-ui/core/TableHead/index.js");
+
+var _TableHead2 = _interopRequireDefault(_TableHead);
+
+var _TableRow = __webpack_require__(/*! @material-ui/core/TableRow */ "./node_modules/@material-ui/core/TableRow/index.js");
+
+var _TableRow2 = _interopRequireDefault(_TableRow);
+
+var _Paper = __webpack_require__(/*! @material-ui/core/Paper */ "./node_modules/@material-ui/core/Paper/index.js");
+
+var _Paper2 = _interopRequireDefault(_Paper);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var CustomTableCell = (0, _styles.withStyles)(function (theme) {
+  return {
+    head: {
+      backgroundColor: theme.palette.common.black,
+      color: theme.palette.common.white
+    },
+    body: {
+      fontSize: 14
+    }
+  };
+})(_TableCell2.default);
+
+var styles = function styles(theme) {
+  return {
+    root: {
+      width: '100%',
+      marginTop: theme.spacing.unit * 3,
+      overflowX: 'auto'
+    },
+    table: {
+      minWidth: 700
+    },
+    row: {
+      '&:nth-of-type(odd)': {
+        backgroundColor: theme.palette.background.default
+      }
+    }
+  };
+};
+
+var id = 0;
+function createData(name, calories, fat, carbs, protein) {
+  id += 1;
+  return { id: id, name: name, calories: calories, fat: fat, carbs: carbs, protein: protein };
+}
+
+var data = [createData('Computador Portatil Lenovo', 159, 1, 159, 6), createData('Camara Fotografica Cannon', 237, 1, 237, 4.3), createData('Bolso Playero', 262, 1, 262, 6.0), createData('Pedazo de Bosta', 305, 1, 305, 4.3), createData('Camisa con mangas largas JH', 356, 1, 356, 3.9)];
+
+function CustomizedTable(props) {
+  var classes = props.classes;
+
+
+  return _react2.default.createElement(
+    _Paper2.default,
+    { className: classes.root },
+    _react2.default.createElement(
+      _Table2.default,
+      { className: classes.table },
+      _react2.default.createElement(
+        _TableHead2.default,
+        null,
+        _react2.default.createElement(
+          _TableRow2.default,
+          null,
+          _react2.default.createElement(
+            CustomTableCell,
+            null,
+            'Items'
+          ),
+          _react2.default.createElement(
+            CustomTableCell,
+            { numeric: true },
+            'Precio (AR$)'
+          ),
+          _react2.default.createElement(
+            CustomTableCell,
+            { numeric: true },
+            'Cantidad'
+          ),
+          _react2.default.createElement(
+            CustomTableCell,
+            { numeric: true },
+            'Subtotal (AR$)'
+          )
+        )
+      ),
+      _react2.default.createElement(
+        _TableBody2.default,
+        null,
+        data.map(function (n) {
+          return _react2.default.createElement(
+            _TableRow2.default,
+            { className: classes.row, key: n.id },
+            _react2.default.createElement(
+              CustomTableCell,
+              { component: 'th', scope: 'row' },
+              n.name
+            ),
+            _react2.default.createElement(
+              CustomTableCell,
+              { numeric: true },
+              n.calories
+            ),
+            _react2.default.createElement(
+              CustomTableCell,
+              { numeric: true },
+              n.fat
+            ),
+            _react2.default.createElement(
+              CustomTableCell,
+              { numeric: true },
+              n.carbs
+            )
+          );
+        }),
+        _react2.default.createElement(
+          _TableRow2.default,
+          { className: classes.row, key: 'totales' },
+          _react2.default.createElement(
+            CustomTableCell,
+            { component: 'th', scope: 'row' },
+            'TOTALES'
+          ),
+          _react2.default.createElement(
+            CustomTableCell,
+            { numeric: true },
+            ''
+          ),
+          _react2.default.createElement(
+            CustomTableCell,
+            { numeric: true },
+            'Suma Items'
+          ),
+          _react2.default.createElement(
+            CustomTableCell,
+            { numeric: true },
+            'TOTAL'
+          )
+        )
+      )
+    )
+  );
+}
+
+CustomizedTable.propTypes = {
+  classes: _propTypes2.default.object.isRequired
+};
+
+exports.default = (0, _styles.withStyles)(styles)(CustomizedTable);
+
+/***/ }),
+
 /***/ "./react/components/Login.js":
 /*!***********************************!*\
   !*** ./react/components/Login.js ***!
@@ -67413,6 +67605,10 @@ var _SidebarContainer = __webpack_require__(/*! ../containers/SidebarContainer *
 
 var _SidebarContainer2 = _interopRequireDefault(_SidebarContainer);
 
+var _Carro = __webpack_require__(/*! ../components/Carro */ "./react/components/Carro.js");
+
+var _Carro2 = _interopRequireDefault(_Carro);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -67440,7 +67636,7 @@ var Main = function (_React$Component) {
                 'div',
                 null,
                 _react2.default.createElement(_Appbar2.default, null),
-                _react2.default.createElement(_SidebarContainer2.default, null)
+                _react2.default.createElement(_Carro2.default, null)
             );
         }
     }]);
@@ -67574,7 +67770,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 _reactDom2.default.render(_react2.default.createElement(
     _reactRouterDom.BrowserRouter,
     null,
-    _react2.default.createElement(_reactRouterDom.Route, { path: '/', component: _SidebarContainer2.default })
+    _react2.default.createElement(_reactRouterDom.Route, { path: '/', component: _Main2.default })
 ), document.getElementById('app'));
 
 /***/ }),

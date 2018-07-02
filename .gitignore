@@ -59,3 +59,8 @@ typings/
 
 # next.js build output
 .next
+
+# los bundles
+bundle.js
+bundle.min.js
+node_modules
