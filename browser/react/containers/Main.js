@@ -1,7 +1,7 @@
 import React from 'react';
 import { Route, Link, Redirect, Switch } from 'react-router-dom';
 import Appbar from '../components/Appbar'
-import Products from '../components/Products'
+import ProductsContainer from './ProductsContainer'
 import SidebarContainer from './SidebarContainer'
 import { Grid } from '@material-ui/core'
 import SingleProduct from '../components/SingleProduct'
@@ -56,7 +56,7 @@ export default class Main extends React.Component {
                         <Switch>
                             <Route
                                 exact path='/products' render={() =>
-                                    <Products />
+                                    <ProductsContainer />
                                 } />
                             <Route
                                 exact path='/products/reptil' render={() =>
