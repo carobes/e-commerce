@@ -4,7 +4,8 @@ import Appbar from '../components/Appbar'
 import ProductsContainer from './ProductsContainer'
 import SidebarContainer from './SidebarContainer'
 import { Grid } from '@material-ui/core'
-import SingleProduct from '../components/SingleProduct'
+import SingleProductContainer from './SingleProductContainer'
+import IdUser from '../components/IdUser'
 import CrearUsuario from './CrearUsuario'
 
 export default class Main extends React.Component {
@@ -60,8 +61,12 @@ export default class Main extends React.Component {
                                     <ProductsContainer />
                                 } />
                             <Route
-                                exact path='/products/reptil' render={() =>
-                                    <SingleProduct />
+                                exact path='/products/:id' render={() =>
+                                    <SingleProductContainer />
+                                } />
+                            <Route
+                                exact path='/account/user' render={() =>
+                                    <IdUser />
                                 } />
                             <Route
                                 exact path='/accounts/new' render={() =>
