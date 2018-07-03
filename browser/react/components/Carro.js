@@ -12,6 +12,7 @@ import Button from '@material-ui/core/Button';
 import DeleteIcon from '@material-ui/icons/Delete';
 import ArrowDownward from '@material-ui/icons/ArrowDownward';
 import ArrowUpward from '@material-ui/icons/ArrowUpward';
+import ShopTwo from '@material-ui/icons/ShopTwo';
 
 const CustomTableCell = withStyles(theme => ({
   head: {
@@ -40,7 +41,7 @@ const styles = theme => ({
 });
 
 function CustomizedTable(props) {
-  const { classes, data, total, handleAdd, handleSubstract, handleDrop } = props;
+  const { classes, data, total, handleAdd, handleSubstract, handleDrop, genOrder } = props;
 
   return (
     <Paper className={classes.root}>
@@ -87,7 +88,11 @@ function CustomizedTable(props) {
             <CustomTableCell>{''}</CustomTableCell>
             <CustomTableCell numeric>{''}</CustomTableCell>
             <CustomTableCell numeric>{'TOTAL : '+total}</CustomTableCell>
-            <CustomTableCell>{''}</CustomTableCell>
+            <CustomTableCell>
+              <Button aria-label="shop" className={classes.button}>
+                <ShopTwo onClick={genOrder}/>
+              </Button>
+            </CustomTableCell>
           </TableRow>
         </TableBody>
       </Table>

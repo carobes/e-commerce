@@ -27,6 +27,7 @@ class CarroContainer extends React.Component{
     this.handleSubstract = this.handleSubstract.bind(this);
     this.handleDrop = this.handleDrop.bind(this);
     this.sumaTotal = this.sumaTotal.bind(this);
+    this.genOrder = this.genOrder.bind(this);
   }
 
   sumaTotal(){
@@ -38,7 +39,7 @@ class CarroContainer extends React.Component{
     this.setState({ total: nuevo_total });
   }
 
-  componentDidMount(){
+  componentWillMount(){
     this.sumaTotal();
   }
 
@@ -48,7 +49,6 @@ class CarroContainer extends React.Component{
     nuevo_state_data[index]['cantidad']++;
     nuevo_state_data[index]['subtotal'] = nuevo_state_data[index]['precio'] * nuevo_state_data[index]['cantidad'];
     this.setState({ data: nuevo_state_data }, () => this.sumaTotal());
-    //this.sumaTotal();
   }
 
   handleSubstract = id => event => {
@@ -57,9 +57,7 @@ class CarroContainer extends React.Component{
     if (nuevo_state_data[index]['cantidad'] > 1){
       nuevo_state_data[index]['cantidad']--;
       nuevo_state_data[index]['subtotal'] = nuevo_state_data[index]['precio'] * nuevo_state_data[index]['cantidad'];
-
       this.setState({ data: nuevo_state_data }, () => this.sumaTotal());
-      //this.sumaTotal();
     }
   }
 
@@ -69,12 +67,15 @@ class CarroContainer extends React.Component{
     nuevo_state_data.splice(id-1, 1);
     console.log(nuevo_state_data);
     this.setState({ data: nuevo_state_data }, () => this.sumaTotal());
-    //this.sumaTotal();
+  }
+
+  genOrder = event => {
+    console.log('Generar orden de compra con el arreglo de Productos : ', this.state.data);
   }
 
   render(){
     return (
-      <Carro data={this.state.data} total={this.state.total} handleAdd={this.handleAdd} handleSubstract={this.handleSubstract} handleDrop={this.handleDrop} />
+      <Carro data={this.state.data} total={this.state.total} handleAdd={this.handleAdd} handleSubstract={this.handleSubstract} handleDrop={this.handleDrop} genOrder={this.genOrder}/>
     );
   }
 }

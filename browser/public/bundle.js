@@ -30613,6 +30613,35 @@ exports.default = _default;
 
 /***/ }),
 
+/***/ "./node_modules/@material-ui/icons/ShopTwo.js":
+/*!****************************************************!*\
+  !*** ./node_modules/@material-ui/icons/ShopTwo.js ***!
+  \****************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var _interopRequireDefault = __webpack_require__(/*! @babel/runtime/helpers/builtin/interopRequireDefault */ "./node_modules/@babel/runtime/helpers/builtin/interopRequireDefault.js");
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+var _react = _interopRequireDefault(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
+
+var _createSvgIcon = _interopRequireDefault(__webpack_require__(/*! ./utils/createSvgIcon */ "./node_modules/@material-ui/icons/utils/createSvgIcon.js"));
+
+var _default = (0, _createSvgIcon.default)(_react.default.createElement("g", null, _react.default.createElement("path", {
+  d: "M3 9H1v11c0 1.11.89 2 2 2h14c1.11 0 2-.89 2-2H3V9zm15-4V3c0-1.11-.89-2-2-2h-4c-1.11 0-2 .89-2 2v2H5v11c0 1.11.89 2 2 2h14c1.11 0 2-.89 2-2V5h-5zm-6-2h4v2h-4V3zm0 12V8l5.5 3-5.5 4z"
+})), 'ShopTwo');
+
+exports.default = _default;
+
+/***/ }),
+
 /***/ "./node_modules/@material-ui/icons/utils/createSvgIcon.js":
 /*!****************************************************************!*\
   !*** ./node_modules/@material-ui/icons/utils/createSvgIcon.js ***!
@@ -67362,6 +67391,10 @@ var _ArrowUpward = __webpack_require__(/*! @material-ui/icons/ArrowUpward */ "./
 
 var _ArrowUpward2 = _interopRequireDefault(_ArrowUpward);
 
+var _ShopTwo = __webpack_require__(/*! @material-ui/icons/ShopTwo */ "./node_modules/@material-ui/icons/ShopTwo.js");
+
+var _ShopTwo2 = _interopRequireDefault(_ShopTwo);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var CustomTableCell = (0, _styles.withStyles)(function (theme) {
@@ -67400,7 +67433,8 @@ function CustomizedTable(props) {
       total = props.total,
       handleAdd = props.handleAdd,
       handleSubstract = props.handleSubstract,
-      handleDrop = props.handleDrop;
+      handleDrop = props.handleDrop,
+      genOrder = props.genOrder;
 
 
   return _react2.default.createElement(
@@ -67520,7 +67554,11 @@ function CustomizedTable(props) {
           _react2.default.createElement(
             CustomTableCell,
             null,
-            ''
+            _react2.default.createElement(
+              _Button2.default,
+              { 'aria-label': 'shop', className: classes.button },
+              _react2.default.createElement(_ShopTwo2.default, { onClick: genOrder })
+            )
           )
         )
       )
@@ -67768,7 +67806,6 @@ var CarroContainer = function (_React$Component) {
         _this.setState({ data: nuevo_state_data }, function () {
           return _this.sumaTotal();
         });
-        //this.sumaTotal();
       };
     };
 
@@ -67779,11 +67816,9 @@ var CarroContainer = function (_React$Component) {
         if (nuevo_state_data[index]['cantidad'] > 1) {
           nuevo_state_data[index]['cantidad']--;
           nuevo_state_data[index]['subtotal'] = nuevo_state_data[index]['precio'] * nuevo_state_data[index]['cantidad'];
-
           _this.setState({ data: nuevo_state_data }, function () {
             return _this.sumaTotal();
           });
-          //this.sumaTotal();
         }
       };
     };
@@ -67797,8 +67832,11 @@ var CarroContainer = function (_React$Component) {
         _this.setState({ data: nuevo_state_data }, function () {
           return _this.sumaTotal();
         });
-        //this.sumaTotal();
       };
+    };
+
+    _this.genOrder = function (event) {
+      console.log('Generar orden de compra con el arreglo de Productos : ', _this.state.data);
     };
 
     _this.state = {
@@ -67809,6 +67847,7 @@ var CarroContainer = function (_React$Component) {
     _this.handleSubstract = _this.handleSubstract.bind(_this);
     _this.handleDrop = _this.handleDrop.bind(_this);
     _this.sumaTotal = _this.sumaTotal.bind(_this);
+    _this.genOrder = _this.genOrder.bind(_this);
     return _this;
   }
 
@@ -67823,14 +67862,14 @@ var CarroContainer = function (_React$Component) {
       this.setState({ total: nuevo_total });
     }
   }, {
-    key: 'componentDidMount',
-    value: function componentDidMount() {
+    key: 'componentWillMount',
+    value: function componentWillMount() {
       this.sumaTotal();
     }
   }, {
     key: 'render',
     value: function render() {
-      return _react2.default.createElement(_Carro2.default, { data: this.state.data, total: this.state.total, handleAdd: this.handleAdd, handleSubstract: this.handleSubstract, handleDrop: this.handleDrop });
+      return _react2.default.createElement(_Carro2.default, { data: this.state.data, total: this.state.total, handleAdd: this.handleAdd, handleSubstract: this.handleSubstract, handleDrop: this.handleDrop, genOrder: this.genOrder });
     }
   }]);
 
