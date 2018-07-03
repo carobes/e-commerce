@@ -12,31 +12,31 @@ const styles = {
 }
 
 export default withStyles(styles)(props => {
-    const { classes } = props
+    const { classes, products } = props
+    console.log(products.imagens)
     return (
         <div>
             <Grid container spacing={16}>
-                {[0, 1, 3].map(value => (
-                    <Grid key={value} item xs={4}>
+                {products.map(product => (
+                    <Grid key={product.id} item xs={4}>
 
                         <Card className={classes.card}>
                             <Link to='/products/reptil'>
                                 <CardMedia
                                     className={classes.media}
-                                    image="/img/NIK_9984_edited_nik_800.jpg"
+                                    image={toString(product.imagens[0])}
                                     title="Contemplative Reptile"
                                 />
                             </Link>
                             <CardContent>
                                 <Link to='/products/reptil'>
                                     <Typography gutterBottom variant="headline" component="h2">
-                                        Lizard
+                                        {product.nombre}
                                 </Typography>
                                 </Link>
                                 <Typography component="p">
-                                    Lizards are a widespread group of squamate reptiles, with over 6,000 species, ranging
-                                    across all continents except Antarctica
-                </Typography>
+                                    {product.descripcion}
+                                </Typography>
                             </CardContent>
                             <CardActions>
                                 <IconButton size="small" color="secondary">
