@@ -12,7 +12,8 @@ const app = express();
 app.use(express.static(path.resolve(`${__dirname}/../browser/public`)));
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
-app.use(routes);
+
+app.use('/api', routes);
 
 app.use('/', function (req, res, next) {
   const indexFilePath = path.resolve(`${__dirname}/../browser/index.html`)
@@ -20,6 +21,7 @@ app.use('/', function (req, res, next) {
 })
 
 app.use((err, req, res, next) => {
+  console.log('tira un puto error')
   res.status(500).send(err);
 });
 
