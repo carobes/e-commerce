@@ -17,7 +17,11 @@ export const searchInput = (search) => ({
 })
 
 export const fetchProducts = () => dispatch =>
+<<<<<<< HEAD
     axios.get('COMPLETAR LA RUTA')
+=======
+    axios.get('/api/products')
+>>>>>>> 07c5227a45ba9199aa6f0b4c6fae16e7d9df4589
         .then(res => res.data)
         .then(products => dispatch(receiveProducts(products)));
 

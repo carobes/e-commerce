@@ -12,14 +12,19 @@ const app = express();
 app.use(express.static(path.resolve(`${__dirname}/../browser/public`)));
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
-app.use(routes);
 
+<<<<<<< HEAD
+=======
+app.use('/api', routes);
+
+>>>>>>> 07c5227a45ba9199aa6f0b4c6fae16e7d9df4589
 app.use('/', function (req, res, next) {
   const indexFilePath = path.resolve(`${__dirname}/../browser/index.html`)
   res.sendfile(indexFilePath)
 })
 
 app.use((err, req, res, next) => {
+  console.log('tira un puto error')
   res.status(500).send(err);
 });
 
