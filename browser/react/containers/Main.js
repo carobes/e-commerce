@@ -5,11 +5,8 @@ import Products from '../components/Products'
 import SidebarContainer from './SidebarContainer'
 import { Grid } from '@material-ui/core'
 import SingleProduct from '../components/SingleProduct'
-<<<<<<< HEAD
 import IdUser from '../components/IdUser'
-=======
 import CrearUsuario from './CrearUsuario'
->>>>>>> a346463cdc0671d36f279c4470a7e61220351b60
 
 export default class Main extends React.Component {
     constructor() {

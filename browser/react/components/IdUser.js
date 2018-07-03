@@ -1,11 +1,9 @@
 
 import React from 'react';
-import { Typography, Card, CardMedia, CardContent, CardActions, Grid, IconButton } from '@material-ui/core'
-import AddShoppingCart from '@material-ui/icons/AddShoppingCart'
+import { Typography, Card, CardContent } from '@material-ui/core'
 import { withStyles } from '@material-ui/core/styles'
-import GridList from '@material-ui/core/GridList';
-import GridListTile from '@material-ui/core/GridListTile';
-import GridListTileBar from '@material-ui/core/GridListTileBar';
+import Avatar from '@material-ui/core/Avatar';
+
 
 const user = {
     nombre: 'Toni',
@@ -14,66 +12,65 @@ const user = {
     mail: 'toni48@pastafrola5.com'
 }
 
-
-
 const styles = {
     card: {
 
         minWidth: 345,
-        height: 300,
-        maxWidth: 300,
+        height: 245,
+        maxWidth: 245,
 
     },
-    // whitecard: {
-
-    //     minWidth: 345,
-    //     height: 345,
-    //     maxWidth: 345,
-
-    // }
 
     title: {
-        marginBottom: 16,
-        fontSize: 20,
+        marginBottom: 8,
+        fontSize: 18,
+        color: '#808080'
     },
     pos: {
-        marginBottom: 12,
+        marginTop: 18,
+    },
+    avatar: {
+        margin: 10,
+        color: '#fff',
+        backgroundColor: '#6eb4ea',
+        float: 'left',
+        width: '75px',
+        height: '75px',
     },
 
-    // titleBar: {
-    //     background:
-    //         'linear-gradient(to top, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.3) 70%, rgba(0,0,0,0) 100%)',
-    // }
+    row: {
+        display: 'flex',
+        float: 'right',
+    },
 }
 
 export default withStyles(styles)(props => {
     const { classes } = props
 
     return (
-
         <div>
             <br />
-
             <Card className={classes.card}>
+                <div className={classes.row}>
+                    <Avatar className={classes.avatar}>{user.nombre[0] + user.apellido[0]}</Avatar>
+                </div>
+                <br />
                 <CardContent>
-
-                    <Typography variant="headline" component="h1">
+                    <Typography className={classes.pos} variant="headline" component="h1">
                         {user.nombre}
                     </Typography>
                     <Typography variant="headline" component="h2">
-                        {selectedProduct.apellido}
+                        {user.apellido}
                     </Typography>
-                    <Typography variant="headline" component="h2">
-                        {selectedProduct.edad}
+                    <br />
+                    <Typography className={classes.title} variant="headline" component="h2">
+                        {user.edad}
                     </Typography>
-                    <Typography variant="headline" component="h2">
-                        {selectedProduct.mail}
+                    <Typography className={classes.title} variant="headline" component="h2">
+                        {user.mail}
                     </Typography>
                 </CardContent>
             </Card>
-
-
-
         </div>
     )
 })
