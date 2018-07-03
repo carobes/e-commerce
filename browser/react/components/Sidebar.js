@@ -14,42 +14,51 @@ import FormHelperText from '@material-ui/core/FormHelperText';
 import Checkbox from '@material-ui/core/Checkbox';
 
 const styles = theme => ({
-  button: {
-    margin: theme.spacing.unit,
-  },
-  extendedIcon: {
-    marginRight: theme.spacing.unit,
-  },
+ button: {
+   margin: theme.spacing.unit,
+
+ },
+ button2: {
+   backgroundColor: '#6eb4ea',
+   color: 'white',
+   '&:hover': {
+     color: 'white'
+   }
+ },
+ extendedIcon: {
+   marginRight: theme.spacing.unit,
+ },
 });
 
-function Sidebar({ categorias, classes, handleChange, handleSubmit }){
-  return(
-    <FormControl component="fieldset">
-      <FormLabel component="legend">Selecciona Categorías</FormLabel>
-      <FormGroup>
-        {Object.keys(categorias).map(etiqueta => (
-          <FormControlLabel key={etiqueta}
-            control={
-              <Checkbox
-                checked={categorias[etiqueta]}
-                onChange={handleChange(etiqueta)}
-                value={etiqueta}
-              />
-            }
-            label={etiqueta}
-          />
-        ))}
-        <Button variant="extendedFab" aria-label="delete" className={classes.button} onClick={handleSubmit} >
-          Filtrar
-        </Button>
-      </FormGroup>
-      <FormHelperText>Se cuidadoso...</FormHelperText>
-    </FormControl>
-  )
+
+function Sidebar({ categorias, classes, handleChange, handleSubmit }) {
+ return (
+   <FormControl component="fieldset">
+     <FormLabel component="legend">Selecciona Categorías</FormLabel>
+     <FormGroup>
+       {Object.keys(categorias).map(etiqueta => (
+         <FormControlLabel key={etiqueta}
+           control={
+             <Checkbox
+               checked={categorias[etiqueta]}
+               onChange={handleChange(etiqueta)}
+               value={etiqueta}
+             />
+           }
+           label={etiqueta}
+         />
+       ))}
+       <Button variant="contained" size="small" className={classes.button2} onClick={handleSubmit}>
+         Filtrar
+       </Button>
+     </FormGroup>
+     <FormHelperText> <br></br> Se cuidadoso...</FormHelperText>
+   </FormControl>
+ )
 }
 
 Sidebar.propTypes = {
-  classes: PropTypes.object.isRequired,
+ classes: PropTypes.object.isRequired,
 };
 
 export default withStyles(styles)(Sidebar);

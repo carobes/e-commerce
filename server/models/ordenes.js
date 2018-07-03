@@ -5,22 +5,18 @@ const db = require('./db');
 const Ordenes = db.define('ordenes', {
     fecha: {
         type: Sequelize.DATE,
-        allowNull: false,
+        allowNull: false
 
-    },
-    estado: {
-        type: Sequelize.STRING,
-        allowNull: false,
     },
     direccion: {
         type: Sequelize.TEXT,
-        allowNull: false,
+        allowNull: false
     },
     mail: {
         type: Sequelize.STRING,
         allowNull: false,
         validate: {
-            isEmail: true,
+            isEmail: true
         },
     }
 

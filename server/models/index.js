@@ -17,13 +17,15 @@ Carrito.belongsToMany(Producto, {through: 'productoCarrito'});
 
 Producto.hasMany(Imagen);
 
-Producto.hasMany(Reviews);
+Reviews.belongsTo(Producto, {as: "producto"});
 
-Users.hasMany(Reviews);
+Reviews.belongsTo(Users, {as: "usuario"});
+
+Ordenes.belongsTo(Users, {as: "usuario"});
 
 Carrito.belongsTo(Users);
 
-Ordenes.hasMany(Estado);
+Ordenes.belongsTo(Estado, {as: "status"});
 
 Ordenes.hasMany(ProductosOrden);
 

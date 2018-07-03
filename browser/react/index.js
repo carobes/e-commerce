@@ -5,7 +5,7 @@ import Main from './containers/Main';
 
 ReactDOM.render(
     <BrowserRouter>
-        <Route path="/" component={Main } />
+        <Route path="/" component={Main} />
     </BrowserRouter>,
     document.getElementById('app')
 );

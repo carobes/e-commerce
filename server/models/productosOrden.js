@@ -6,7 +6,7 @@ const ProductosOrden = db.define('productosOrden', {
         type: Sequelize.STRING,
         validate: {notEmpty: true}
     },
-    descripción: {
+    descripcion: {
         type: Sequelize.TEXT("long"),
         allowNull: false
     },
