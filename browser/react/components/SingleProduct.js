@@ -7,13 +7,6 @@ import GridList from '@material-ui/core/GridList';
 import GridListTile from '@material-ui/core/GridListTile';
 import GridListTileBar from '@material-ui/core/GridListTileBar';
 
-
-const selectedProduct = {
-    nombre: 'Lizard',
-    descripcion: " Lizards are a widespread group of squamate reptiles, with over 6,000 species, ranging across all continents except Antarctica",
-    imagen: ["/img/NIK_9984_edited_nik_800.jpg", "/img/NIK_9984_edited_nik_800.jpg", "/img/NIK_9984_edited_nik_800.jpg"],
-    precio: 1200 + "$"
-}
 const styles = {
     media: {
         height: 0,
@@ -61,24 +54,24 @@ const styles = {
 export default withStyles(styles)(props => {
     const { classes } = props
     const bull = <span className={classes.bullet}>•</span>;
+    const imgGrid = !props.product.imagens ? [] : props.product.imagens.slice(1)
     return (
 
         <div>
-            <Grid container spacing={12}>
+            <Grid container spacing={16}>
                 <Grid item xs={6}>
                     <Card className={classes.card}>
                         <CardMedia
                             className={classes.media}
-                            image="/img/NIK_9984_edited_nik_800.jpg"
-                            title="Contemplative Reptile"
+                            image={!props.product.imagens ? './' : props.product.imagens[0].ruta}
                         />
                     </Card>
                     <br />
                     <div className={classes.root}>
                         <GridList className={classes.gridList} cols={2.5}>
-                            {selectedProduct.imagen.map(data => (
-                                <GridListTile>
-                                    <img src={data} />
+                            {imgGrid.map(data => (
+                                <GridListTile key={data.id}>
+                                    <img src={data.ruta} />
                                     <GridListTileBar
 
                                     />
@@ -94,13 +87,13 @@ export default withStyles(styles)(props => {
                     <Card className={classes.card}>
                         <CardContent>
                             <Typography className={classes.title} variant="headline" component="h2">
-                                {selectedProduct.precio}
+                                {props.product.precio + '$'}
                             </Typography>
                             <Typography variant="headline" component="h2">
-                                {selectedProduct.nombre}
+                                {props.product.nombre}
                             </Typography>
                             <Typography component="p">
-                                {selectedProduct.descripcion}
+                                {props.product.descripcion}
                             </Typography>
                         </CardContent>
                         <CardActions>
