@@ -8,6 +8,11 @@ import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 
+import Button from '@material-ui/core/Button';
+import DeleteIcon from '@material-ui/icons/Delete';
+import ArrowDownward from '@material-ui/icons/ArrowDownward';
+import ArrowUpward from '@material-ui/icons/ArrowUpward';
+
 const CustomTableCell = withStyles(theme => ({
   head: {
     backgroundColor: theme.palette.common.black,
@@ -34,22 +39,8 @@ const styles = theme => ({
   },
 });
 
-let id = 0;
-function createData(name, calories, fat, carbs, protein) {
-  id += 1;
-  return { id, name, calories, fat, carbs, protein };
-}
-
-const data = [
-  createData('Computador Portatil Lenovo', 159, 1, 159, 6),
-  createData('Camara Fotografica Cannon', 237, 1, 237, 4.3),
-  createData('Bolso Playero', 262, 1, 262, 6.0),
-  createData('Pedazo de Bosta', 305, 1, 305, 4.3),
-  createData('Camisa con mangas largas JH', 356, 1, 356, 3.9),
-];
-
 function CustomizedTable(props) {
-  const { classes } = props;
+  const { classes, data, total, handleAdd, handleSubstract, handleDrop } = props;
 
   return (
     <Paper className={classes.root}>
@@ -58,8 +49,9 @@ function CustomizedTable(props) {
           <TableRow>
             <CustomTableCell>Items</CustomTableCell>
             <CustomTableCell numeric>Precio (AR$)</CustomTableCell>
-            <CustomTableCell numeric>Cantidad</CustomTableCell>
+            <CustomTableCell numeric>Cantidad de Items</CustomTableCell>
             <CustomTableCell numeric>Subtotal (AR$)</CustomTableCell>
+            <CustomTableCell numeric>Borrar Producto</CustomTableCell>
           </TableRow>
         </TableHead>
         <TableBody>
@@ -69,19 +61,33 @@ function CustomizedTable(props) {
                 <CustomTableCell component="th" scope="row">
                   {n.name}
                 </CustomTableCell>
-                <CustomTableCell numeric>{n.calories}</CustomTableCell>
-                <CustomTableCell numeric>{n.fat}</CustomTableCell>
-                <CustomTableCell numeric>{n.carbs}</CustomTableCell>
+                <CustomTableCell numeric>
+                  {n.precio}
+                </CustomTableCell>
+                <CustomTableCell>
+                  <Button mini color="primary" aria-label="add" className={classes.button} onClick={handleAdd(n.id)}>
+                    <ArrowUpward />
+                  </Button>
+                  <span className={classes.root}>{n.cantidad}</span>
+                  <Button mini color="primary" aria-label="substract" className={classes.button} onClick={handleSubstract(n.id)}>
+                    <ArrowDownward />
+                  </Button>
+                </CustomTableCell>
+                <CustomTableCell numeric>{n.subtotal}</CustomTableCell>
+                <CustomTableCell>
+                  <Button aria-label="delete" className={classes.button} onClick={handleDrop(n.id)}>
+                    <DeleteIcon />
+                  </Button>
+                </CustomTableCell>
               </TableRow>
             );
           })}
           <TableRow className={classes.row} key={'totales'}>
-            <CustomTableCell component="th" scope="row">
-              TOTALES
-            </CustomTableCell>
+            <CustomTableCell component="th" scope="row">{'TOTALES'}</CustomTableCell>
+            <CustomTableCell>{''}</CustomTableCell>
             <CustomTableCell numeric>{''}</CustomTableCell>
-            <CustomTableCell numeric>{'Suma Items'}</CustomTableCell>
-            <CustomTableCell numeric>{'TOTAL'}</CustomTableCell>
+            <CustomTableCell numeric>{'TOTAL : '+total}</CustomTableCell>
+            <CustomTableCell>{''}</CustomTableCell>
           </TableRow>
         </TableBody>
       </Table>

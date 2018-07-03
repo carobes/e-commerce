@@ -30526,6 +30526,93 @@ exports.default = _default;
 
 /***/ }),
 
+/***/ "./node_modules/@material-ui/icons/ArrowDownward.js":
+/*!**********************************************************!*\
+  !*** ./node_modules/@material-ui/icons/ArrowDownward.js ***!
+  \**********************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var _interopRequireDefault = __webpack_require__(/*! @babel/runtime/helpers/builtin/interopRequireDefault */ "./node_modules/@babel/runtime/helpers/builtin/interopRequireDefault.js");
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+var _react = _interopRequireDefault(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
+
+var _createSvgIcon = _interopRequireDefault(__webpack_require__(/*! ./utils/createSvgIcon */ "./node_modules/@material-ui/icons/utils/createSvgIcon.js"));
+
+var _default = (0, _createSvgIcon.default)(_react.default.createElement("g", null, _react.default.createElement("path", {
+  d: "M20 12l-1.41-1.41L13 16.17V4h-2v12.17l-5.58-5.59L4 12l8 8 8-8z"
+})), 'ArrowDownward');
+
+exports.default = _default;
+
+/***/ }),
+
+/***/ "./node_modules/@material-ui/icons/ArrowUpward.js":
+/*!********************************************************!*\
+  !*** ./node_modules/@material-ui/icons/ArrowUpward.js ***!
+  \********************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var _interopRequireDefault = __webpack_require__(/*! @babel/runtime/helpers/builtin/interopRequireDefault */ "./node_modules/@babel/runtime/helpers/builtin/interopRequireDefault.js");
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+var _react = _interopRequireDefault(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
+
+var _createSvgIcon = _interopRequireDefault(__webpack_require__(/*! ./utils/createSvgIcon */ "./node_modules/@material-ui/icons/utils/createSvgIcon.js"));
+
+var _default = (0, _createSvgIcon.default)(_react.default.createElement("g", null, _react.default.createElement("path", {
+  d: "M4 12l1.41 1.41L11 7.83V20h2V7.83l5.58 5.59L20 12l-8-8-8 8z"
+})), 'ArrowUpward');
+
+exports.default = _default;
+
+/***/ }),
+
+/***/ "./node_modules/@material-ui/icons/Delete.js":
+/*!***************************************************!*\
+  !*** ./node_modules/@material-ui/icons/Delete.js ***!
+  \***************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var _interopRequireDefault = __webpack_require__(/*! @babel/runtime/helpers/builtin/interopRequireDefault */ "./node_modules/@babel/runtime/helpers/builtin/interopRequireDefault.js");
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+var _react = _interopRequireDefault(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
+
+var _createSvgIcon = _interopRequireDefault(__webpack_require__(/*! ./utils/createSvgIcon */ "./node_modules/@material-ui/icons/utils/createSvgIcon.js"));
+
+var _default = (0, _createSvgIcon.default)(_react.default.createElement("g", null, _react.default.createElement("path", {
+  d: "M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6v12zM19 4h-3.5l-1-1h-5l-1 1H5v2h14V4z"
+})), 'Delete');
+
+exports.default = _default;
+
+/***/ }),
+
 /***/ "./node_modules/@material-ui/icons/utils/createSvgIcon.js":
 /*!****************************************************************!*\
   !*** ./node_modules/@material-ui/icons/utils/createSvgIcon.js ***!
@@ -67259,6 +67346,22 @@ var _Paper = __webpack_require__(/*! @material-ui/core/Paper */ "./node_modules/
 
 var _Paper2 = _interopRequireDefault(_Paper);
 
+var _Button = __webpack_require__(/*! @material-ui/core/Button */ "./node_modules/@material-ui/core/Button/index.js");
+
+var _Button2 = _interopRequireDefault(_Button);
+
+var _Delete = __webpack_require__(/*! @material-ui/icons/Delete */ "./node_modules/@material-ui/icons/Delete.js");
+
+var _Delete2 = _interopRequireDefault(_Delete);
+
+var _ArrowDownward = __webpack_require__(/*! @material-ui/icons/ArrowDownward */ "./node_modules/@material-ui/icons/ArrowDownward.js");
+
+var _ArrowDownward2 = _interopRequireDefault(_ArrowDownward);
+
+var _ArrowUpward = __webpack_require__(/*! @material-ui/icons/ArrowUpward */ "./node_modules/@material-ui/icons/ArrowUpward.js");
+
+var _ArrowUpward2 = _interopRequireDefault(_ArrowUpward);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var CustomTableCell = (0, _styles.withStyles)(function (theme) {
@@ -67291,16 +67394,13 @@ var styles = function styles(theme) {
   };
 };
 
-var id = 0;
-function createData(name, calories, fat, carbs, protein) {
-  id += 1;
-  return { id: id, name: name, calories: calories, fat: fat, carbs: carbs, protein: protein };
-}
-
-var data = [createData('Computador Portatil Lenovo', 159, 1, 159, 6), createData('Camara Fotografica Cannon', 237, 1, 237, 4.3), createData('Bolso Playero', 262, 1, 262, 6.0), createData('Pedazo de Bosta', 305, 1, 305, 4.3), createData('Camisa con mangas largas JH', 356, 1, 356, 3.9)];
-
 function CustomizedTable(props) {
-  var classes = props.classes;
+  var classes = props.classes,
+      data = props.data,
+      total = props.total,
+      handleAdd = props.handleAdd,
+      handleSubstract = props.handleSubstract,
+      handleDrop = props.handleDrop;
 
 
   return _react2.default.createElement(
@@ -67328,12 +67428,17 @@ function CustomizedTable(props) {
           _react2.default.createElement(
             CustomTableCell,
             { numeric: true },
-            'Cantidad'
+            'Cantidad de Items'
           ),
           _react2.default.createElement(
             CustomTableCell,
             { numeric: true },
             'Subtotal (AR$)'
+          ),
+          _react2.default.createElement(
+            CustomTableCell,
+            { numeric: true },
+            'Borrar Producto'
           )
         )
       ),
@@ -67352,17 +67457,40 @@ function CustomizedTable(props) {
             _react2.default.createElement(
               CustomTableCell,
               { numeric: true },
-              n.calories
+              n.precio
+            ),
+            _react2.default.createElement(
+              CustomTableCell,
+              null,
+              _react2.default.createElement(
+                _Button2.default,
+                { mini: true, color: 'primary', 'aria-label': 'add', className: classes.button, onClick: handleAdd(n.id) },
+                _react2.default.createElement(_ArrowUpward2.default, null)
+              ),
+              _react2.default.createElement(
+                'span',
+                { className: classes.root },
+                n.cantidad
+              ),
+              _react2.default.createElement(
+                _Button2.default,
+                { mini: true, color: 'primary', 'aria-label': 'substract', className: classes.button, onClick: handleSubstract(n.id) },
+                _react2.default.createElement(_ArrowDownward2.default, null)
+              )
             ),
             _react2.default.createElement(
               CustomTableCell,
               { numeric: true },
-              n.fat
+              n.subtotal
             ),
             _react2.default.createElement(
               CustomTableCell,
-              { numeric: true },
-              n.carbs
+              null,
+              _react2.default.createElement(
+                _Button2.default,
+                { 'aria-label': 'delete', className: classes.button, onClick: handleDrop(n.id) },
+                _react2.default.createElement(_Delete2.default, null)
+              )
             )
           );
         }),
@@ -67376,18 +67504,23 @@ function CustomizedTable(props) {
           ),
           _react2.default.createElement(
             CustomTableCell,
+            null,
+            ''
+          ),
+          _react2.default.createElement(
+            CustomTableCell,
             { numeric: true },
             ''
           ),
           _react2.default.createElement(
             CustomTableCell,
             { numeric: true },
-            'Suma Items'
+            'TOTAL : ' + total
           ),
           _react2.default.createElement(
             CustomTableCell,
-            { numeric: true },
-            'TOTAL'
+            null,
+            ''
           )
         )
       )
@@ -67577,6 +67710,137 @@ exports.default = (0, _styles.withStyles)(styles)(Sidebar);
 
 /***/ }),
 
+/***/ "./react/containers/CarroContainer.js":
+/*!********************************************!*\
+  !*** ./react/containers/CarroContainer.js ***!
+  \********************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+
+var _react2 = _interopRequireDefault(_react);
+
+var _Carro = __webpack_require__(/*! ../components/Carro */ "./react/components/Carro.js");
+
+var _Carro2 = _interopRequireDefault(_Carro);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var id = 0;
+function createData(name, precio, cantidad) {
+  id += 1;
+  var subtotal = cantidad * precio;
+  return { id: id, name: name, precio: precio, cantidad: cantidad, subtotal: subtotal };
+}
+
+var datos = [createData('Computador Portatil Lenovo', 1000, 1), createData('Camara Fotografica Cannon', 100, 1), createData('Bolso Playero', 200, 1), createData('Pedazo de Bosta', 1, 1), createData('Camisa con mangas largas JH', 200, 1)];
+
+var CarroContainer = function (_React$Component) {
+  _inherits(CarroContainer, _React$Component);
+
+  function CarroContainer(props) {
+    _classCallCheck(this, CarroContainer);
+
+    var _this = _possibleConstructorReturn(this, (CarroContainer.__proto__ || Object.getPrototypeOf(CarroContainer)).call(this, props));
+
+    _this.handleAdd = function (id) {
+      return function (event) {
+        var index = _this.state.data.indexOf(_this.state.data[id - 1]);
+        var nuevo_state_data = _this.state.data.slice();
+        nuevo_state_data[index]['cantidad']++;
+        nuevo_state_data[index]['subtotal'] = nuevo_state_data[index]['precio'] * nuevo_state_data[index]['cantidad'];
+        _this.setState({ data: nuevo_state_data }, function () {
+          return _this.sumaTotal();
+        });
+        //this.sumaTotal();
+      };
+    };
+
+    _this.handleSubstract = function (id) {
+      return function (event) {
+        var index = _this.state.data.indexOf(_this.state.data[id - 1]);
+        var nuevo_state_data = _this.state.data.slice();
+        if (nuevo_state_data[index]['cantidad'] > 1) {
+          nuevo_state_data[index]['cantidad']--;
+          nuevo_state_data[index]['subtotal'] = nuevo_state_data[index]['precio'] * nuevo_state_data[index]['cantidad'];
+
+          _this.setState({ data: nuevo_state_data }, function () {
+            return _this.sumaTotal();
+          });
+          //this.sumaTotal();
+        }
+      };
+    };
+
+    _this.handleDrop = function (id) {
+      return function (event) {
+        var nuevo_state_data = _this.state.data.slice();
+        if (nuevo_state_data.length === 1) nuevo_state_data = [];
+        nuevo_state_data.splice(id - 1, 1);
+        console.log(nuevo_state_data);
+        _this.setState({ data: nuevo_state_data }, function () {
+          return _this.sumaTotal();
+        });
+        //this.sumaTotal();
+      };
+    };
+
+    _this.state = {
+      data: datos,
+      total: 0
+    };
+    _this.handleAdd = _this.handleAdd.bind(_this);
+    _this.handleSubstract = _this.handleSubstract.bind(_this);
+    _this.handleDrop = _this.handleDrop.bind(_this);
+    _this.sumaTotal = _this.sumaTotal.bind(_this);
+    return _this;
+  }
+
+  _createClass(CarroContainer, [{
+    key: 'sumaTotal',
+    value: function sumaTotal() {
+      var nuevo_total = 0;
+      var data_length = this.state.data.length;
+      for (var i = 0; i < data_length; i++) {
+        nuevo_total = nuevo_total + this.state.data[i]['subtotal'];
+      }
+      this.setState({ total: nuevo_total });
+    }
+  }, {
+    key: 'componentDidMount',
+    value: function componentDidMount() {
+      this.sumaTotal();
+    }
+  }, {
+    key: 'render',
+    value: function render() {
+      return _react2.default.createElement(_Carro2.default, { data: this.state.data, total: this.state.total, handleAdd: this.handleAdd, handleSubstract: this.handleSubstract, handleDrop: this.handleDrop });
+    }
+  }]);
+
+  return CarroContainer;
+}(_react2.default.Component);
+
+exports.default = CarroContainer;
+
+/***/ }),
+
 /***/ "./react/containers/Main.js":
 /*!**********************************!*\
   !*** ./react/containers/Main.js ***!
@@ -67605,9 +67869,9 @@ var _SidebarContainer = __webpack_require__(/*! ../containers/SidebarContainer *
 
 var _SidebarContainer2 = _interopRequireDefault(_SidebarContainer);
 
-var _Carro = __webpack_require__(/*! ../components/Carro */ "./react/components/Carro.js");
+var _CarroContainer = __webpack_require__(/*! ../containers/CarroContainer */ "./react/containers/CarroContainer.js");
 
-var _Carro2 = _interopRequireDefault(_Carro);
+var _CarroContainer2 = _interopRequireDefault(_CarroContainer);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -67636,7 +67900,7 @@ var Main = function (_React$Component) {
                 'div',
                 null,
                 _react2.default.createElement(_Appbar2.default, null),
-                _react2.default.createElement(_Carro2.default, null)
+                _react2.default.createElement(_CarroContainer2.default, null)
             );
         }
     }]);
