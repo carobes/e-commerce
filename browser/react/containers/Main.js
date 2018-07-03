@@ -5,6 +5,7 @@ import Products from '../components/Products'
 import SidebarContainer from './SidebarContainer'
 import { Grid } from '@material-ui/core'
 import SingleProduct from '../components/SingleProduct'
+import IdUser from '../components/IdUser'
 
 export default class Main extends React.Component {
     constructor() {
@@ -62,6 +63,11 @@ export default class Main extends React.Component {
                                 exact path='/products/reptil' render={() =>
                                     <SingleProduct />
                                 } />
+                            <Route
+                                exact path='/account/user' render={() =>
+                                    <IdUser />
+                                } />
+
 
                             <Redirect from="/" to="/products" />
                         </Switch>

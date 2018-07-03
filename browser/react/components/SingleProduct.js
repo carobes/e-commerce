@@ -11,7 +11,7 @@ const selectedProduct = {
     nombre: 'Lizard',
     descripcion: " Lizards are a widespread group of squamate reptiles, with over 6,000 species, ranging across all continents except Antarctica",
     imagen: ["/img/NIK_9984_edited_nik_800.jpg", "/img/NIK_9984_edited_nik_800.jpg", "/img/NIK_9984_edited_nik_800.jpg"],
-    precio: 1200
+    precio: 1200 + "$"
 }
 const styles = {
     media: {
@@ -20,8 +20,16 @@ const styles = {
     },
     card: {
         maxWidth: 345,
-        minWidth: 275,
+        minWidth: 345,
+
     },
+    // whitecard: {
+
+    //     minWidth: 345,
+    //     height: 345,
+    //     maxWidth: 345,
+
+    // },
     root: {
         display: 'flex',
         flexWrap: 'wrap',
