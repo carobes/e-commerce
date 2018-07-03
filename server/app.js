@@ -13,7 +13,6 @@ app.use(express.static(path.resolve(`${__dirname}/../browser/public`)));
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
-
 app.use('/api', routes);
 
 app.use('/', function (req, res, next) {
