@@ -1,6 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { withStyles } from "@material-ui/core/styles";
+import {withRouter} from 'react-router'
 import TextField from "@material-ui/core/TextField";
 import { Grid } from '@material-ui/core';
 import Button from '@material-ui/core/Button';
@@ -36,15 +37,19 @@ const styles = theme => ({
 });
 
 class TextFields extends React.Component {
-  state = {
-    nombre: '',
-    apellido: '',
-    edad: '',
-    mail: '',
-    password:'',
-    passValidate: ''
-  };
-
+  constructor(){
+    super();
+    this.state = {
+      nombre: '',
+      apellido: '',
+      edad: '',
+      mail: '',
+      password:'',
+      passValidate: ''
+    };
+    this.handleSubmit = this.handleSubmit.bind(this) 
+  }
+  
   handleChange = name => event => {
     this.setState({
       [name]: event.target.value
@@ -53,6 +58,7 @@ class TextFields extends React.Component {
 
   handleSubmit(evt){
     evt.preventDefault();
+    console.log(this.props)
     const usuario = {
       nombre: this.state.nombre,
       apellido: this.state.apellido,
@@ -60,12 +66,12 @@ class TextFields extends React.Component {
       mail: this.state.mail.toLowerCase(),
       password: this.state.password
     }
-    axios.post('/api/users/new')
-    .then(res => res.data)
-    .then(user => this.props.history.push(`/user${user.id}`))
+    axios.post('/api/users/new',usuario)
+    .then(res => {console.log(res.data);return res.data})
+    .then(user => {this.props.history.push(`/user/${user.id}`)})
   }
 
-  render() {
+  render() {  
     const { classes } = this.props;
     const {nombre,apellido,edad,mail,password,passValidate} = this.state
     var check = (nombre.length && apellido.length && edad.length && mail.length && mail.length && password.length && password === passValidate) ? true : false
@@ -156,4 +162,4 @@ TextFields.propTypes = {
   classes: PropTypes.object.isRequired
 };
 
-export default withStyles(styles)(TextFields);
+export default withStyles(styles)(withRouter(TextFields));
