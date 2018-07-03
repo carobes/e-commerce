@@ -9,8 +9,8 @@ const productos = [
     precio: 20,
     disponibilidad: 10,
     imagens: [
-        {ruta: '/ruta1producto1'},
-        {ruta: '/ruta2producto1'}
+        {ruta: '/img/NIK_9984_edited_nik_800.jpg'},
+        {ruta: '/img/NIK_9984_edited_nik_800.jpg'}
     ]},
     asociacion: {include: [ Imagen ]
   }},
@@ -20,7 +20,7 @@ const productos = [
     precio: 50,
     disponibilidad: 20,
     imagens: [
-        {ruta: '/ruta1producto2'}
+        {ruta: '/img/NIK_9984_edited_nik_800.jpg'}
     ]},
     asociacion: {include: [ Imagen ]
   }},
@@ -30,9 +30,9 @@ const productos = [
     precio: 150,
     disponibilidad: 3,
     imagens: [
-        {ruta: '/ruta1producto3'},
-        {ruta: '/ruta2producto3'},
-        {ruta: '/ruta3producto3'}
+        {ruta: '/img/NIK_9984_edited_nik_800.jpg'},
+        {ruta: '/img/NIK_9984_edited_nik_800.jpg'},
+        {ruta: '/img/NIK_9984_edited_nik_800.jpg'}
     ]},
     asociacion: {include: [ Imagen ]
   }}]
