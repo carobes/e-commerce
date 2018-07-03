@@ -22,6 +22,6 @@ export const fetchProducts = () => dispatch =>
         .then(products => dispatch(receiveProducts(products)));
 
 export const fetchProduct = id => dispatch =>
-    axios.get('COMPLETAR LA RUTA/${id}')
+    axios.get(`/api/products/${id}`)
         .then(res => res.data)
         .then(product => dispatch(receiveProduct(product)));
