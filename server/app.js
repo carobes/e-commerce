@@ -14,7 +14,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use(routes);
 
-app.get('/', function (req, res, next) {
+app.use('/', function (req, res, next) {
   const indexFilePath = path.resolve(`${__dirname}/../browser/index.html`)
   res.sendfile(indexFilePath)
 })
