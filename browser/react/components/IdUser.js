@@ -3,6 +3,8 @@ import React from 'react';
 import { Typography, Card, CardContent } from '@material-ui/core'
 import { withStyles } from '@material-ui/core/styles'
 import Avatar from '@material-ui/core/Avatar';
+import Button from '@material-ui/core/Button';
+
 
 
 const user = {
@@ -42,6 +44,13 @@ const styles = {
         display: 'flex',
         float: 'right',
     },
+    buttonOrden: {
+        backgroundColor: '#6eb4ea',
+        color: 'white',
+        '&:hover': {
+            color: 'white'
+        }
+    }
 }
 
 export default withStyles(styles)(props => {
@@ -71,6 +80,10 @@ export default withStyles(styles)(props => {
                     </Typography>
                 </CardContent>
             </Card>
+            <br />
+            <Button className={classes.buttonOrden} size="medium" >
+                Mis Ordenes
+            </Button>
         </div>
     )
 })

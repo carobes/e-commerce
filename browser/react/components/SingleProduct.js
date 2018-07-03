@@ -1,11 +1,12 @@
 import React from 'react';
 import { Typography, Card, CardMedia, CardContent, CardActions, Grid, IconButton } from '@material-ui/core'
 import AddShoppingCart from '@material-ui/icons/AddShoppingCart'
+import Star from '@material-ui/icons/Star'
 import { withStyles } from '@material-ui/core/styles'
 import GridList from '@material-ui/core/GridList';
 import GridListTile from '@material-ui/core/GridListTile';
 import GridListTileBar from '@material-ui/core/GridListTileBar';
-import Button from '@material-ui/core/Button';
+
 
 const selectedProduct = {
     nombre: 'Lizard',
@@ -16,20 +17,14 @@ const selectedProduct = {
 const styles = {
     media: {
         height: 0,
-        paddingTop: '56.25%', // 16:9
+        paddingTop: '56.25%',
     },
     card: {
         maxWidth: 345,
         minWidth: 345,
 
     },
-    // whitecard: {
 
-    //     minWidth: 345,
-    //     height: 345,
-    //     maxWidth: 345,
-
-    // },
     root: {
         display: 'flex',
         flexWrap: 'wrap',
@@ -58,11 +53,9 @@ const styles = {
     pos: {
         marginBottom: 12,
     },
-
-    // titleBar: {
-    //     background:
-    //         'linear-gradient(to top, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.3) 70%, rgba(0,0,0,0) 100%)',
-    // }
+    buttonStar: {
+        color: "#D7DF01"
+    },
 }
 
 export default withStyles(styles)(props => {
@@ -113,6 +106,9 @@ export default withStyles(styles)(props => {
                         <CardActions>
                             <IconButton size="small" color="secondary">
                                 <AddShoppingCart />
+                            </IconButton>
+                            <IconButton className={classes.buttonStar} size="small" >
+                                <Star />
                             </IconButton>
                         </CardActions>
                     </Card>
