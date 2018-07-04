@@ -68,7 +68,7 @@ class TextFields extends React.Component {
     }
     axios.post('/api/users/new',usuario)
     .then(res => {console.log(res.data);return res.data})
-    .then(user => {this.props.history.push(`/user/${user.id}`)})
+    .then(user => {this.props.history.push(`/accounts/user/${user.id}`)})
   }
 
   render() {  
