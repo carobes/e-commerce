@@ -5,6 +5,7 @@ import ProductsContainer from './ProductsContainer'
 import SidebarContainer from './SidebarContainer'
 import { Grid } from '@material-ui/core'
 import SingleProductContainer from './SingleProductContainer'
+import SingleOrderContainer from './SingleOrderContainer'
 import IdUser from '../components/IdUser'
 import CrearUsuario from './CrearUsuario'
 import SingleOrder from '../components/SingleProduct'
@@ -74,8 +75,8 @@ export default class Main extends React.Component {
                                     <CrearUsuario />
                                 } />
                              <Route
-                                exact path='/orders/singleorder' render={() =>
-                                    <SingleOrder />
+                                exact path='/orders/:id' render={() =>
+                                    <SingleOrderContainer />
                                 } />
                             <Redirect from="/" to="/products" />
                         </Switch>
