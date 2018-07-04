@@ -6,30 +6,34 @@ import Search from './Search'
 import { withStyles } from '@material-ui/core/styles';
 
 const styles = {
-    root: {
-        flexGrow: 1
-    },
-    flex: {
-        flex: 1
+    padre: {
+        display: 'flex',
+        justifyContent: 'space-between'
+
     },
     colorBar: {
         backgroundColor: '#2196F3',
         color: 'white'
+    },
+    align: {
+        alignItems: 'center'
     }
 }
 
 export default withStyles(styles)(props => {
     const { classes, setSearch, search, handleSubmit } = props
     return (
-        <div className={classes.root}>
+        <div>
             <AppBar className={classes.colorBar} position="static" color="inherit">
-                <Toolbar>
-                    <Typography className={classes.flex} variant="title" color="inherit">
+                <Toolbar className={classes.padre}>
+                    <Typography variant="title" color="inherit">
                         TonE-Commerce
-          </Typography>
+                    </Typography>
                     <Search setSearch={setSearch} search={search} handleSubmit={handleSubmit} />
+                    <div className={[classes.padre, classes.align].join(' ')}>
                     <Carrito />
                     <Login />
+                    </div>
                 </Toolbar>
             </AppBar>
         </div>
