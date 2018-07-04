@@ -6,7 +6,7 @@ import SidebarContainer from './containers/SidebarContainer';
 
 ReactDOM.render(
     <BrowserRouter>
-        <Route path="/" component={Main} />
+        <Main />
     </BrowserRouter>,
     document.getElementById('app')
 );

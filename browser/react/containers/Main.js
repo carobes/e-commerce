@@ -7,6 +7,7 @@ import { Grid } from '@material-ui/core'
 import SingleProductContainer from './SingleProductContainer'
 import IdUser from '../components/IdUser'
 import CrearUsuario from './CrearUsuario'
+import CrearProducto from './CrearProducto'
 
 export default class Main extends React.Component {
     constructor() {
@@ -60,6 +61,10 @@ export default class Main extends React.Component {
                                 exact path='/products' render={() =>
                                     <ProductsContainer />
                                 } />
+                                    <Route
+                                        exact path='/products/new' render={() =>
+                                            <CrearProducto />
+                                        } />
                             <Route
                                 exact path='/products/:id' render={() =>
                                     <SingleProductContainer />

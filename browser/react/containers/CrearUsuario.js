@@ -58,7 +58,6 @@ class TextFields extends React.Component {
 
   handleSubmit(evt){
     evt.preventDefault();
-    console.log(this.props)
     const usuario = {
       nombre: this.state.nombre,
       apellido: this.state.apellido,
@@ -67,9 +66,10 @@ class TextFields extends React.Component {
       password: this.state.password
     }
     axios.post('/api/users/new',usuario)
-    .then(res => {console.log(res.data);return res.data})
+    .then(res => res.data)
     .then(user => {this.props.history.push(`/accounts/user/${user.id}`)})
   }
+  
 
   render() {  
     const { classes } = this.props;
@@ -148,8 +148,6 @@ class TextFields extends React.Component {
                 margin="normal"
               />
             <Button variant="contained" size="small" className={classes.button} onClick={this.handleSubmit} disabled={!check}>Crear</Button>
-            </Grid>
-            <Grid item md={3} xs={1}>
             </Grid>
           </Grid>
         </form>
