@@ -7,6 +7,7 @@ import { Grid } from '@material-ui/core'
 import SingleProductContainer from './SingleProductContainer'
 import SingleOrderContainer from './SingleOrderContainer'
 import IdUser from '../components/IdUser'
+import UserIdContainer from './UserIdContainer'
 import CrearUsuario from './CrearUsuario'
 import SingleOrder from '../components/SingleProduct'
 
@@ -67,8 +68,8 @@ export default class Main extends React.Component {
                                     <SingleProductContainer />
                                 } />
                             <Route
-                                exact path='/account/user' render={() =>
-                                    <IdUser />
+                                exact path='/accounts/user/:id' render={() =>
+                                    <UserIdContainer />
                                 } />
                             <Route
                                 exact path='/accounts/new' render={() =>

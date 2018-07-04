@@ -1,28 +1,28 @@
 import React from 'react';
-import store from '../store'
+import { connect } from 'react-redux'; 
 import SingleProduct from '../components/SingleProduct'
 import { fetchProduct } from '../action-creators/products'
 import { withRouter } from 'react-router'
 
-export default withRouter(class SingleProductContainer extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = store.getState();
-    }
+const mapStateToProps = ({ products }) => ({
+    selectedProduct: products.selectedProduct,
+  })
+  
+  const mapDispatchToProps = (dispatch) => ({
+    fetchProduct: (id) => dispatch(fetchProduct(id))
+  })
 
+
+class SingleProductContainer extends React.Component {
 
     componentDidMount() {
-        this.unsubscribe = store.subscribe(() => {
-            this.setState(store.getState());
-        });
-        store.dispatch(fetchProduct(this.props.match.params.id));
-    }
-
-    componentWillUnmount() {
-        this.unsubscribe();
+        this.props.fetchProduct(this.props.match.params.id);
     }
 
     render() {
-        return <SingleProduct product={this.state.products.selectedProduct} />
+        console.log(this.props.selectedProduct)
+        return <SingleProduct product={this.props.selectedProduct} />
     }
-})
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(withRouter(SingleProductContainer))

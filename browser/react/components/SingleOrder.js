@@ -9,6 +9,7 @@ import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
 import Paper from "@material-ui/core/Paper";
 import Avatar from "@material-ui/core/Avatar";
+import IdUserCard from './IdUserCard';
 
 const CustomTableCell = withStyles(theme => ({
   head: {
@@ -116,7 +117,8 @@ function CustomizedTable({ classes, order }) {
   return (
     <div>
       <br />
-      <Card className={classes.card}>
+
+      {/* <Card className={classes.card}>
         <div className={classes.rowAvatar}>
           <Avatar className={classes.avatar}>
             {usu.nombre + usu.apellido}
@@ -139,7 +141,8 @@ function CustomizedTable({ classes, order }) {
            mail: {order.mail}
           </Typography>
         </CardContent>
-      </Card>
+      </Card> */}
+      <IdUserCard user={usu}/>
       <Paper className={classes.root}>
         <Table className={classes.table}>
           <TableHead>
