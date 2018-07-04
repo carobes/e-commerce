@@ -7,6 +7,11 @@ import { Grid } from '@material-ui/core';
 import Button from '@material-ui/core/Button';
 import axios from 'axios'
 
+function validateEmail(email) {
+  var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+  return re.test(String(email).toLowerCase());
+}
+
 
 const styles = theme => ({
   container: {
@@ -45,20 +50,35 @@ class TextFields extends React.Component {
       edad: '',
       mail: '',
       password:'',
-      passValidate: ''
+      passValidate: '',
+      emailCheck: true,
+      gralCheck: false
     };
     this.handleSubmit = this.handleSubmit.bind(this) 
   }
   
+  validateEmail(email) {
+    var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    return re.test(email);
+  }
+  
   handleChange = name => event => {
+    const aux = this.state
+    aux[name] = event.target.value
+    var echeck = aux.emailCheck
+    if (name === 'mail') {
+      echeck = this.validateEmail(event.target.value)
+    }
+    var check = (aux.nombre.length && aux.apellido.length && aux.edad.length && aux.mail.length && aux.mail.length && aux.password.length && echeck && aux.password === aux.passValidate) ? true : false
     this.setState({
-      [name]: event.target.value
+      [name]: event.target.value,
+      gralCheck: check,
+      emailCheck: echeck
     });
   };
 
   handleSubmit(evt){
     evt.preventDefault();
-    console.log(this.props)
     const usuario = {
       nombre: this.state.nombre,
       apellido: this.state.apellido,
@@ -67,18 +87,17 @@ class TextFields extends React.Component {
       password: this.state.password
     }
     axios.post('/api/users/new',usuario)
-    .then(res => {console.log(res.data);return res.data})
+    .then(res => res.data)
     .then(user => {this.props.history.push(`/accounts/user/${user.id}`)})
   }
 
-  render() {  
+  render() {
     const { classes } = this.props;
-    const {nombre,apellido,edad,mail,password,passValidate} = this.state
-    var check = (nombre.length && apellido.length && edad.length && mail.length && mail.length && password.length && password === passValidate) ? true : false
+    const {nombre,apellido,edad,mail,password,passValidate,emailCheck,gralCheck} = this.state
 
     return (
       <div> <h1 className={classes.title}>Crear Usuario</h1>
-        <form className={classes.container} noValidate autoComplete="off">
+        <form className={classes.container} autoComplete="off">
           <Grid container spacing={16}>
             <Grid item md={3} xs={1}>
             </Grid>
@@ -115,6 +134,7 @@ class TextFields extends React.Component {
                 margin="normal"
               />
               <TextField
+                error={!emailCheck}
                 required
                 id="mail"
                 label="E-Mail"
@@ -147,7 +167,12 @@ class TextFields extends React.Component {
                 autoComplete="current-password"
                 margin="normal"
               />
-            <Button variant="contained" size="small" className={classes.button} onClick={this.handleSubmit} disabled={!check}>Crear</Button>
+            <Button
+              variant="contained"
+              size="small"
+              className={classes.button}
+              onClick={this.handleSubmit}
+              disabled={!gralCheck}>Crear</Button>
             </Grid>
             <Grid item md={3} xs={1}>
             </Grid>
@@ -157,7 +182,8 @@ class TextFields extends React.Component {
     );
   }
 }
-
+// averiguar que hace esto para mañana porque el hijo de puta de toni me pidió
+// que se lo explique a toda la clase.
 TextFields.propTypes = {
   classes: PropTypes.object.isRequired
 };
