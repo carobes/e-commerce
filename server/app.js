@@ -4,13 +4,12 @@ const path = require('path');
 const routes = require('./routes');
 const db = require('./models/db');
 const seed = require('./seed')
-const {Producto, Imagen, Categoria} = require('./models/index')
 
 
 const app = express();
 
 app.use(express.static(path.resolve(`${__dirname}/../browser/public`)));
-app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
 app.use('/api', routes);
@@ -21,7 +20,7 @@ app.use('/', function (req, res, next) {
 })
 
 app.use((err, req, res, next) => {
-  console.log('tira un puto error')
+  console.log('tira un error', req.params)
   res.status(500).send(err);
 });
 

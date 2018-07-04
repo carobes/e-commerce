@@ -8,7 +8,18 @@ const Imagens = models.Imagen
 module.exports = router;
 
 
-router.get('/', function(req, res){
-    Productos.findAll({include: [Imagens]})
-    .then(productos => res.json(productos));
+router.get('/:id', function (req, res) {
+    Productos.findOne({
+        where: { id: req.params.id },
+        include: [Imagens]
+    })
+        .then(producto => res.json(producto));
 });
+
+router.get('/', function (req, res) {
+    Productos.findAll({ include: [Imagens] })
+        .then(productos => res.json(productos));
+});
+
+
+
