@@ -8,7 +8,8 @@ const styles = theme => ({
         display: 'unset',
         flexWrap: 'wrap',
         float: 'left',
-        marginTop: '4px'
+        marginTop: '4px',
+
     },
     margin: {
         margin: theme.spacing.unit,
@@ -27,7 +28,7 @@ const styles = theme => ({
         border: '1px solid #ced4da',
         fontSize: 14,
         padding: '10px 12px',
-        width: 'calc(100% - 24px)',
+        width: '280px',
         transition: theme.transitions.create(['border-color', 'box-shadow']),
         fontFamily: [
             '-apple-system',
@@ -55,7 +56,7 @@ const styles = theme => ({
 
 
 export default withStyles(styles)(props => {
-    const { classes, value } = props;
+    const { classes, value, onChange } = props;
 
     return (
         <div className={classes.container}>
@@ -64,7 +65,7 @@ export default withStyles(styles)(props => {
 
                 id="bootstrap-input"
                 value={value}
-                onChange={props.onChange}
+                onChange={onChange}
                 placeholder="Search"
                 InputProps={{
                     disableUnderline: true,

@@ -5,24 +5,12 @@ import { withStyles } from '@material-ui/core/styles'
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 
-
-
-const user = {
-    nombre: 'Toni',
-    apellido: 'Pastafrola',
-    edad: '48',
-    mail: 'toni48@pastafrola5.com'
-}
-
 const styles = {
     card: {
-
         minWidth: 345,
         height: 245,
         maxWidth: 245,
-
     },
-
     title: {
         marginBottom: 8,
         fontSize: 18,
@@ -61,22 +49,22 @@ export default withStyles(styles)(props => {
             <br />
             <Card className={classes.card}>
                 <div className={classes.row}>
-                    <Avatar className={classes.avatar}>{user.nombre[0] + user.apellido[0]}</Avatar>
+                    <Avatar className={classes.avatar}>{!props.user.nombre ? [] : props.user.nombre[0] + props.user.apellido[0]}</Avatar>
                 </div>
                 <br />
                 <CardContent>
                     <Typography className={classes.pos} variant="headline" component="h1">
-                        {user.nombre}
+                        {!props.user ? 'loading..' : props.user.nombre}
                     </Typography>
                     <Typography variant="headline" component="h2">
-                        {user.apellido}
+                        {!props.user ? 'loading..' : props.user.apellido}
                     </Typography>
                     <br />
                     <Typography className={classes.title} variant="headline" component="h2">
-                        {user.edad}
+                        {!props.user ? 'loading..' : props.user.edad}
                     </Typography>
                     <Typography className={classes.title} variant="headline" component="h2">
-                        {user.mail}
+                        {!props.user ? 'loading..' : props.user.mail}
                     </Typography>
                 </CardContent>
             </Card>

@@ -31,8 +31,8 @@ export default withStyles(styles)(props => {
                     </Typography>
                     <Search setSearch={setSearch} search={search} handleSubmit={handleSubmit} />
                     <div className={[classes.padre, classes.align].join(' ')}>
-                    <Carrito />
-                    <Login />
+                        <Carrito />
+                        <Login />
                     </div>
                 </Toolbar>
             </AppBar>
