@@ -4,6 +4,7 @@ import { Typography, Card, CardContent } from '@material-ui/core'
 import { withStyles } from '@material-ui/core/styles'
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
+import IdUserCard from './IdUserCard';
 
 const styles = {
     card: {
@@ -47,27 +48,7 @@ export default withStyles(styles)(props => {
     return (
         <div>
             <br />
-            <Card className={classes.card}>
-                <div className={classes.row}>
-                    <Avatar className={classes.avatar}>{!props.user.nombre ? [] : props.user.nombre[0] + props.user.apellido[0]}</Avatar>
-                </div>
-                <br />
-                <CardContent>
-                    <Typography className={classes.pos} variant="headline" component="h1">
-                        {!props.user ? 'loading..' : props.user.nombre}
-                    </Typography>
-                    <Typography variant="headline" component="h2">
-                        {!props.user ? 'loading..' : props.user.apellido}
-                    </Typography>
-                    <br />
-                    <Typography className={classes.title} variant="headline" component="h2">
-                        {!props.user ? 'loading..' : props.user.edad}
-                    </Typography>
-                    <Typography className={classes.title} variant="headline" component="h2">
-                        {!props.user ? 'loading..' : props.user.mail}
-                    </Typography>
-                </CardContent>
-            </Card>
+            <IdUserCard user={props.user} />
             <br />
             <Button className={classes.buttonOrden} size="medium" >
                 Mis Ordenes
