@@ -34,8 +34,6 @@ const Users = db.define('users', {
         defaultValue: false,
         allowNull:false
     }
-
-
 })
 
 module.exports = Users;
