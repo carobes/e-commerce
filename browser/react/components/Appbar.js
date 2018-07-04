@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom'
 import { AppBar, Toolbar, Typography } from '@material-ui/core';
 import Login from './Login';
 import Carrito from './Carrito'
@@ -26,9 +27,11 @@ export default withStyles(styles)(props => {
         <div>
             <AppBar className={classes.colorBar} position="static" color="inherit">
                 <Toolbar className={classes.padre}>
-                    <Typography variant="title" color="inherit">
-                        TonE-Commerce
-                    </Typography>
+                    <Link to={'/'} style={{ textDecoration: 'none',color: 'white' }}>
+                        <Typography variant="title" color="inherit">
+                            TonE-Commerce
+                        </Typography>
+                    </Link>
                     <Search setSearch={setSearch} search={search} handleSubmit={handleSubmit} />
                     <div className={[classes.padre, classes.align].join(' ')}>
                     <Carrito />
