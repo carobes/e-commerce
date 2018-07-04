@@ -65,7 +65,7 @@ export default class Main extends React.Component {
                                     <SingleProductContainer />
                                 } />
                             <Route
-                                exact path='/account/user' render={() =>
+                                exact path='/accounts/user/:id' render={() =>
                                     <IdUser />
                                 } />
                             <Route
