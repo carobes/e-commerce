@@ -17,10 +17,6 @@ const styles = {
 
 export default withStyles(styles)(props => {
     const { classes, products } = props
-<<<<<<< HEAD
-=======
-    console.log(classes)
->>>>>>> a498ced2a218d62a7171a9f88a60ab25b1d9736a
     return (
         <div>
             <Grid container spacing={16}>
