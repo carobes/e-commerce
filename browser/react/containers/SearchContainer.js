@@ -3,6 +3,7 @@ import store from '../store'
 import Input from '../components/Input'
 import { fetchSearch } from '../action-creators/products'
 import { withRouter } from 'react-router'
+import Search from '../components/Search'
 
 
 export default withRouter(class SearchContainer extends React.Component {
@@ -11,12 +12,10 @@ export default withRouter(class SearchContainer extends React.Component {
         this.state = {
             search: ""
         }
-
         this.setSearch = this.setSearch.bind(this)
         this.handleSubmit = this.handleSubmit.bind(this)
     }
     setSearch(e) {
-        console.log(this.state.search)
         this.setState({ search: e.target.value })
     }
 
@@ -36,6 +35,6 @@ export default withRouter(class SearchContainer extends React.Component {
     }
 
     render() {
-        return < Search setSearch={setSearch} search={search} handleSubmit={handleSubmit} />
+        return < Search setSearch={this.setSearch} search={this.state.search} handleSubmit={this.handleSubmit} />
     }
 })

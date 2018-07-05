@@ -27,6 +27,6 @@ export const fetchProduct = id => dispatch =>
         .then(product => dispatch(receiveProduct(product)));
 
 export const fetchSearch = input => dispatch =>
-    axios.get(`/api/products/${input}`)
+    axios.get(`/api/products/search/${input}`)
         .then(res => res.data)
-        .then(products => dispatch(receiveProduct(products)));
+        .then(products => dispatch(receiveProducts(products)));

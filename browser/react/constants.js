@@ -14,5 +14,8 @@ export const CATEGORIES_SELECTED = 'CATEGORIES_SELECTED'
 //Users
 export const RECEIVE_USER = 'RECEIVE_USER';
 
+//Users
+export const SEARCH_PRODUCTS = 'SEARCH_PRODUCTS';
+
 
 
