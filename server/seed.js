@@ -1,4 +1,6 @@
 const {Producto, Imagen, Categoria, Reviews, Users, Estado, Ordenes, ProductosOrden} = require('./models/index')
+const crypto = require('crypto');
+
 
 
 
@@ -100,14 +102,14 @@ const usuarios = [{
     apellido: 'Sainz',
     edad: 25,
     mail: 'alansainz@plataforma5.la',
-    password: 'provoleta',
+    password: crypto.createHmac('sha256', 'Plataforma5').update('provoleta').digest('hex'),
     admin: false
 },{
     nombre: 'Toni',
     apellido: 'Tralice',
     edad: 31,
     mail: 'toni@plataforma5.la',
-    password: 'todobien',
+    password: crypto.createHmac('sha256', 'Plataforma5').update('todobien').digest('hex'),
     admin: true
 }]
 

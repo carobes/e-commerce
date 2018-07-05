@@ -5,8 +5,11 @@ import ProductsContainer from './ProductsContainer'
 import SidebarContainer from './SidebarContainer'
 import { Grid } from '@material-ui/core'
 import SingleProductContainer from './SingleProductContainer'
+import SingleOrderContainer from './SingleOrderContainer'
+import IdUser from '../components/IdUser'
 import UserIdContainer from './UserIdContainer'
 import CrearUsuario from './CrearUsuario'
+import SingleOrder from '../components/SingleProduct'
 
 export default class Main extends React.Component {
     constructor() {
@@ -72,7 +75,10 @@ export default class Main extends React.Component {
                                 exact path='/accounts/new' render={() =>
                                     <CrearUsuario />
                                 } />
-
+                             <Route
+                                exact path='/orders/:id' render={() =>
+                                    <SingleOrderContainer />
+                                } />
                             <Redirect from="/" to="/products" />
                         </Switch>
                     </Grid>

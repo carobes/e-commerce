@@ -9,6 +9,7 @@ import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
 import Paper from "@material-ui/core/Paper";
 import Avatar from "@material-ui/core/Avatar";
+import IdUserCard from './IdUserCard';
 
 const CustomTableCell = withStyles(theme => ({
   head: {
@@ -42,13 +43,13 @@ const styles = theme => ({
   },
   card: {
     minWidth: 345,
-    height: 175,
+    height: 185,
     maxWidth: 245,
   },
   card2: {
-    minWidth: 345,
-    height: 75,
-    maxWidth: 245,
+    minWidth: 255,
+    height: 125,
+    maxWidth: 255,
     float: 'right',
   },
   title: {
@@ -61,7 +62,8 @@ const styles = theme => ({
   },
   pos2: {
     textAlign: 'right',
-  },
+    fontSize: 18
+  },  
   avatar: {
     margin: 10,
     color: "#fff",
@@ -76,45 +78,50 @@ const styles = theme => ({
   }
 });
 
-let id = 0;
-function createData(
-  nomProd,
-  descripProducto,
-  precioUnitario,
-  cantidadProducto,
-  subTotal,
-  statusOrden
-) {
-  id += 1;
-  return {
-    id,
-    nomProd,
-    descripProducto,
-    precioUnitario,
-    cantidadProducto,
-    subTotal,
-    statusOrden
-  };
-}
+// let id = 0;
+// function createData(
+//   nomProd,
+//   descripProducto,
+//   precioUnitario,
+//   cantidadProducto,
+//   subTotal,
+//   statusOrden
+// ) {
+//   id += 1;
+//   return {
+//     id,
+//     nomProd,
+//     descripProducto,
+//     precioUnitario,
+//     cantidadProducto,
+//     subTotal,
+//     statusOrden
+//   };
+// }
 
-const data = [
-  createData('Producto 1', 'Soy el producto uno', 20, 3, 60, "Procesando"),
-  createData('a', 'b', 1, 2, 3, 'c'),
-  createData('a', 'b', 1, 2, 3, 'c'),
-  createData('a', 'b', 1, 2, 3, 'c'),
-  createData('a', 'b', 1, 2, 3, 'c'),
-];
+// const data = [
+//   createData('Producto 1', 'Soy el producto uno', 20, 3, 60, "Procesando"),
+//   createData('a', 'b', 1, 2, 3, 'c'),
+//   createData('a', 'b', 1, 2, 3, 'c'),
+//   createData('a', 'b', 1, 2, 3, 'c'),
+//   createData('a', 'b', 1, 2, 3, 'c'),
+// ];
 
-function CustomizedTable(props) {
-  const { classes } = props;
+function CustomizedTable({ classes, order }) {
+  const { productosOrdens, status, usuario } = order; 
+  const pO = !productosOrdens ? [] : productosOrdens;
+  const stat = !status ? {} : status;
+  const usu = !usuario ? {} : usuario;
 
+  console.log("ver que hace pO", pO, "order", order, "productosOrden", productosOrdens)
   return (
     <div>
       <br />
-      <Card className={classes.card}>
+
+      {/* <Card className={classes.card}>
         <div className={classes.rowAvatar}>
           <Avatar className={classes.avatar}>
-            {user.nombre[0] + user.apellido[0]}
+            {usu.nombre + usu.apellido}
           </Avatar>
         </div>
         <br />
@@ -131,41 +138,38 @@ function CustomizedTable(props) {
             variant="headline"
             component="h2"
           >
-           mail: {user.mail}
+           mail: {order.mail}
           </Typography>
         </CardContent>
-      </Card>
+      </Card> */}
+      <IdUserCard user={usu}/>
       <Paper className={classes.root}>
         <Table className={classes.table}>
           <TableHead>
             <TableRow>
-              <CustomTableCell>Nombre de Producto)</CustomTableCell>
+              <CustomTableCell>Nombre de Producto</CustomTableCell>
               <CustomTableCell>Descripción de Producto</CustomTableCell>
               <CustomTableCell numeric>Precio Unitario</CustomTableCell>
               <CustomTableCell numeric>Cantidad de Producto</CustomTableCell>
               <CustomTableCell numeric>Subtotal</CustomTableCell>
-              <CustomTableCell>Status de la Orden</CustomTableCell>
             </TableRow>
           </TableHead>
           <TableBody>
-            {data.map(n => {
-              return (
-                <TableRow className={classes.row} key={n.id}>
+              {pO.map(data => (
+                <TableRow className={classes.row} key={data.id}>
                   <CustomTableCell component="th" scope="row">
-                    {n.nomProd}
+                    {data.nombre}
                   </CustomTableCell>
-                  <CustomTableCell>{n.descripProducto}</CustomTableCell>
+                  <CustomTableCell>{data.descripcion}</CustomTableCell>
                   <CustomTableCell numeric>
-                    $ {n.precioUnitario}
+                    $ {data.precio}
                   </CustomTableCell>
                   <CustomTableCell numeric>
-                    {n.cantidadProducto}
+                    {data.cantidad}
                   </CustomTableCell>
-                  <CustomTableCell numeric>$ {n.subTotal}</CustomTableCell>
-                  <CustomTableCell>{n.statusOrden}</CustomTableCell>
+                  <CustomTableCell numeric>$ {data.subTotal}</CustomTableCell>
                 </TableRow>
-              );
-            })}
+                    ))}
           </TableBody>
         </Table>
       </Paper>
@@ -173,8 +177,17 @@ function CustomizedTable(props) {
       <Card className={classes.card2}>
         <br />
         <CardContent>
-          <Typography className={classes.pos2} variant="headline" component="h1">
+          <Typography className={classes.pos2} variant="headline" component="h2">
             Total: $ 'Acá va el Total'
+          </Typography>
+          <Typography className={classes.pos2} variant="headline" component="h1">
+            Status: {stat.estado}
+          </Typography>
+          <Typography className={classes.pos2} variant="headline" component="h1">
+            mail de envío: {stat.estado}
+          </Typography>
+          <Typography className={classes.pos2} variant="headline" component="h1">
+            dirección de envío: {stat.estado}
           </Typography>
           <br />
         </CardContent>
