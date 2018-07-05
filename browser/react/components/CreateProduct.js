@@ -41,8 +41,8 @@ const styles = theme => ({
 });
 
 class TextFields extends React.Component {
-  constructor(){
-    super();
+  constructor(props){
+    super(props);
     this.state = {
       nombre: '',
       descripcion: '',
@@ -100,7 +100,8 @@ render() {
     const { nombre, descripcion, precio, disponibilidad, imagenes, gralCheck, urlCheck } = this.state
     
     return (
-        <div> <h1 className={classes.title}>Crear Producto</h1>
+      <div> <h1 className={classes.title}>Crear Producto</h1>
+      {console.log(this.props)}
         <form className={classes.container} noValidate autoComplete="off">
               <TextField
                 required

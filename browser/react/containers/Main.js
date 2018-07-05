@@ -9,8 +9,8 @@ import SingleOrderContainer from './SingleOrderContainer'
 import IdUser from '../components/IdUser'
 import UserIdContainer from './UserIdContainer'
 import CrearUsuario from './CrearUsuario'
-import CrearProducto from './CrearProducto'
 import SingleOrder from '../components/SingleProduct'
+import CreateProductContainer from './CreateProductContainer';
 
 export default class Main extends React.Component {
     constructor() {
@@ -54,20 +54,22 @@ export default class Main extends React.Component {
             <div>
                 <Appbar setSearch={this.setSearch} search={this.state.search} handleSubmit={this.handleSubmit} />
                 <br />
-                <Grid container spacing={16}>
-                    <Grid item xs={2}>
-                        <SidebarContainer />
-                    </Grid>
-                    <Grid item xs={10}>
                         <Switch>
                             <Route
                                 exact path='/products' render={() =>
+                                <Grid container spacing={16}>
+                                    <Grid item xs={2}>
+                                    <SidebarContainer />
+                                    </Grid>
+                                    <Grid item xs={10}>
                                     <ProductsContainer />
+                                    </Grid>
+                                </Grid>
                                 } />
-                                    <Route
-                                        exact path='/products/new' render={() =>
-                                            <CrearProducto />
-                                        } />
+                            <Route
+                                exact path='/products/new' render={() =>
+                                    <CreateProductContainer />
+                                } />
                             <Route
                                 exact path='/products/:id' render={() =>
                                     <SingleProductContainer />
@@ -86,8 +88,6 @@ export default class Main extends React.Component {
                                 } />
                             <Redirect from="/" to="/products" />
                         </Switch>
-                    </Grid>
-                </Grid>
             </div>
         )
     }
