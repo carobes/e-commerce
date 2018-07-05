@@ -4,9 +4,7 @@ const db = require('./db');
 
 const Carrito = db.define('carrito', {
     cantidad: {
-        type: Sequelize.INTEGER,
-        allowNull: false
-
+        type: Sequelize.INTEGER
     }
 
 });
