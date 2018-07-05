@@ -1,12 +1,18 @@
 import React from 'react';
-import store from '../store'
-import Input from '../components/Input'
+import { connect } from 'react-redux';
 import { fetchSearch } from '../action-creators/products'
 import { withRouter } from 'react-router'
 import Search from '../components/Search'
 
+const mapStateToProps = () => ({
 
-export default withRouter(class SearchContainer extends React.Component {
+})
+
+const mapDispatchToProps = (dispatch) => ({
+    fetchSearch: (input) => dispatch(fetchSearch(input))
+})
+
+class SearchContainer extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -21,20 +27,13 @@ export default withRouter(class SearchContainer extends React.Component {
 
     handleSubmit(e) {
         e.preventDefault()
-        store.dispatch(fetchSearch(this.state.search));
+        this.props.fetchSearch(this.state.search);
     }
 
-    componentDidMount() {
-        this.unsubscribe = store.subscribe(() => {
-            this.setState(store.getState());
-        });
-    }
-
-    componentWillUnmount() {
-        this.unsubscribe();
-    }
 
     render() {
         return < Search setSearch={this.setSearch} search={this.state.search} handleSubmit={this.handleSubmit} />
     }
-})
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(withRouter(SearchContainer))

@@ -1,9 +1,8 @@
-import { RECEIVE_PRODUCTS, RECEIVE_PRODUCT, SEARCH_INPUT, SEARCH_PRODUCTS } from '../constants';
+import { RECEIVE_PRODUCTS, RECEIVE_PRODUCT, SEARCH_PRODUCTS } from '../constants';
 
 const initialState = {
     productsList: [],
     selectedProduct: {},
-    searchInput: ''
 }
 
 export default (state = initialState, action) => {
@@ -12,8 +11,6 @@ export default (state = initialState, action) => {
             return Object.assign({}, state, { productsList: action.products });
         case RECEIVE_PRODUCT:
             return Object.assign({}, state, { selectedProduct: action.product });
-        case SEARCH_INPUT:
-            return Object.assign({}, state, { searchInput: action.search })
         case SEARCH_PRODUCTS:
             return Object.assign({}, state, { productsList: action.products });
         default:

@@ -11,11 +11,6 @@ const receiveProduct = (product) => ({
     product
 })
 
-export const searchInput = (search) => ({
-    type: SEARCH_INPUT,
-    search
-})
-
 export const fetchProducts = () => dispatch =>
     axios.get('/api/products')
         .then(res => res.data)
