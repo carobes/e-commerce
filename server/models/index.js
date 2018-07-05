@@ -11,9 +11,11 @@ const Users = require('./users');
 
 Producto.belongsToMany(Categoria, {as: 'Category', through: 'productoCategoria'});
 Categoria.belongsToMany(Producto, {as: 'Category', through: 'productoCategoria'});
-
-Producto.belongsToMany(Carrito, {through: 'productoCarrito'});
-Carrito.belongsToMany(Producto, {through: 'productoCarrito'});
+// se cambio la asociacion y se puso alias a la asociacion. en una tabla Carrito pone userId, productoId, cantidad
+Producto.belongsToMany(Users, {as: 'prodcarrito', through: Carrito });
+Users.belongsToMany(Producto, {as: 'usercarrito', through: Carrito });
+// Producto.belongsToMany(Carrito, {through: 'productoCarrito'});
+// Carrito.belongsToMany(Producto, {through: 'productoCarrito'});
 
 Producto.hasMany(Imagen);
 

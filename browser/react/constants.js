@@ -1,7 +1,7 @@
 // Products
 export const RECEIVE_PRODUCTS = 'RECEIVE_PRODUCTS';
 export const RECEIVE_PRODUCT = 'RECEIVE_PRODUCT';
-export const SEARCH_INPUT = 'SEARCH_INPUT'
+
 
 //Orders
 export const RECEIVE_ORDERS = 'RECEIVE_ORDERS';
@@ -13,6 +13,9 @@ export const CATEGORIES_SELECTED = 'CATEGORIES_SELECTED'
 
 //Users
 export const RECEIVE_USER = 'RECEIVE_USER';
+
+//Search Products
+export const SEARCH_PRODUCTS = 'SEARCH_PRODUCTS';
 
 
 

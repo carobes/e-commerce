@@ -6,53 +6,17 @@ import SidebarContainer from './SidebarContainer'
 import { Grid } from '@material-ui/core'
 import SingleProductContainer from './SingleProductContainer'
 import SingleOrderContainer from './SingleOrderContainer'
-import IdUser from '../components/IdUser'
 import UserIdContainer from './UserIdContainer'
 import CrearUsuario from './CrearUsuario'
 import SingleOrder from '../components/SingleProduct'
 import CreateProductContainer from './CreateProductContainer';
 
 export default class Main extends React.Component {
-    constructor() {
-        super();
-        this.state = {
-            search: "",
-            products: [],
-
-
-        }
-        this.setSearch = this.setSearch.bind(this)
-        this.handleSubmit = this.handleSubmit.bind(this)
-    }
-
-    setSearch(e) {
-        console.log(this.state.search)
-        this.setState({ search: e.target.value })
-
-
-    }
-
-    handleSubmit(e) {
-        e.preventDefault()
-
-        this.setState({ products: ["heladera 1", "heladera 2", "heladera 3"] })
-        console.log(this.state.products)
-        //     axios.get()
-        //         .then((result) => {
-
-        //             this.setState({
-        //                 products: [],
-        //                 search: ""
-        //             })
-        //             this.props.history.push('/search');
-        //         });
-    }
-
 
     render() {
         return (
             <div>
-                <Appbar setSearch={this.setSearch} search={this.state.search} handleSubmit={this.handleSubmit} />
+                <Appbar />
                 <br />
                         <Switch>
                             <Route
@@ -82,7 +46,7 @@ export default class Main extends React.Component {
                                 exact path='/accounts/new' render={() =>
                                     <CrearUsuario />
                                 } />
-                             <Route
+                            <Route
                                 exact path='/orders/:id' render={() =>
                                     <SingleOrderContainer />
                                 } />
