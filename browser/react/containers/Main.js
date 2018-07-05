@@ -1,7 +1,7 @@
 import React from 'react';
 import { Route, Link, Redirect, Switch } from 'react-router-dom';
 import Appbar from '../components/Appbar'
-import Products from '../components/Products'
+import ProductsContainer from './ProductsContainer'
 import SidebarContainer from './SidebarContainer'
 import { Grid } from '@material-ui/core'
 import SingleProductContainer from './SingleProductContainer'
@@ -49,18 +49,6 @@ export default class Main extends React.Component {
 
 
     render() {
-      if (this.props.location.pathname === '/cart'){
-        return (
-          <div>
-            <Appbar setSearch={this.setSearch} search={this.state.search} handleSubmit={this.handleSubmit} />
-            <Route
-                exact path='/cart' render={() =>
-                    <Cart />
-                } />
-            <br />
-          </div>
-        )
-      }else{
         return (
             <div>
                 <Appbar setSearch={this.setSearch} search={this.state.search} handleSubmit={this.handleSubmit} />
@@ -73,7 +61,7 @@ export default class Main extends React.Component {
                         <Switch>
                             <Route
                                 exact path='/products' render={() =>
-                                    <Products />
+                                    <ProductsContainer />
                                 } />
                             <Route
                                 exact path='/products/:id' render={() =>
@@ -87,13 +75,10 @@ export default class Main extends React.Component {
                                 exact path='/accounts/new' render={() =>
                                     <CrearUsuario />
                                 } />
-<<<<<<< HEAD
-=======
                              <Route
                                 exact path='/orders/:id' render={() =>
                                     <SingleOrderContainer />
                                 } />
->>>>>>> 31a46b88f35b5ad39e2c07f47575c75f2670eb5e
                             <Redirect from="/" to="/products" />
                         </Switch>
                     </Grid>
@@ -101,5 +86,4 @@ export default class Main extends React.Component {
             </div>
         )
     }
-  }
 }

@@ -29,7 +29,7 @@ class SidebarContainer extends React.Component {
     event.preventDefault();
     const categorias = this.state.categorias;
     let filtros_arr = Object.keys(categorias).filter( categoria => {if (categorias[categoria]) return categoria});
-    this.setState({ filtros: filtros_arr }, () => console.log(this.state.filtros));
+    this.setState({ filtros: filtros_arr }, ()=> console.log(this.state.filtros));
   };
 
   render() {
