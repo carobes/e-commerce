@@ -20,7 +20,7 @@ app.use('/', function (req, res, next) {
 })
 
 app.use((err, req, res, next) => {
-  console.log('tira un error', req.params)
+  console.log('tira un error', err);
   res.status(500).send(err);
 });
 

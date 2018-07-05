@@ -1,5 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import DataForOrder from './data_for_gen_order';
+
 import { withStyles } from '@material-ui/core/styles';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
@@ -96,6 +98,7 @@ function CustomizedTable(props) {
           </TableRow>
         </TableBody>
       </Table>
+      <DataForOrder />
     </Paper>
   );
 }
