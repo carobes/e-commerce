@@ -12,8 +12,8 @@ const Users = require('./users');
 Producto.belongsToMany(Categoria, {as: 'Category', through: 'productoCategoria'});
 Categoria.belongsToMany(Producto, {as: 'Category', through: 'productoCategoria'});
 
-Producto.belongsToMany(Carrito, {through: 'productoCarrito'});
-Carrito.belongsToMany(Producto, {through: 'productoCarrito'});
+Producto.belongsToMany(Users, {as: 'prodcarrito', through: Carrito }); // crea la tabla Carrito (producto.Id, user.Id, cantidad)
+Users.belongsToMany(Producto, {as: 'usercarrito', through: Carrito });
 
 Producto.hasMany(Imagen);
 
@@ -22,8 +22,6 @@ Reviews.belongsTo(Producto, {as: "producto"});
 Reviews.belongsTo(Users, {as: "usuario"});
 
 Ordenes.belongsTo(Users, {as: "usuario"});
-
-Carrito.belongsTo(Users);
 
 Ordenes.belongsTo(Estado, {as: "status"});
 
