@@ -3,8 +3,9 @@ import PropTypes from "prop-types";
 import { withStyles } from "@material-ui/core/styles";
 import {withRouter} from 'react-router'
 import TextField from "@material-ui/core/TextField";
-import { Grid, Button, InputAdornment, Input, InputLabel, FormControl } from '@material-ui/core';
+import { Button, InputAdornment, Input } from '@material-ui/core';
 import axios from 'axios';
+import validUrl from 'valid-url';
 
 
 const styles = theme => ({
@@ -47,14 +48,33 @@ class TextFields extends React.Component {
       descripcion: '',
       precio: '',
       disponibilidad: '',
-      imagenes: []
+      imagenes: [],
+      urlCheck: true,
+      gralCheck: false
     };
     this.handleSubmit = this.handleSubmit.bind(this) 
 }
 
+validateUrl(str) {
+  if (validUrl.isUri(str)){
+    return true
+} else {
+    return false
+}
+}
+
 handleChange = name => event => {
+    const aux = this.state
+    aux[name] = event.target.value
+    var ucheck = aux.urlCheck
+    if(name === 'imagenes') {
+      ucheck = this.validateUrl(event.target.value)
+    }
+    var check = (aux.nombre.length && aux.descripcion.length && aux.precio.length && aux.disponibilidad.length && aux.imagenes.length && ucheck) ? true : false
     this.setState({
-        [name]: event.target.value
+        [name]: event.target.value,
+        gralCheck: check,
+        urlCheck: ucheck
     });
 };
 
@@ -68,8 +88,7 @@ handleSubmit(evt){
     },
     {
         include: [Imagen]
-    }
-    ]
+    }]
     axios.post('/api/products/new',product)
     .then(res => res.data)
     .then(user => {this.props.history.push(`/accounts/user/${user.id}`)})
@@ -78,7 +97,7 @@ handleSubmit(evt){
 
 render() {  
     const { classes } = this.props;
-    const { nombre, descripcion, precio, disponibilidad, imagenes } = this.state
+    const { nombre, descripcion, precio, disponibilidad, imagenes, gralCheck, urlCheck } = this.state
     
     return (
         <div> <h1 className={classes.title}>Crear Producto</h1>
@@ -104,6 +123,7 @@ render() {
                 margin="normal"
               />
                 <TextField
+                  error={!urlCheck}
                   required
                   id="imagenes"
                   label="Imágenes"
@@ -134,7 +154,12 @@ render() {
                 />
               <br/>
               <br/>
-            <Button variant="contained" size="small" className={classes.button} onClick={this.handleSubmit}>Crear</Button>
+            <Button 
+              variant="contained" 
+              size="small" 
+              className={classes.button} 
+              onClick={this.handleSubmit}
+              disabled={!gralCheck}>Crear</Button>
         </form>
       </div>
     );
