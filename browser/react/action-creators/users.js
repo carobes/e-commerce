@@ -7,6 +7,6 @@ const receiveUser = (user) => ({
 })
 
 export const fetchUser = id => dispatch =>
-    axios.get('COMPLETAR LA RUTA/${id}')
+    axios.get(`/api/users/${id}`)
         .then(res => res.data)
         .then(user => dispatch(receiveUser(user)))

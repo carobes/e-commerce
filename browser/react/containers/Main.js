@@ -4,9 +4,12 @@ import Appbar from '../components/Appbar'
 import Products from '../components/Products'
 import SidebarContainer from './SidebarContainer'
 import { Grid } from '@material-ui/core'
-import SingleProduct from '../components/SingleProduct'
+import SingleProductContainer from './SingleProductContainer'
+import SingleOrderContainer from './SingleOrderContainer'
+import IdUser from '../components/IdUser'
+import UserIdContainer from './UserIdContainer'
 import CrearUsuario from './CrearUsuario'
-import Cart from './CarroContainer'
+import SingleOrder from '../components/SingleProduct'
 
 export default class Main extends React.Component {
     constructor() {
@@ -73,13 +76,24 @@ export default class Main extends React.Component {
                                     <Products />
                                 } />
                             <Route
-                                exact path='/products/reptil' render={() =>
-                                    <SingleProduct />
+                                exact path='/products/:id' render={() =>
+                                    <SingleProductContainer />
+                                } />
+                            <Route
+                                exact path='/accounts/user/:id' render={() =>
+                                    <UserIdContainer />
                                 } />
                             <Route
                                 exact path='/accounts/new' render={() =>
                                     <CrearUsuario />
                                 } />
+<<<<<<< HEAD
+=======
+                             <Route
+                                exact path='/orders/:id' render={() =>
+                                    <SingleOrderContainer />
+                                } />
+>>>>>>> 31a46b88f35b5ad39e2c07f47575c75f2670eb5e
                             <Redirect from="/" to="/products" />
                         </Switch>
                     </Grid>

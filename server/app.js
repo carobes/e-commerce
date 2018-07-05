@@ -4,13 +4,12 @@ const path = require('path');
 const routes = require('./routes');
 const db = require('./models/db');
 const seed = require('./seed')
-const {Producto, Imagen, Categoria} = require('./models/index')
 
 
 const app = express();
 
 app.use(express.static(path.resolve(`${__dirname}/../browser/public`)));
-app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
 app.use('/api', routes);

@@ -8,11 +8,16 @@ const styles = {
     media: {
         height: 0,
         paddingTop: '56.25%', // 16:9
+    },
+    padre: {
+        display: 'flex',
+        justifyContent: 'space-between',
     }
 }
 
 export default withStyles(styles)(props => {
-    const { classes } = props
+    const { classes, products } = props
+    //console.log(classes)
     return (
         <div>
             <Grid container spacing={16}>
@@ -20,28 +25,30 @@ export default withStyles(styles)(props => {
                     <Grid key={value} item xs={4}>
 
                         <Card className={classes.card}>
-                            <Link to='/products/reptil'>
+                            <Link to={`/products/${product.id}`}>
                                 <CardMedia
                                     className={classes.media}
-                                    image="/img/NIK_9984_edited_nik_800.jpg"
-                                    title="Contemplative Reptile"
+                                    image={product.imagens[0].ruta}
                                 />
                             </Link>
                             <CardContent>
-                                <Link to='/products/reptil'>
+                                <Link to={`/products/${product.id}`}>
                                     <Typography gutterBottom variant="headline" component="h2">
-                                        Lizard
-                                </Typography>
+                                            {product.nombre}
+                                    </Typography>
                                 </Link>
                                 <Typography component="p">
                                     Lizards are a widespread group of squamate reptiles, with over 6,000 species, ranging
                                     across all continents except Antarctica
                 </Typography>
                             </CardContent>
-                            <CardActions>
-                                <IconButton size="small" color="secondary">
+                            <CardActions className={classes.padre}>
+                                <IconButton  size="small" color="secondary">
                                     <AddShoppingCart />
                                 </IconButton>
+                                <Typography  variant='title' color='primary' component="p">
+                                    {product.precio}$
+                                </Typography>
                             </CardActions>
                         </Card>
                     </Grid>
