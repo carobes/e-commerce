@@ -1,7 +1,7 @@
 import React from 'react';
 import { Route, Link, Redirect, Switch } from 'react-router-dom';
 import Appbar from '../components/Appbar'
-import Products from '../components/Products'
+import ProductsContainer from './ProductsContainer'
 import SidebarContainer from './SidebarContainer'
 import { Grid } from '@material-ui/core'
 import SingleProductContainer from './SingleProductContainer'
@@ -50,18 +50,6 @@ export default class Main extends React.Component {
 
 
     render() {
-      if (this.props.location.pathname === '/cart'){
-        return (
-          <div>
-            <Appbar setSearch={this.setSearch} search={this.state.search} handleSubmit={this.handleSubmit} />
-            <Route
-                exact path='/cart' render={() =>
-                    <Cart />
-                } />
-            <br />
-          </div>
-        )
-      }else{
         return (
             <div>
                 <Appbar setSearch={this.setSearch} search={this.state.search} handleSubmit={this.handleSubmit} />
@@ -74,7 +62,7 @@ export default class Main extends React.Component {
                         <Switch>
                             <Route
                                 exact path='/products' render={() =>
-                                    <Products />
+                                    <ProductsContainer />
                                 } />
                                     <Route
                                         exact path='/products/new' render={() =>
@@ -103,5 +91,4 @@ export default class Main extends React.Component {
             </div>
         )
     }
-  }
 }

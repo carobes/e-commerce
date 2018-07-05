@@ -4,8 +4,6 @@ import { AppBar, Toolbar, Typography } from '@material-ui/core';
 import Login from './Login';
 import Carrito from './Carrito'
 import Search from './Search'
-import Button from '@material-ui/core/Button';
-import CarroContainer from '../containers/CarroContainer';
 import { withStyles } from '@material-ui/core/styles';
 
 const styles = {
@@ -21,9 +19,9 @@ const styles = {
     align: {
         alignItems: 'center'
     }
-});
+}
 
-function Appbar(props){
+export default withStyles(styles)(props => {
     const { classes, setSearch, search, handleSubmit } = props
     return (
         <div>
@@ -43,10 +41,4 @@ function Appbar(props){
             </AppBar>
         </div>
     )
-}
-
-Appbar.propTypes = {
-  classes: PropTypes.object.isRequired,
-};
-
-export default withStyles(styles)(Appbar);
+})

@@ -17,11 +17,15 @@ const styles = {
 
 export default withStyles(styles)(props => {
     const { classes, products } = props
+<<<<<<< HEAD
+=======
+    console.log(classes)
+>>>>>>> a498ced2a218d62a7171a9f88a60ab25b1d9736a
     return (
         <div>
             <Grid container spacing={16}>
-                {[0, 1, 3].map(value => (
-                    <Grid key={value} item xs={4}>
+                {products.map(product => (
+                    <Grid key={product.id} item xs={4}>
 
                         <Card className={classes.card}>
                             <Link to={`/products/${product.id}`}>
@@ -37,9 +41,8 @@ export default withStyles(styles)(props => {
                                     </Typography>
                                 </Link>
                                 <Typography component="p">
-                                    Lizards are a widespread group of squamate reptiles, with over 6,000 species, ranging
-                                    across all continents except Antarctica
-                </Typography>
+                                    {product.descripcion}
+                                </Typography>
                             </CardContent>
                             <CardActions className={classes.padre}>
                                 <IconButton  size="small" color="secondary">

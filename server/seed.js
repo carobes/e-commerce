@@ -178,21 +178,13 @@ function seed(){
     var pprod = productos.map((producto) => Producto.create(producto.detalle, producto.asociacion))
     var puser = usuarios.map((usuario) => Users.create(usuario))
     var pestado = estados.map((estado) => Estado.create(estado))
-
+   
 
     Promise.all([...pcat,...pprod,...puser,...pestado]).then(() => {
-        catprod.map(obj => Producto.findOne({where:{nombre:obj.nombreprod}})
-        .then(foundProd => obj.categorias.map(cat => Categoria.findOne({where:{categoria:cat.nombrecat}})
-        .then(foundCat => foundProd.addCategory(foundCat.id)))))
+        catprod.map(obj => Producto.findOne({where:{nombre:obj.nombreprod}}).then(foundProd => obj.categorias.map(cat => Categoria.findOne({where:{categoria:cat.nombrecat}}).then(foundCat => foundProd.addCategory(foundCat.id)))))
     })
-    .then(() => {reviews.map((review) => Producto.findOne({where:{nombre:review.producto}})
-    .then((foundProd) => Users.findOne({where: {nombre: review.usuario}})
-    .then((foundUser) => Reviews.create(review.detalle)
-    .then((reviewCreated) => {reviewCreated.setProducto(foundProd); reviewCreated.setUsuario(foundUser)}))))})
-    .then(() => {ordenes.map((orden) => Users.findOne({where:{nombre:orden.usuario}})
-    .then((foundUser) => Estado.findOne({where:{estado:orden.estado}})
-    .then(foundEstado => Ordenes.create(orden.detalle, orden.asociacion)
-    .then(ordenCreated => {ordenCreated.setUsuario(foundUser);ordenCreated.setStatus(foundEstado)}))))})
+    .then(() => {reviews.map((review) => Producto.findOne({where:{nombre:review.producto}}).then((foundProd) => Users.findOne({where: {nombre: review.usuario}}).then((foundUser) => Reviews.create(review.detalle).then((reviewCreated) => {reviewCreated.setProducto(foundProd); reviewCreated.setUsuario(foundUser)}))))})
+    .then(() => {ordenes.map((orden) => Users.findOne({where:{nombre:orden.usuario}}).then((foundUser) => Estado.findOne({where:{estado:orden.estado}}).then(foundEstado => Ordenes.create(orden.detalle, orden.asociacion).then(ordenCreated => {ordenCreated.setUsuario(foundUser);ordenCreated.setStatus(foundEstado)}))))})
 }
 
 module.exports = seed;
