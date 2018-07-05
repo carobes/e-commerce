@@ -16,6 +16,18 @@ router.get('/:id', function (req, res) {
         .then(producto => res.json(producto));
 });
 
+router.get('/search/:input', function (req, res) {
+    Productos.findAll({
+        where: {
+            nombre: {
+                $iLike: '%' + req.params.input + '%'
+            }
+        },
+        include: [Imagen]
+    })
+        .then(producto => res.json(producto));
+});
+
 router.get('/', function (req, res) {
     Productos.findAll({ include: [Imagen] })
         .then(productos => res.json(productos));

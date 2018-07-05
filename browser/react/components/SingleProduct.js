@@ -29,7 +29,6 @@ const styles = {
     },
     gridList: {
         flexWrap: 'nowrap',
-        // Promote the list into his own layer on Chrome. This cost memory but helps keeping high FPS.
         transform: 'translateZ(0)',
     },
 
@@ -53,7 +52,6 @@ const styles = {
 
 export default withStyles(styles)(props => {
     const { classes } = props
-    const bull = <span className={classes.bullet}>•</span>;
     const imgGrid = !props.product.imagens ? [] : props.product.imagens.slice(1)
     return (
 
@@ -78,8 +76,6 @@ export default withStyles(styles)(props => {
                                 </GridListTile>
                             ))}
                         </GridList>
-
-
                     </div>
                 </Grid>
                 <Grid item xs={6}>
@@ -106,11 +102,7 @@ export default withStyles(styles)(props => {
                         </CardActions>
                     </Card>
                 </Grid>
-
-
             </Grid>
-
-
         </div>
     )
 })
