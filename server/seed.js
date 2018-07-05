@@ -1,4 +1,6 @@
 const {Producto, Imagen, Categoria, Reviews, Users, Estado, Ordenes, ProductosOrden} = require('./models/index')
+const crypto = require('crypto');
+
 
 
 
@@ -100,14 +102,14 @@ const usuarios = [{
     apellido: 'Sainz',
     edad: 25,
     mail: 'alansainz@plataforma5.la',
-    password: 'provoleta',
+    password: crypto.createHmac('sha256', 'Plataforma5').update('provoleta').digest('hex'),
     admin: false
 },{
     nombre: 'Toni',
     apellido: 'Tralice',
     edad: 31,
     mail: 'toni@plataforma5.la',
-    password: 'todobien',
+    password: crypto.createHmac('sha256', 'Plataforma5').update('todobien').digest('hex'),
     admin: true
 }]
 
@@ -176,13 +178,21 @@ function seed(){
     var pprod = productos.map((producto) => Producto.create(producto.detalle, producto.asociacion))
     var puser = usuarios.map((usuario) => Users.create(usuario))
     var pestado = estados.map((estado) => Estado.create(estado))
-   
+
 
     Promise.all([...pcat,...pprod,...puser,...pestado]).then(() => {
-        catprod.map(obj => Producto.findOne({where:{nombre:obj.nombreprod}}).then(foundProd => obj.categorias.map(cat => Categoria.findOne({where:{categoria:cat.nombrecat}}).then(foundCat => foundProd.addCategory(foundCat.id)))))
+        catprod.map(obj => Producto.findOne({where:{nombre:obj.nombreprod}})
+        .then(foundProd => obj.categorias.map(cat => Categoria.findOne({where:{categoria:cat.nombrecat}})
+        .then(foundCat => foundProd.addCategory(foundCat.id)))))
     })
-    .then(() => {reviews.map((review) => Producto.findOne({where:{nombre:review.producto}}).then((foundProd) => Users.findOne({where: {nombre: review.usuario}}).then((foundUser) => Reviews.create(review.detalle).then((reviewCreated) => {reviewCreated.setProducto(foundProd); reviewCreated.setUsuario(foundUser)}))))})
-    .then(() => {ordenes.map((orden) => Users.findOne({where:{nombre:orden.usuario}}).then((foundUser) => Estado.findOne({where:{estado:orden.estado}}).then(foundEstado => Ordenes.create(orden.detalle, orden.asociacion).then(ordenCreated => {ordenCreated.setUsuario(foundUser);ordenCreated.setStatus(foundEstado)}))))})
+    .then(() => {reviews.map((review) => Producto.findOne({where:{nombre:review.producto}})
+    .then((foundProd) => Users.findOne({where: {nombre: review.usuario}})
+    .then((foundUser) => Reviews.create(review.detalle)
+    .then((reviewCreated) => {reviewCreated.setProducto(foundProd); reviewCreated.setUsuario(foundUser)}))))})
+    .then(() => {ordenes.map((orden) => Users.findOne({where:{nombre:orden.usuario}})
+    .then((foundUser) => Estado.findOne({where:{estado:orden.estado}})
+    .then(foundEstado => Ordenes.create(orden.detalle, orden.asociacion)
+    .then(ordenCreated => {ordenCreated.setUsuario(foundUser);ordenCreated.setStatus(foundEstado)}))))})
 }
 
 module.exports = seed;

@@ -12,12 +12,12 @@ const receiveOrder = (order) => ({
 })
 
 export const fetchOrders = () => dispatch =>
-    axios.get('COMPLETAR LA RUTA')
+    axios.get('/api/orders')
         .then(res => res.data)
         .then(orders => dispatch(receiveOrders(orders)));
 
 export const fetchOrder = id => dispatch =>
-    axios.get('COMPLETAR LA RUTA/${id}')
-        .then(res = res.data)
+    axios.get(`/api/orders/${id}`)
+        .then(res => res.data)
         .then(orden => dispatch(receiveOrder(orden)));
         

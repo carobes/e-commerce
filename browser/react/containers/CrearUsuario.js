@@ -7,12 +7,6 @@ import { Grid } from '@material-ui/core';
 import Button from '@material-ui/core/Button';
 import axios from 'axios'
 
-function validateEmail(email) {
-  var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-  return re.test(String(email).toLowerCase());
-}
-
-
 const styles = theme => ({
   container: {
     display: "flex",

@@ -1,13 +1,16 @@
 import React from 'react';
 import { Route, Link, Redirect, Switch } from 'react-router-dom';
 import Appbar from '../components/Appbar'
-import ProductsContainer from './ProductsContainer'
+import Products from '../components/Products'
 import SidebarContainer from './SidebarContainer'
 import { Grid } from '@material-ui/core'
 import SingleProductContainer from './SingleProductContainer'
+import SingleOrderContainer from './SingleOrderContainer'
 import IdUser from '../components/IdUser'
+import UserIdContainer from './UserIdContainer'
 import CrearUsuario from './CrearUsuario'
 import CrearProducto from './CrearProducto'
+import SingleOrder from '../components/SingleProduct'
 
 export default class Main extends React.Component {
     constructor() {
@@ -47,6 +50,18 @@ export default class Main extends React.Component {
 
 
     render() {
+      if (this.props.location.pathname === '/cart'){
+        return (
+          <div>
+            <Appbar setSearch={this.setSearch} search={this.state.search} handleSubmit={this.handleSubmit} />
+            <Route
+                exact path='/cart' render={() =>
+                    <Cart />
+                } />
+            <br />
+          </div>
+        )
+      }else{
         return (
             <div>
                 <Appbar setSearch={this.setSearch} search={this.state.search} handleSubmit={this.handleSubmit} />
@@ -59,7 +74,7 @@ export default class Main extends React.Component {
                         <Switch>
                             <Route
                                 exact path='/products' render={() =>
-                                    <ProductsContainer />
+                                    <Products />
                                 } />
                                     <Route
                                         exact path='/products/new' render={() =>
@@ -71,13 +86,16 @@ export default class Main extends React.Component {
                                 } />
                             <Route
                                 exact path='/accounts/user/:id' render={() =>
-                                    <IdUser />
+                                    <UserIdContainer />
                                 } />
                             <Route
                                 exact path='/accounts/new' render={() =>
                                     <CrearUsuario />
                                 } />
-
+                             <Route
+                                exact path='/orders/:id' render={() =>
+                                    <SingleOrderContainer />
+                                } />
                             <Redirect from="/" to="/products" />
                         </Switch>
                     </Grid>
@@ -85,4 +103,5 @@ export default class Main extends React.Component {
             </div>
         )
     }
+  }
 }
