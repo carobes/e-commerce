@@ -40,28 +40,18 @@ function data_for_gen_order(props) {
 
   return (
     <div className={classes.container}>
-      <FormControl className={classes.margin}>
-        <InputLabel
-          FormLabelClasses={{
-            root: classes.cssLabel,
-            focused: classes.cssFocused,
-          }}
-          htmlFor="custom-css-input"
-        >
-          E-mail
-        </InputLabel>
-        <Input
-          classes={{
-            underline: classes.cssUnderline,
-          }}
-          id="custom-css-input"
+      <MuiThemeProvider theme={theme}>
+        <TextField onChange={() => console.log('HOLA')}
+          className={classes.margin}
+          label="e-mail"
+          id="input-email"
         />
-      </FormControl>
+      </MuiThemeProvider>
       <MuiThemeProvider theme={theme}>
         <TextField onChange={() => console.log('HOLA')}
           className={classes.margin}
           label="Ship Address"
-          id="mui-theme-provider-input"
+          id="input-shipaddress"
         />
       </MuiThemeProvider>
     </div>
