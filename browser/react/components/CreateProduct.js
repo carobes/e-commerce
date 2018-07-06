@@ -6,6 +6,8 @@ import TextField from "@material-ui/core/TextField";
 import { Button, InputAdornment, Input } from '@material-ui/core';
 import axios from 'axios';
 import validUrl from 'valid-url';
+import CatCreateProduct from "./CatCreateProduct";
+
 
 
 const styles = theme => ({
@@ -18,8 +20,14 @@ const styles = theme => ({
     marginRight: theme.spacing.unit,
     width: 400
   },
-  numInput: {
+  numInputPrecio: {
     marginTop: theme.spacing.unit,
+    marginLeft: theme.spacing.unit,
+    marginRight: theme.spacing.unit,
+    width: 150
+  },
+  numInputDisp: {
+    marginTop: 20,
     marginLeft: theme.spacing.unit,
     marginRight: theme.spacing.unit,
     width: 150
@@ -96,12 +104,11 @@ handleSubmit(evt){
 
 
 render() {  
-    const { classes } = this.props;
-    const { nombre, descripcion, precio, disponibilidad, imagenes, gralCheck, urlCheck } = this.state
+    const { classes, categList } = this.props;
+    const { nombre, descripcion, precio, disponibilidad, imagenes, gralCheck, urlCheck, prueba } = this.state
     
     return (
       <div> <h1 className={classes.title}>Crear Producto</h1>
-      {console.log(this.props)}
         <form className={classes.container} noValidate autoComplete="off">
               <TextField
                 required
@@ -134,33 +141,34 @@ render() {
                   onChange={this.handleChange('imagenes')}
                   margin="normal"
                 />
-              <TextField
-                required
-                id="disponibilidad"
-                label="Disponibilidad"
-                className={classes.numInput}
-                value={disponibilidad}
-                type="number"
-                onChange={this.handleChange("disponibilidad")}
-                margin="normal"
-              />
-              <Input
-                required
-                id="precio"
-                value={precio}
-                onChange={this.handleChange("precio")}
-                type="number"
-                className={classes.numInput}
-                startAdornment={<InputAdornment position="start">$</InputAdornment>}
-                />
-              <br/>
-              <br/>
-            <Button 
-              variant="contained" 
-              size="small" 
-              className={classes.button} 
-              onClick={this.handleSubmit}
-              disabled={!gralCheck}>Crear</Button>
+                  <CatCreateProduct/>
+                  <TextField
+                    required
+                    id="disponibilidad"
+                    label="Disponibilidad"
+                    className={classes.numInputDisp}
+                    value={disponibilidad}
+                    type="number"
+                    onChange={this.handleChange("disponibilidad")}
+                    margin="normal"
+                  />
+                  <Input
+                    required
+                    id="precio"
+                    value={precio}
+                    onChange={this.handleChange("precio")}
+                    type="number"
+                    className={classes.numInputPrecio}
+                    startAdornment={<InputAdornment position="start">$</InputAdornment>}
+                    />
+                <br/>
+                <br/>
+              <Button 
+                variant="contained" 
+                size="small" 
+                className={classes.button} 
+                onClick={this.handleSubmit}
+                disabled={!gralCheck}>Crear</Button>
         </form>
       </div>
     );
