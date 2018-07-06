@@ -7,6 +7,7 @@ import TextField from '@material-ui/core/TextField';
 import FormControl from '@material-ui/core/FormControl';
 import purple from '@material-ui/core/colors/purple';
 import green from '@material-ui/core/colors/green';
+import red from '@material-ui/core/colors/red'
 
 const styles = theme => ({
   container: {
@@ -16,52 +17,50 @@ const styles = theme => ({
   margin: {
     margin: theme.spacing.unit,
   },
-  cssLabel: {
-    '&$cssFocused': {
-      color: purple[500],
-    },
-  },
-  cssFocused: {},
-  cssUnderline: {
-    '&:after': {
-      borderBottomColor: purple[500],
-    },
+});
+
+let emailtheme = createMuiTheme({
+  palette: {
+    primary: green,
   },
 });
 
-const theme = createMuiTheme({
+let addresstheme = createMuiTheme({
   palette: {
     primary: green,
   },
 });
 
 function data_for_gen_order(props) {
-  const { classes } = props;
-
+  const { classes, handleChange, emailFlag } = props;
+  // console.log(props);
+  if (emailFlag){
+    emailtheme = createMuiTheme({
+      palette: {
+        primary: green,
+      },
+    });
+  }else{
+    emailtheme = createMuiTheme({
+      palette: {
+        primary: red,
+      },
+    });
+  }
   return (
     <div className={classes.container}>
-      <FormControl className={classes.margin}>
-        <InputLabel
-          FormLabelClasses={{
-            root: classes.cssLabel,
-            focused: classes.cssFocused,
-          }}
-          htmlFor="custom-css-input"
-        >
-          E-mail
-        </InputLabel>
-        <Input
-          classes={{
-            underline: classes.cssUnderline,
-          }}
-          id="custom-css-input"
+      <MuiThemeProvider theme={emailtheme}>
+        <TextField onChange={handleChange}
+          className={classes.margin}
+          label="e-mail"
+          id="input-email"
         />
-      </FormControl>
-      <MuiThemeProvider theme={theme}>
-        <TextField onChange={() => console.log('HOLA')}
+      </MuiThemeProvider>
+      <MuiThemeProvider theme={addresstheme}>
+        <TextField onChange={handleChange}
           className={classes.margin}
           label="Ship Address"
-          id="mui-theme-provider-input"
+          id="input-address"
         />
       </MuiThemeProvider>
     </div>
