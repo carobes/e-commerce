@@ -1,16 +1,15 @@
 import React from 'react';
 import { Route, Link, Redirect, Switch } from 'react-router-dom';
-import Appbar from '../components/Appbar'
-import ProductsContainer from './ProductsContainer'
-import SidebarContainer from './SidebarContainer'
-import { Grid } from '@material-ui/core'
-import SingleProductContainer from './SingleProductContainer'
-import SingleOrderContainer from './SingleOrderContainer'
-import UserIdContainer from './UserIdContainer'
-import CrearUsuario from './CrearUsuario'
-import LoginForm from './LoginForm'
-import SingleOrder from '../components/SingleProduct'
-import CarroContainer from './CarroContainer'
+import Appbar from '../components/Appbar';
+import ProductsContainer from './ProductsContainer';
+import SidebarContainer from './SidebarContainer';
+import { Grid } from '@material-ui/core';
+import SingleProductContainer from './SingleProductContainer';
+import SingleOrderContainer from './SingleOrderContainer';
+import UserIdContainer from './UserIdContainer';
+import CrearUsuario from './CrearUsuario';
+import LoginForm from './LoginForm';
+import CarroContainer from './CarroContainer';
 
 export default class Main extends React.Component {
     constructor(props){
@@ -36,7 +35,7 @@ export default class Main extends React.Component {
         }
         return (
             <div>
-                <Appbar num_elems_carro={this.state.num_elems_carro}/>
+                <Appbar num_elems_carro={this.state.num_elems_carro} loggedUser={this.props.loggedUser} unlogUser={this.props.unlogUser}/>
                 <br />
                 <Grid container spacing={16}>
                     <Grid item xs={2}>
