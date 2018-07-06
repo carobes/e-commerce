@@ -57,6 +57,7 @@ class TextFields extends React.Component {
       precio: '',
       disponibilidad: '',
       imagenes: [],
+      categorias: '',
       urlCheck: true,
       gralCheck: false
     };
@@ -72,6 +73,7 @@ validateUrl(str) {
 }
 
 handleChange = name => event => {
+  console.log('llega', event)
     const aux = this.state
     aux[name] = event.target.value
     var ucheck = aux.urlCheck
@@ -105,8 +107,7 @@ handleSubmit(evt){
 
 render() {  
     const { classes, categList } = this.props;
-    const { nombre, descripcion, precio, disponibilidad, imagenes, gralCheck, urlCheck, prueba } = this.state
-    
+    const { nombre, descripcion, precio, disponibilidad, imagenes, gralCheck, urlCheck } = this.state
     return (
       <div> <h1 className={classes.title}>Crear Producto</h1>
         <form className={classes.container} noValidate autoComplete="off">
@@ -141,7 +142,7 @@ render() {
                   onChange={this.handleChange('imagenes')}
                   margin="normal"
                 />
-                  <CatCreateProduct/>
+                  <CatCreateProduct onCatChange={this.handleChange('categorias')} categs={categList}/>
                   <TextField
                     required
                     id="disponibilidad"

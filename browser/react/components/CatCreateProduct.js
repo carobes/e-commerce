@@ -12,16 +12,17 @@ import ClearIcon from '@material-ui/icons/Clear';
 import Chip from '@material-ui/core/Chip';
 import Select from 'react-select';
 
-const suggestions = [
-  { label: 'Afghanistan' },
-  { label: 'Colombia' },
-  { label: 'Argentina' },
-  { label: 'Aland Islands' },
-  { label: 'Albania' }
-].map(suggestion => ({
-  value: suggestion.label,
-  label: suggestion.label,
-}));
+
+// const suggestions = [
+//   { label: 'Afghanistan' },
+//   { label: 'Colombia' },
+//   { label: 'Argentina' },
+//   { label: 'Aland Islands' },
+//   { label: 'Albania' }
+// ].map(suggestion => ({
+//   value: suggestion.label,
+//   label: suggestion.label,
+// }));
 
 class Option extends React.Component {
   handleClick = event => {
@@ -202,16 +203,19 @@ const styles = theme => ({
 
 class IntegrationReactSelect extends React.Component {
   state = {
-    single: null,
     multi: null,
-    multiLabel: null,
   };
 
-  handleChange = name => value => {
-    this.setState({
-      [name]: value,
-    });
-  };
+  // handleChange = value => {
+  //   this.props.onCatChange(value);
+  // };
+
+  handleOptions = () => {
+    return this.props.categs.map(categ => ({
+      value: categ,
+      label: categ,
+    }));
+  }
 
   render() {
     const { classes } = this.props;
@@ -221,7 +225,7 @@ class IntegrationReactSelect extends React.Component {
         <Input
           inputComponent={SelectWrapped}
           value={this.state.multi}
-          onChange={this.handleChange('multi')}
+          onChange={this.props.onCatChange}
           placeholder="Select multiple countries"
           name="react-select-chip"
           inputProps={{
@@ -230,7 +234,7 @@ class IntegrationReactSelect extends React.Component {
             instanceId: 'react-select-chip',
             id: 'react-select-chip',
             simpleValue: true,
-            options: suggestions,
+            options: this.handleOptions(),
           }}
         />
       </div>
