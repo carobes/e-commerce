@@ -9,6 +9,7 @@ import SingleOrderContainer from './SingleOrderContainer'
 import IdUser from '../components/IdUser'
 import UserIdContainer from './UserIdContainer'
 import CrearUsuario from './CrearUsuario'
+import LoginForm from './LoginForm'
 import SingleOrder from '../components/SingleProduct'
 
 export default class Main extends React.Component {
@@ -70,6 +71,10 @@ export default class Main extends React.Component {
                             <Route
                                 exact path='/accounts/user/:id' render={() =>
                                     <UserIdContainer />
+                                } />
+                            <Route
+                                exact path='/login' render={() =>
+                                    <LoginForm />
                                 } />
                             <Route
                                 exact path='/accounts/new' render={() =>

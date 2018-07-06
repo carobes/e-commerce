@@ -35,7 +35,7 @@ export default withStyles(styles)(props => {
                     <Search setSearch={setSearch} search={search} handleSubmit={handleSubmit} />
                     <div className={[classes.padre, classes.align].join(' ')}>
                         <Carrito />
-                        <Login />
+                            <Login />
                     </div>
                 </Toolbar>
             </AppBar>
