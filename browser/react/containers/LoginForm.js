@@ -39,12 +39,8 @@ class TextFields extends React.Component {
   constructor(){
     super();
     this.state = {
-      nombre: '',
-      apellido: '',
-      edad: '',
       mail: '',
       password:'',
-      passValidate: '',
       emailCheck: true,
       gralCheck: false
     };
@@ -63,7 +59,7 @@ class TextFields extends React.Component {
     if (name === 'mail') {
       echeck = this.validateEmail(event.target.value)
     }
-    var check = (aux.nombre.length && aux.apellido.length && aux.edad.length && aux.mail.length && aux.password.length && echeck && aux.password === aux.passValidate) ? true : false
+    var check = (aux.mail.length && aux.password.length && echeck) ? true : false
     this.setState({
       [name]: event.target.value,
       gralCheck: check,
@@ -74,59 +70,30 @@ class TextFields extends React.Component {
   handleSubmit(evt){
     evt.preventDefault();
     const usuario = {
-      nombre: this.state.nombre,
-      apellido: this.state.apellido,
-      edad: this.state.edad,
-      mail: this.state.mail.toLowerCase(),
+      username: this.state.mail.toLowerCase(),
       password: this.state.password
     }
-    axios.post('/api/users/new',usuario)
+    axios.post('/api/login',usuario)
     .then(res => res.data)
-    .then(user => {this.props.history.push(`/accounts/user/${user.id}`)})
+    // .then(login => {console.log(login);return login})
+    .then(data => {
+      if(data.success) this.props.history.push(`/accounts/user/${data.user.id}`)
+      console.log(data)  
+    })
+    .catch(err => err)
   }
 
   render() {
     const { classes } = this.props;
-    const {nombre,apellido,edad,mail,password,passValidate,emailCheck,gralCheck} = this.state
+    const {mail,password,emailCheck,gralCheck} = this.state
 
     return (
-      <div> <h1 className={classes.title}>Crear Usuario</h1>
+      <div> <h1 className={classes.title}>Login</h1>
         <form className={classes.container} autoComplete="off">
           <Grid container spacing={16}>
             <Grid item md={3} xs={1}>
             </Grid>
             <Grid item md={6} xs={10}>
-              <TextField
-                required
-                id="nombre"
-                label="Nombre"
-                className={classes.textField}
-                value={nombre}
-                onChange={this.handleChange("nombre")}
-                margin="normal"
-              />
-              <TextField
-                required
-                id="apellido"
-                label="Apellido"
-                className={classes.textField}
-                value={apellido}
-                onChange={this.handleChange("apellido")}
-                margin="normal"
-              />
-              <TextField
-                required
-                id="edad"
-                label="Edad"
-                value={edad}
-                onChange={this.handleChange("edad")}
-                type="number"
-                className={classes.textField}
-                InputLabelProps={{
-                  shrink: true
-                }}
-                margin="normal"
-              />
               <TextField
                 error={!emailCheck}
                 required
@@ -149,24 +116,12 @@ class TextFields extends React.Component {
                 autoComplete="current-password"
                 margin="normal"
               />
-              <TextField
-                error={this.state.password === this.state.passValidate ? false : true}
-                required
-                id="password-validate"
-                label="Repetir Password"
-                className={classes.textField}
-                value={passValidate}
-                type="password"
-                onChange={this.handleChange('passValidate')}
-                autoComplete="current-password"
-                margin="normal"
-              />
             <Button
               variant="contained"
               size="small"
               className={classes.button}
               onClick={this.handleSubmit}
-              disabled={!gralCheck}>Crear</Button>
+              disabled={!gralCheck}>Iniciar Sesión</Button>
             </Grid>
             <Grid item md={3} xs={1}>
             </Grid>
@@ -176,8 +131,7 @@ class TextFields extends React.Component {
     );
   }
 }
-// averiguar que hace esto para mañana porque el hijo de puta de toni me pidió
-// que se lo explique a toda la clase.
+
 TextFields.propTypes = {
   classes: PropTypes.object.isRequired
 };

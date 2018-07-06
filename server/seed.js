@@ -102,14 +102,14 @@ const usuarios = [{
     apellido: 'Sainz',
     edad: 25,
     mail: 'alansainz@plataforma5.la',
-    password: crypto.createHmac('sha256', 'Plataforma5').update('provoleta').digest('hex'),
+    password: 'provoleta',
     admin: false
 },{
     nombre: 'Toni',
     apellido: 'Tralice',
     edad: 31,
     mail: 'toni@plataforma5.la',
-    password: crypto.createHmac('sha256', 'Plataforma5').update('todobien').digest('hex'),
+    password: 'todobien',
     admin: true
 }]
 
