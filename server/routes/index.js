@@ -13,6 +13,7 @@ router.post('/login', (req,res,next) =>{
 router.use('/products', require('./products'));
 router.use('/users', require('./users'));
 router.use('/orders', require('./orders'));
+router.use('/carrito', require('./cart'));
 
 router.use(function (req, res) {
     res.status(404).end();

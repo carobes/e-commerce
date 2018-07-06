@@ -6,53 +6,37 @@ import SidebarContainer from './SidebarContainer'
 import { Grid } from '@material-ui/core'
 import SingleProductContainer from './SingleProductContainer'
 import SingleOrderContainer from './SingleOrderContainer'
-import IdUser from '../components/IdUser'
 import UserIdContainer from './UserIdContainer'
 import CrearUsuario from './CrearUsuario'
 import LoginForm from './LoginForm'
 import SingleOrder from '../components/SingleProduct'
+import CarroContainer from './CarroContainer'
 
 export default class Main extends React.Component {
-    constructor() {
-        super();
-        this.state = {
-            search: "",
-            products: [],
-
-
-        }
-        this.setSearch = this.setSearch.bind(this)
-        this.handleSubmit = this.handleSubmit.bind(this)
+    constructor(props){
+      super(props);
+      this.state = {
+        userId: 2,
+        num_elems_carro: 5, // traer el numero de elementos que existen en el carro de el usuario
+      }
     }
-
-    setSearch(e) {
-        console.log(this.state.search)
-        this.setState({ search: e.target.value })
-
-
-    }
-
-    handleSubmit(e) {
-        e.preventDefault()
-
-        this.setState({ products: ["heladera 1", "heladera 2", "heladera 3"] })
-        console.log(this.state.products)
-        //     axios.get()
-        //         .then((result) => {
-
-        //             this.setState({
-        //                 products: [],
-        //                 search: ""
-        //             })
-        //             this.props.history.push('/search');
-        //         });
-    }
-
 
     render() {
+        console.log(this.props.location.pathname);
+        if (this.props.location.pathname === '/carro') {
+          return (
+            <div>
+              <Appbar num_elems_carro={this.state.num_elems_carro}/>
+              <br />
+              <Grid container spacing={16}>
+                <CarroContainer />
+              </Grid>
+            </div>
+          )
+        }
         return (
             <div>
-                <Appbar setSearch={this.setSearch} search={this.state.search} handleSubmit={this.handleSubmit} />
+                <Appbar num_elems_carro={this.state.num_elems_carro}/>
                 <br />
                 <Grid container spacing={16}>
                     <Grid item xs={2}>
@@ -80,7 +64,7 @@ export default class Main extends React.Component {
                                 exact path='/accounts/new' render={() =>
                                     <CrearUsuario />
                                 } />
-                             <Route
+                            <Route
                                 exact path='/orders/:id' render={() =>
                                     <SingleOrderContainer />
                                 } />
