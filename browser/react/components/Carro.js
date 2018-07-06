@@ -43,8 +43,6 @@ const styles = theme => ({
 
 function CustomizedTable(props) {
   const { classes, data, address, total, handleAdd, handleSubstract, handleDrop, genOrder, emailFlag } = props;
-  console.log('emailFlag : ', emailFlag);
-  console.log('address : ', address);
   const genOrderFlag = (address.length > 10 && emailFlag) ? false : true;
   return (
     <Paper className={classes.root}>
