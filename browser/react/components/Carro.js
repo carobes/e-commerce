@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+
 import { withStyles } from '@material-ui/core/styles';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
@@ -41,8 +42,8 @@ const styles = theme => ({
 });
 
 function CustomizedTable(props) {
-  const { classes, data, total, handleAdd, handleSubstract, handleDrop, genOrder } = props;
-
+  const { classes, data, address, total, handleAdd, handleSubstract, handleDrop, genOrder, emailFlag } = props;
+  const genOrderFlag = (address.length > 10 && emailFlag) ? false : true;
   return (
     <Paper className={classes.root}>
       <Table className={classes.table}>
@@ -89,7 +90,7 @@ function CustomizedTable(props) {
             <CustomTableCell numeric>{''}</CustomTableCell>
             <CustomTableCell numeric>{'TOTAL : '+total}</CustomTableCell>
             <CustomTableCell>
-              <Button aria-label="shop" className={classes.button}>
+              <Button aria-label="shop" className={classes.button} disabled={genOrderFlag}>
                 <ShopTwo onClick={genOrder}/>
               </Button>
             </CustomTableCell>
