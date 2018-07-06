@@ -22,7 +22,6 @@ export default class Main extends React.Component {
     }
 
     render() {
-        console.log(this.props.location.pathname);
         if (this.props.location.pathname === '/carro') {
           return (
             <div>

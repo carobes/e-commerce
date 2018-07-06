@@ -1,5 +1,8 @@
 import React from 'react';
 import Carro from '../components/Carro';
+import InputDataToGenOrder from '../components/data_for_gen_order';
+
+import { Grid } from '@material-ui/core'
 
 let id = 0;
 function createData(name, precio, cantidad) {
@@ -16,18 +19,28 @@ const datos = [
   createData('Camisa con mangas largas JH', 200, 1),
 ];
 
+function validateEmail(email) {
+  var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+  return re.test(email);
+}
+
 class CarroContainer extends React.Component{
   constructor(props){
     super(props);
     this.state = {
       data: datos,
-      total: 0
+      total: 0,
+      email: '',
+      address: '',
+      userId: 1,
+      emailFlag: false
     };
     this.handleAdd = this.handleAdd.bind(this);
     this.handleSubstract = this.handleSubstract.bind(this);
     this.handleDrop = this.handleDrop.bind(this);
     this.sumaTotal = this.sumaTotal.bind(this);
     this.genOrder = this.genOrder.bind(this);
+    this.handleChange = this.handleChange.bind(this);
   }
 
   sumaTotal(){
@@ -69,13 +82,26 @@ class CarroContainer extends React.Component{
     this.setState({ data: nuevo_state_data }, () => this.sumaTotal());
   }
 
+  handleChange = event => {
+    const string = event.target.value;
+    const key = event.target.id;
+    if (key === 'input-email'){
+      this.setState({emailFlag: validateEmail(string)});
+    }else{
+      this.setState({address: string});
+    }
+  }
+
   genOrder = event => {
     console.log('Generar orden de compra con el arreglo de Productos : ', this.state.data);
   }
 
   render(){
     return (
-      <Carro data={this.state.data} total={this.state.total} handleAdd={this.handleAdd} handleSubstract={this.handleSubstract} handleDrop={this.handleDrop} genOrder={this.genOrder}/>
+      <div>
+        <Carro data={this.state.data} address={this.state.address} total={this.state.total} handleAdd={this.handleAdd} handleSubstract={this.handleSubstract} handleDrop={this.handleDrop} genOrder={this.genOrder} emailFlag={this.state.emailFlag}/>
+        <InputDataToGenOrder handleChange={this.handleChange} emailFlag={this.state.emailFlag}/>
+      </div>
     );
   }
 }
