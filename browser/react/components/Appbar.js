@@ -5,6 +5,7 @@ import Login from './Login';
 import Carrito from './Carrito'
 import Search from './Search'
 import { withStyles } from '@material-ui/core/styles';
+import SearchContainer from '../containers/SearchContainer'
 
 const styles = {
     padre: {
@@ -22,19 +23,21 @@ const styles = {
 }
 
 export default withStyles(styles)(props => {
-    const { classes, setSearch, search, handleSubmit } = props
+    const { classes, setSearch, search, handleSubmit, num_elems_carro } = props
     return (
         <div>
             <AppBar className={classes.colorBar} position="static" color="inherit">
                 <Toolbar className={classes.padre}>
-                    <Link to={'/'} style={{ textDecoration: 'none',color: 'white' }}>
+                    <Link to={'/'} style={{ textDecoration: 'none', color: 'white' }}>
                         <Typography variant="title" color="inherit">
                             TonE-Commerce
                         </Typography>
                     </Link>
-                    <Search setSearch={setSearch} search={search} handleSubmit={handleSubmit} />
+                    <SearchContainer />
                     <div className={[classes.padre, classes.align].join(' ')}>
-                        <Carrito />
+                      <Link to={'/carro'} style={{ textDecoration: 'none', color: 'white' }}>
+                        <Carrito num_elems_carro={num_elems_carro}/>
+                      </Link>
                         <Login />
                     </div>
                 </Toolbar>

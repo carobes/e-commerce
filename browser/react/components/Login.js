@@ -1,6 +1,7 @@
 import React from 'react';
 import Button from '@material-ui/core/Button';
 import { withStyles } from '@material-ui/core/styles';
+import {Link} from 'react-router-dom';
 
 const styles = {
     buttonLogin: {
@@ -15,7 +16,7 @@ const styles = {
 export default withStyles(styles)(props => {
     const {classes} = props
     return <div>
-            <Button className={classes.buttonLogin}  size="medium" >
+            <Button className={classes.buttonLogin} size="medium" component={Link} to='/login' >
                 Login
             </Button>
         </div>

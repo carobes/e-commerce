@@ -1,16 +1,16 @@
 import React from 'react';
-import { connect } from 'react-redux'; 
+import { connect } from 'react-redux';
 import SingleProduct from '../components/SingleProduct'
 import { fetchProduct } from '../action-creators/products'
 import { withRouter } from 'react-router'
 
 const mapStateToProps = ({ products }) => ({
     selectedProduct: products.selectedProduct,
-  })
-  
-  const mapDispatchToProps = (dispatch) => ({
+})
+
+const mapDispatchToProps = (dispatch) => ({
     fetchProduct: (id) => dispatch(fetchProduct(id))
-  })
+})
 
 
 class SingleProductContainer extends React.Component {
@@ -21,7 +21,9 @@ class SingleProductContainer extends React.Component {
 
     render() {
         console.log(this.props.selectedProduct)
-        return <SingleProduct product={this.props.selectedProduct} />
+        return (
+            <SingleProduct product={this.props.selectedProduct} />
+        )
     }
 }
 
