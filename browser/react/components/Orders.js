@@ -21,11 +21,7 @@ const CustomTableCell = withStyles(theme => ({
   }
 }))(TableCell);
 
-const user = {
-  nombre: "Toni",
-  apellido: "Pastafrola",
-  mail: "toni48@pastafrola5.com"
-};
+
 const styles = theme => ({
   root: {
     width: "100%",
@@ -75,21 +71,26 @@ const styles = theme => ({
   rowAvatar: {
     display: "flex",
     float: "right"
-  }
+  },
+  buttonsFilter: {
+    backgroundColor: '#6eb4ea',
+    color: 'white',
+    '&:hover': {
+        color: 'white'
+    }
+}
 });
 
 
-function CustomizedTable({ classes, order }) {
-  const { productosOrdens, status, usuario } = order; 
+function CustomizedTable({ classes, orders }) {
+  const { productosOrdens, status, usuario } = orders; 
   const pO = !productosOrdens ? [] : productosOrdens;
-  const stat = !status ? {} : status;
   const usu = !usuario ? {} : usuario;
 
-  console.log("ver que hace pO", pO, "order", order, "productosOrden", productosOrdens)
+
   return (
     <div>
       <br />
-
       {/* <Card className={classes.card}>
         <div className={classes.rowAvatar}>
           <Avatar className={classes.avatar}>
@@ -119,34 +120,49 @@ function CustomizedTable({ classes, order }) {
         <Table className={classes.table}>
           <TableHead>
             <TableRow>
-              <CustomTableCell>Nombre de Producto</CustomTableCell>
-              <CustomTableCell>Descripción de Producto</CustomTableCell>
-              <CustomTableCell numeric>Precio Unitario</CustomTableCell>
-              <CustomTableCell numeric>Cantidad de Producto</CustomTableCell>
-              <CustomTableCell numeric>Subtotal</CustomTableCell>
+              <CustomTableCell></CustomTableCell>
+              <CustomTableCell>Usuario</CustomTableCell>
+              <CustomTableCell>Fecha de la Orden</CustomTableCell>
+              <CustomTableCell>Número de Orden</CustomTableCell>
+              <CustomTableCell numeric> Total (en $)</CustomTableCell>
+              <CustomTableCell numeric>Status</CustomTableCell>
             </TableRow>
           </TableHead>
           <TableBody>
-              {pO.map(data => (
+              {orders.map(data => (
                 <TableRow className={classes.row} key={data.id}>
-                  <CustomTableCell component="th" scope="row">
-                    {data.nombre}
-                  </CustomTableCell>
-                  <CustomTableCell>{data.descripcion}</CustomTableCell>
+                  <CustomTableCell>  <div className={classes.rowAvatar}><Avatar className={classes.avatar}>
+{data.usuario.nombre[0] + data.usuario.apellido[0]}</Avatar></div></CustomTableCell>
+                  <CustomTableCell>{data.usuario.nombreApellido}</CustomTableCell>
+                  <CustomTableCell>{data.fecha}</CustomTableCell>
                   <CustomTableCell numeric>
-                    $ {data.precio}
+                    {data.id}
                   </CustomTableCell>
                   <CustomTableCell numeric>
                     {data.cantidad}
                   </CustomTableCell>
-                  <CustomTableCell numeric>$ {data.subtotal}</CustomTableCell>
+                  <CustomTableCell>{data.status.estado}</CustomTableCell>
                 </TableRow>
                     ))}
           </TableBody>
         </Table>
       </Paper>
       <br/>
-      <Card className={classes.card2}>
+      {/* <TablePagination
+          component="div"
+          count={data.length} 
+          rowsPerPage={rowsPerPage}
+          page={page}
+          backIconButtonProps={{
+            'aria-label': 'Previous Page',
+          }}
+          nextIconButtonProps={{
+            'aria-label': 'Next Page',
+          }}
+          onChangePage={this.handleChangePage}
+          onChangeRowsPerPage={this.handleChangeRowsPerPage}
+        /> */}
+      {/* <Card className={classes.card2}>
         <br />
         <CardContent>
           <Typography className={classes.pos2} variant="headline" component="h2">
@@ -163,7 +179,7 @@ function CustomizedTable({ classes, order }) {
           </Typography>
           <br />
         </CardContent>
-      </Card>
+      </Card> */}
     </div>
   );
 }

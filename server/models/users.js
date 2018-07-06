@@ -34,6 +34,12 @@ const Users = db.define('users', {
         defaultValue: false,
         allowNull:false
     }
+},{
+    getterMethods: {
+        nombreApellido() {
+            return this.nombre + ' ' + this.apellido
+        }
+    }
 })
 
 module.exports = Users;

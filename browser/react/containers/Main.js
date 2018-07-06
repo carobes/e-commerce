@@ -9,7 +9,7 @@ import SingleOrderContainer from './SingleOrderContainer'
 import IdUser from '../components/IdUser'
 import UserIdContainer from './UserIdContainer'
 import CrearUsuario from './CrearUsuario'
-import SingleOrder from '../components/SingleProduct'
+import OrdersContainer from './OrdersContainer'
 
 export default class Main extends React.Component {
     constructor() {
@@ -78,6 +78,10 @@ export default class Main extends React.Component {
                              <Route
                                 exact path='/orders/:id' render={() =>
                                     <SingleOrderContainer />
+                                } />
+                                   <Route
+                                exact path='/orders' render={() =>
+                                    <OrdersContainer />
                                 } />
                             <Redirect from="/" to="/products" />
                         </Switch>

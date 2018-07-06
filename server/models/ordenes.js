@@ -4,7 +4,7 @@ const db = require('./db');
 
 const Ordenes = db.define('ordenes', {
     fecha: {
-        type: Sequelize.DATE,
+        type: Sequelize.DATEONLY,
         allowNull: false
 
     },

@@ -147,7 +147,7 @@ const ordenes = [
         {nombre: 'Producto 3',
         descripcion: 'Soy el producto tres',
         precio: 150,
-        cantidad: 1},
+        cantidad: 3},
         {nombre: 'Producto 2',
         descripcion: 'Soy el producto dos',
         precio: 50,
