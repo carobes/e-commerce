@@ -59,7 +59,7 @@ app.use('/', function (req, res, next) {
 })
 
 app.use((err, req, res, next) => {
-  console.log('tira un error')
+  console.log(err)
   res.status(500).send(err);
 });
 
