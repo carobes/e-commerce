@@ -36,7 +36,7 @@ export default class Main extends React.Component {
         }
         return (
             <div>
-                <Appbar num_elems_carro={this.state.num_elems_carro}/>
+                <Appbar num_elems_carro={this.state.num_elems_carro} loggedUser={this.props.loggedUser} unlogUser={this.props.unlogUser}/>
                 <br />
                         <Switch>
                             <Route

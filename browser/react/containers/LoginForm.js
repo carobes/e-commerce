@@ -5,7 +5,10 @@ import {withRouter} from 'react-router'
 import TextField from "@material-ui/core/TextField";
 import { Grid } from '@material-ui/core';
 import Button from '@material-ui/core/Button';
-import axios from 'axios'
+import axios from 'axios';
+import { connect } from 'react-redux';
+import {logUser} from '../action-creators/users'
+
 
 const styles = theme => ({
   container: {
@@ -32,8 +35,24 @@ const styles = theme => ({
     typography:{
       fontFamily: 'Roboto'
     }
+  },
+  error:{
+    textAlign: 'center',
+    color: 'red',
+    typography:{
+      fontFamily: 'Roboto'
+    }
   }
 });
+
+const mapStateToProps = () => ({
+
+})
+
+const mapDispatchToProps = (dispatch) => ({
+  logUser: (user) => dispatch(logUser(user))
+
+})
 
 class TextFields extends React.Component {
   constructor(){
@@ -42,7 +61,9 @@ class TextFields extends React.Component {
       mail: '',
       password:'',
       emailCheck: true,
-      gralCheck: false
+      passCheck: true,
+      gralCheck: false,
+      errormsg:''
     };
     this.handleSubmit = this.handleSubmit.bind(this) 
   }
@@ -63,7 +84,9 @@ class TextFields extends React.Component {
     this.setState({
       [name]: event.target.value,
       gralCheck: check,
-      emailCheck: echeck
+      emailCheck: echeck,
+      passCheck: true,
+      errormsg: ''
     });
   };
 
@@ -75,20 +98,23 @@ class TextFields extends React.Component {
     }
     axios.post('/api/login',usuario)
     .then(res => res.data)
-    // .then(login => {console.log(login);return login})
     .then(data => {
-      if(data.success) this.props.history.push(`/accounts/user/${data.user.id}`)
-      console.log(data)  
+      if(data.success) {
+        this.props.logUser(data.user.id)  
+        return this.props.history.goBack()
+      }
+      this.setState(data.info)  
     })
     .catch(err => err)
   }
 
   render() {
     const { classes } = this.props;
-    const {mail,password,emailCheck,gralCheck} = this.state
+    const {mail,password,emailCheck,passCheck,gralCheck,errormsg} = this.state
 
     return (
       <div> <h1 className={classes.title}>Login</h1>
+        <div className={classes.error}><span>{errormsg}</span></div>
         <form className={classes.container} autoComplete="off">
           <Grid container spacing={16}>
             <Grid item md={3} xs={1}>
@@ -106,6 +132,7 @@ class TextFields extends React.Component {
                 margin="normal"
               />
               <TextField
+                error={!passCheck}
                 required
                 id="password-input"
                 label="Password"
@@ -136,4 +163,4 @@ TextFields.propTypes = {
   classes: PropTypes.object.isRequired
 };
 
-export default withStyles(styles)(withRouter(TextFields));
+export default connect(mapStateToProps, mapDispatchToProps)(withStyles(styles)(withRouter(TextFields)));

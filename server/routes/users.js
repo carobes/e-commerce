@@ -15,5 +15,12 @@ router.get('/:id', function (req, res) {
     Users.findOne({
         where: { id: req.params.id }
     })
-        .then(user => res.json(user));
+        .then(user => res.json({
+            id: user.id,
+            nombre: user.nombre,
+            apellido: user.apellido,
+            mail: user.mail,
+            edad: user.edad,
+            admin: user.admin
+        }));
 });
