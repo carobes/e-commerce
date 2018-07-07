@@ -21,16 +21,17 @@ passport.use(new LocalStrategy(
     Users.findOne({where:{ mail: username }})
     .then(user => {
       if (!user) {
-        return done(null, false, { message: 'Incorrect username' });
+        return done(null, false, { errormsg: 'Email no registrado', emailCheck: false });
       }
       if (!user.validPassword(password)) {
-        return done(null, false, { message: 'Incorrect password' });
+        return done(null, false, { errormsg: 'Contraseña incorrecta', passCheck: false });
       }
       return done(null, user);
     })
     .catch(err => done(err))
   }
 ));
+
 
 passport.serializeUser(function(user, done) {
   done(null, user.id);
