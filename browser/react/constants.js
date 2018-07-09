@@ -19,5 +19,6 @@ export const UNLOG_USER = 'UNLOG_USER';
 //Search Products
 export const SEARCH_PRODUCTS = 'SEARCH_PRODUCTS';
 
-
-
+//Carrito
+export const ITEMS_IN_CART = 'ITEMS_IN_CART'; // aqui se guardan los items que estan en el carrito
+export const CURRENT_TOTAL = 'CURRENT_TOTAL'; // lleva el total del carrito
