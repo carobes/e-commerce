@@ -1,13 +1,14 @@
 import React from "react";
+import { Link } from 'react-router-dom';
 import PropTypes from "prop-types";
 import { withStyles } from "@material-ui/core/styles";
-import {withRouter} from 'react-router'
+import { withRouter } from 'react-router'
 import TextField from "@material-ui/core/TextField";
-import { Grid } from '@material-ui/core';
+import { Grid, Typography } from '@material-ui/core';
 import Button from '@material-ui/core/Button';
 import axios from 'axios';
 import { connect } from 'react-redux';
-import {logUser} from '../action-creators/users'
+import { logUser } from '../action-creators/users'
 
 
 const styles = theme => ({
@@ -15,10 +16,13 @@ const styles = theme => ({
     display: "flex",
     flexWrap: "wrap"
   },
-  textField: {
-    marginLeft: theme.spacing.unit,
-    marginRight: theme.spacing.unit,
-    width: 200
+  newUser: {
+    color: 'grey',
+    fontSize: '80%',
+    marginTop: '5%',
+    typography:{
+      fontFamily: 'Roboto'
+    }
   },
   menu: {
     width: 200
@@ -114,46 +118,46 @@ class TextFields extends React.Component {
 
     return (
       <div> <h1 className={classes.title}>Login</h1>
-        <div className={classes.error}><span>{errormsg}</span></div>
-        <form className={classes.container} autoComplete="off">
-          <Grid container spacing={16}>
-            <Grid item md={3} xs={1}>
-            </Grid>
-            <Grid item md={6} xs={10}>
-              <TextField
-                error={!emailCheck}
-                required
-                id="mail"
-                label="E-Mail"
-                className={classes.textField}
-                value={mail}
-                type="email"
-                onChange={this.handleChange("mail")}
-                margin="normal"
-              />
-              <TextField
-                error={!passCheck}
-                required
-                id="password-input"
-                label="Password"
-                className={classes.textField}
-                value={password}
-                type="password"
-                onChange={this.handleChange('password')}
-                autoComplete="current-password"
-                margin="normal"
-              />
-            <Button
-              variant="contained"
-              size="small"
-              className={classes.button}
-              onClick={this.handleSubmit}
-              disabled={!gralCheck}>Iniciar Sesión</Button>
-            </Grid>
-            <Grid item md={3} xs={1}>
+          <Grid container spacing={16} justify='center'>
+            <Grid item md={5} >
+              <div>
+                <form className={classes.container} autoComplete="off">
+                  <TextField
+                    error={!emailCheck}
+                    required
+                    fullWidth={true}
+                    id="mail"
+                    label="E-Mail"
+                    helperText={!emailCheck ? errormsg : ''}
+                    value={mail}
+                    type="email"
+                    onChange={this.handleChange("mail")}
+                    margin="normal"
+                  />
+                  <TextField
+                    error={!passCheck}
+                    required
+                    fullWidth={true}
+                    id="password-input"
+                    label="Password"
+                    helperText={!passCheck ? errormsg : ''}
+                    value={password}
+                    type="password"
+                    onChange={this.handleChange('password')}
+                    autoComplete="current-password"
+                    margin="normal"
+                  />
+                <Button
+                  variant="contained"
+                  size="small"
+                  className={classes.button}
+                  onClick={this.handleSubmit}
+                  disabled={!gralCheck}>Iniciar Sesión</Button>
+                </form>
+              </div>
+              <div className={classes.newUser}>No estás registrado? <Link to='/accounts/new' action ='replace'>Click aquí!</Link></div>
             </Grid>
           </Grid>
-        </form>
       </div>
     );
   }
