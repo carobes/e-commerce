@@ -4,7 +4,7 @@ import CreateProduct from '../components/CreateProduct'
 import { withRouter } from 'react-router'
 
 const mapStateToProps = () => ({
-    categories: ['prueba1', 'prueba2', 'prueba3'],
+    categories: ['prueba1', 'prueba2', 'prueba3', 'prueba4', 'prueba5'],
   })
   
 

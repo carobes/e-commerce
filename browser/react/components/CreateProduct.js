@@ -27,7 +27,7 @@ const styles = theme => ({
     width: 150
   },
   numInputDisp: {
-    marginTop: 20,
+    marginTop: 35,
     marginLeft: theme.spacing.unit,
     marginRight: theme.spacing.unit,
     width: 150
@@ -73,43 +73,51 @@ validateUrl(str) {
 }
 
 handleChange = name => event => {
-  console.log('llega', event)
     const aux = this.state
-    aux[name] = event.target.value
+    aux[name] = [event] || event.target.value
     var ucheck = aux.urlCheck
     if(name === 'imagenes') {
       ucheck = this.validateUrl(event.target.value)
     }
-    var check = (aux.nombre.length && aux.descripcion.length && aux.precio.length && aux.disponibilidad.length && aux.imagenes.length && ucheck) ? true : false
+    var check = (aux.nombre.length && aux.descripcion.length && aux.precio.length && aux.disponibilidad.length && aux.imagenes.length && ucheck && aux.categorias.length) ? true : false
+    if(name === 'categorias') {
+      return this.setState({
+        categorias: event,
+        gralCheck: check,
+        urlCheck: ucheck 
+      }
+    )
+    }
     this.setState({
         [name]: event.target.value,
         gralCheck: check,
         urlCheck: ucheck
-    });
-};
-
-handleSubmit(evt){
-    evt.preventDefault();
-    const product = [{
+      });
+    };
+    
+    handleSubmit(evt){
+      evt.preventDefault();
+      const product = [{
         nombre: this.state.nombre,
         descripcion: this.state.descripcion,
         precio: this.state.precio,
         disponibilidad: this.state.disponibilidad
-    },
-    {
+      },
+      {
         include: [Imagen]
-    }]
-    axios.post('/api/products/new',product)
-    .then(res => res.data)
-    .then(user => {this.props.history.push(`/accounts/user/${user.id}`)})
-}
-
-
-render() {  
-    const { classes, categList } = this.props;
-    const { nombre, descripcion, precio, disponibilidad, imagenes, gralCheck, urlCheck } = this.state
-    return (
-      <div> <h1 className={classes.title}>Crear Producto</h1>
+      }]
+      axios.post('/api/products/new',product)
+      .then(res => res.data)
+      .then(user => {this.props.history.push(`/accounts/user/${user.id}`)})
+    }
+    
+    
+    render() {  
+      // console.log(this.state.categorias.length)
+      const { classes, categList } = this.props;
+      const { nombre, descripcion, precio, disponibilidad, imagenes, gralCheck, urlCheck } = this.state
+      return (
+        <div> <h1 className={classes.title}>Crear Producto</h1>
         <form className={classes.container} noValidate autoComplete="off">
               <TextField
                 required
@@ -119,7 +127,7 @@ render() {
                 value={nombre}
                 onChange={this.handleChange("nombre")}
                 margin="normal"
-              />
+                />
               <TextField
                 required
                 multiline
@@ -142,7 +150,7 @@ render() {
                   onChange={this.handleChange('imagenes')}
                   margin="normal"
                 />
-                  <CatCreateProduct onCatChange={this.handleChange('categorias')} categs={categList}/>
+                  <CatCreateProduct onCatChange={this.handleChange('categorias')} categs={categList} selectedCats={this.state.categorias}/>
                   <TextField
                     required
                     id="disponibilidad"

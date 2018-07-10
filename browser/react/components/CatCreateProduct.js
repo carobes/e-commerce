@@ -28,9 +28,12 @@ class Option extends React.Component {
   handleClick = event => {
     this.props.onSelect(this.props.option, event);
   };
+  
+
 
   render() {
     const { children, isFocused, isSelected, onFocus } = this.props;
+    
 
     return (
       <MenuItem
@@ -61,6 +64,7 @@ function SelectWrapped(props) {
       clearRenderer={() => <ClearIcon />}
       valueComponent={valueProps => {
         const { value, children, onRemove } = valueProps;
+        console.log(valueProps)
 
         const onDelete = event => {
           event.preventDefault();
@@ -109,6 +113,7 @@ const styles = theme => ({
       alignItems: 'center',
       border: 0,
       height: 'auto',
+      width: 400,
       background: 'transparent',
       '&:hover': {
         boxShadow: 'none',
@@ -118,6 +123,7 @@ const styles = theme => ({
       flexGrow: 1,
       display: 'flex',
       flexWrap: 'wrap',
+      maxWidth: 380
     },
     '.Select--multi .Select-input': {
       margin: 0,
@@ -129,7 +135,7 @@ const styles = theme => ({
       padding: theme.spacing.unit * 2,
     },
     '.Select-input': {
-      display: 'inline-flex !important',
+      display: 'contents !important',
       padding: 0,
       height: 'auto',
       width: 380
@@ -218,15 +224,15 @@ class IntegrationReactSelect extends React.Component {
   }
 
   render() {
-    const { classes } = this.props;
+    const { classes, selectedCats } = this.props;
 
     return (
       <div className={classes.root}>
         <Input
           inputComponent={SelectWrapped}
-          value={this.state.multi}
+          value={selectedCats}
           onChange={this.props.onCatChange}
-          placeholder="Select multiple countries"
+          placeholder="Seleccionar categoría/s"
           name="react-select-chip"
           inputProps={{
             classes,
