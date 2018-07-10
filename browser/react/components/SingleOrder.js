@@ -84,6 +84,7 @@ function CustomizedTable({ classes, order }) {
   const pO = !productosOrdens ? [] : productosOrdens;
   const stat = !status ? {} : status;
   const usu = !usuario ? {} : usuario;
+  // const total = !productosOrdens ? [] : productosOrdens.map(data => data.subtotal).reduce((prev, next) => prev + next); 
 
   console.log("ver que hace pO", pO, "order", order, "productosOrden", productosOrdens)
   return (
@@ -149,9 +150,8 @@ function CustomizedTable({ classes, order }) {
       <Card className={classes.card2}>
         <br />
         <CardContent>
-          <Typography className={classes.pos2} variant="headline" component="h2">
-            Total: $ 
-         </Typography>
+          <Typography className={classes.pos2} variant="headline" component="h2"> Total: AR${total} 
+         </Typography> 
           <Typography className={classes.pos2} variant="headline" component="h1">
             Status: {stat.estado}
           </Typography>

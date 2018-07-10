@@ -38,9 +38,9 @@ const styles = theme => ({
     }
   },
   card: {
-    minWidth: 345,
-    height: 185,
-    maxWidth: 315,
+    minWidth: 275,
+    height: 100,
+    maxWidth: 275,
   },
   card2: {
     minWidth: 255,
@@ -86,36 +86,18 @@ function CustomizedTable({ classes, orders }) {
   const { productosOrdens, status, usuario } = orders; 
   const pO = !productosOrdens ? [] : productosOrdens;
   const usu = !usuario ? {} : usuario;
-
-
+ 
   return (
+    
     <div>
       <br />
-      {/* <Card className={classes.card}>
-        <div className={classes.rowAvatar}>
-          <Avatar className={classes.avatar}>
-            {usu.nombre + usu.apellido}
-          </Avatar>
-        </div>
-        <br />
+      <Card className={classes.card}>
         <CardContent>
           <Typography className={classes.pos} variant="headline" component="h1">
-            {user.nombre}
-          </Typography>
-          <Typography variant="headline" component="h2">
-            {user.apellido}
-          </Typography>
-          <br/>
-          <Typography
-            className={classes.title}
-            variant="headline"
-            component="h2"
-          >
-           mail: {order.mail}
+            Todas las órdenes
           </Typography>
         </CardContent>
-      </Card> */}
-      <IdUserCard user={usu}/>
+      </Card>
       <Paper className={classes.root}>
         <Table className={classes.table}>
           <TableHead>
@@ -124,7 +106,7 @@ function CustomizedTable({ classes, orders }) {
               <CustomTableCell>Usuario</CustomTableCell>
               <CustomTableCell>Fecha de la Orden</CustomTableCell>
               <CustomTableCell>Número de Orden</CustomTableCell>
-              <CustomTableCell numeric> Total (en $)</CustomTableCell>
+              <CustomTableCell numeric> Total (en AR$)</CustomTableCell>
               <CustomTableCell numeric>Status</CustomTableCell>
             </TableRow>
           </TableHead>
@@ -135,12 +117,8 @@ function CustomizedTable({ classes, orders }) {
 {data.usuario.nombre[0] + data.usuario.apellido[0]}</Avatar></div></CustomTableCell>
                   <CustomTableCell>{data.usuario.nombreApellido}</CustomTableCell>
                   <CustomTableCell>{data.fecha}</CustomTableCell>
-                  <CustomTableCell numeric>
-                    {data.id}
-                  </CustomTableCell>
-                  <CustomTableCell numeric>
-                    {data.cantidad}
-                  </CustomTableCell>
+                  <CustomTableCell numeric>{data.id}</CustomTableCell>
+                  <CustomTableCell numeric> {data.total} </CustomTableCell>
                   <CustomTableCell>{data.status.estado}</CustomTableCell>
                 </TableRow>
                     ))}

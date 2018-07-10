@@ -18,8 +18,11 @@ const Ordenes = db.define('ordenes', {
         validate: {
             isEmail: true
         },
+      },
+    total: {
+        type: Sequelize.FLOAT,
+        allowNull: false
     }
-
 
 });
 
