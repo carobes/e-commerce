@@ -50,7 +50,7 @@ class CarroContainer extends React.Component{
     let nuevo_total = 0;
     let data_length = this.state.data.length;
     for (let i=0; i < data_length; i++){
-      nuevo_total = nuevo_total + this.state.data[i]['subtotal'];
+      nuevo_total = nuevo_total + (this.state.data[i]['carrito']['cantidad'] * this.state.data[i]['precio']);
     }
     this.setState({ total: nuevo_total });
   }
@@ -60,6 +60,7 @@ class CarroContainer extends React.Component{
         this.setState({data: store.getState().carrito.list_items});
     });
     store.dispatch(fetchItemsInCart(this.state.userId));
+    this.sumaTotal();
   }
 
   componentWillMount(){
@@ -111,7 +112,14 @@ class CarroContainer extends React.Component{
   }
 
   render(){
-    console.log('Data q trae el REDUX: ',this.state.data);
+    // console.log('Data q trae el REDUX: ',this.state.data);
+    if (this.state.data.length === 0){
+      return (
+        <div>
+          <h1>CARRO VACIO</h1>
+        </div>
+      )
+    }
     return (
       <div>
         <Carro data={this.state.data} address={this.state.address} total={this.state.total} handleAdd={this.handleAdd} handleSubstract={this.handleSubstract} handleDrop={this.handleDrop} genOrder={this.genOrder} emailFlag={this.state.emailFlag}/>
