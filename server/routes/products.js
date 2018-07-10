@@ -34,4 +34,11 @@ router.get('/', function (req, res) {
 });
 
 
+function isLoggedIn(req, res, next){
+    if(req.isAuthenticated()){
+      return next()
+    }else{
+      res.json({status: 'no está loggeado'})
+    }
+  }
 

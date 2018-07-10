@@ -7,7 +7,10 @@ const Users = models.Users;
 module.exports = router;
 
 router.post('/new',function(req,res,next){
-    Users.create(req.body)
+    Users.findOrCreate({
+        where:{mail:req.body.mail},
+        defaults:req.body
+    })
         .then(data => res.status(201).json(data))
 })
 
