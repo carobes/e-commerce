@@ -13,5 +13,9 @@ export const current_total = (current_total) => ({
 
 export const fetchItemsInCart = (userId) => dispatch =>
     axios.get(`/api/carrito/${userId}`)
-        .then(res => res.data)
-        .then(items => dispatch(products_in_cart(items)));
+      .then(res => res.data)
+      .then(items => dispatch(products_in_cart(items)));
+
+export const updateItemInCart = (userId, itemId, cantidad) => dispatch =>
+  axios.put(`/api/carrito`,{usuario: userId, producto: itemId, cantidad: cantidad})
+    .then(res => true);

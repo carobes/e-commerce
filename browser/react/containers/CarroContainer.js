@@ -31,7 +31,7 @@ class CarroContainer extends React.Component{
     super(props);
     //this.state = store.getState();
     this.state = {
-      data: store.getState().carrito.list_items,
+      data: store.getState(),
       total: 0,
       email: '',
       address: '',
@@ -47,49 +47,43 @@ class CarroContainer extends React.Component{
   }
 
   sumaTotal(){
-    let nuevo_total = 0;
-    let data_length = this.state.data.length;
+    let total = 0;
+    let data_length = this.state.data.carrito.list_items.length;
     for (let i=0; i < data_length; i++){
-      nuevo_total = nuevo_total + (this.state.data[i]['carrito']['cantidad'] * this.state.data[i]['precio']);
+      total = total + (this.state.data.carrito.list_items[i]['carrito']['cantidad'] * this.state.data.carrito.list_items[i]['precio']);
     }
-    this.setState({ total: nuevo_total });
+    return total;
   }
 
   componentDidMount(){
     this.unsubscribe = store.subscribe(() => {
-        this.setState({data: store.getState().carrito.list_items});
+        this.setState({data: store.getState()});
     });
     store.dispatch(fetchItemsInCart(this.state.userId));
-    this.sumaTotal();
   }
 
-  componentWillMount(){
-    this.sumaTotal();
-  }
-
-  handleAdd = id => event => {
-    let index = this.state.data.indexOf(this.state.data[id-1]);
-    let nuevo_state_data = this.state.data.slice();
-    nuevo_state_data[index]['cantidad']++;
-    nuevo_state_data[index]['subtotal'] = nuevo_state_data[index]['precio'] * nuevo_state_data[index]['cantidad'];
+  handleAdd = id => event => { // debo llamar la ruta para actualizar un item en carrito
+    let index = this.state.data.carrito.list_items.indexOf(this.state.data.carrito.list_items[id]);
+    let nuevo_state_data = this.state.data.carrito.list_items.slice();
+    nuevo_state_data[index]['carrito']['cantidad']++;
+    //nuevo_state_data[index]['subtotal'] = nuevo_state_data[index]['precio'] * nuevo_state_data[index]['cantidad'];
     this.setState({ data: nuevo_state_data }, () => this.sumaTotal());
   }
 
-  handleSubstract = id => event => {
-    let index = this.state.data.indexOf(this.state.data[id-1]);
-    let nuevo_state_data = this.state.data.slice();
-    if (nuevo_state_data[index]['cantidad'] > 1){
-      nuevo_state_data[index]['cantidad']--;
-      nuevo_state_data[index]['subtotal'] = nuevo_state_data[index]['precio'] * nuevo_state_data[index]['cantidad'];
+  handleSubstract = id => event => { // debo llamar la ruta para actualizar un item en carrito
+    let index = this.state.data.carrito.list_items.indexOf(this.state.data.carrito.list_items[id]);
+    let nuevo_state_data = this.state.data.carrito.list_items.slice();
+    if (nuevo_state_data[index]['carrito']['cantidad'] > 1){
+      nuevo_state_data[index]['carrito']['cantidad']--;
+      //nuevo_state_data[index]['subtotal'] = nuevo_state_data[index]['precio'] * nuevo_state_data[index]['cantidad'];
       this.setState({ data: nuevo_state_data }, () => this.sumaTotal());
     }
   }
 
-  handleDrop = id => event => {
-    let nuevo_state_data = this.state.data.slice();
+  handleDrop = id => event => { // debo llamar la ruta para actualizar un item en carrito
+    let nuevo_state_data = this.state.data.carrito.list_items.slice();
     if (nuevo_state_data.length === 1) nuevo_state_data = [];
-    nuevo_state_data.splice(id-1, 1);
-    console.log(nuevo_state_data);
+    nuevo_state_data.carrito.list_items.splice(id, 1);
     this.setState({ data: nuevo_state_data }, () => this.sumaTotal());
   }
 
@@ -104,7 +98,7 @@ class CarroContainer extends React.Component{
   }
 
   genOrder = event => {
-    console.log('Generar orden de compra con el arreglo de Productos : ', this.state.data);
+    console.log('Generar orden de compra con el arreglo de Productos : ', this.state.data.carrito.list_items);
   }
 
   componentWillUnmount() {
@@ -112,17 +106,17 @@ class CarroContainer extends React.Component{
   }
 
   render(){
-    // console.log('Data q trae el REDUX: ',this.state.data);
-    if (this.state.data.length === 0){
-      return (
-        <div>
-          <h1>CARRO VACIO</h1>
-        </div>
-      )
-    }
+    console.log('UserId : ', this.state.users);
+    // if (this.state.data.carrito.list_items.length === 0){
+    //   return (
+    //     <div>
+    //       <h1>CARRO VACIO</h1>
+    //     </div>
+    //   )
+    // }
     return (
       <div>
-        <Carro data={this.state.data} address={this.state.address} total={this.state.total} handleAdd={this.handleAdd} handleSubstract={this.handleSubstract} handleDrop={this.handleDrop} genOrder={this.genOrder} emailFlag={this.state.emailFlag}/>
+        <Carro data={this.state.data.carrito.list_items} address={this.state.address} sumaTotal={this.sumaTotal} total={this.state.total} handleAdd={this.handleAdd} handleSubstract={this.handleSubstract} handleDrop={this.handleDrop} genOrder={this.genOrder} emailFlag={this.state.emailFlag}/>
         <InputDataToGenOrder handleChange={this.handleChange} emailFlag={this.state.emailFlag}/>
       </div>
     );

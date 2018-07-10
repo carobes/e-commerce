@@ -21,7 +21,7 @@ router.get('/:userId', function(req, res, next){
 // recibe un json de la forma { usuario: id, producto: id, cantidad: 1}
 // devuelve un status 200 en exito, y un array de todos los objetos que estan en ese momento en
 // el carrito
-router.post('/', function(req, res, next){
+router.post('/', function(req, res, next) {
     Promise.all([
       Producto.findOne({where:{id: req.body.producto}}),
       Users.findOne({where:{id: req.body.usuario}})
@@ -34,3 +34,23 @@ router.post('/', function(req, res, next){
     })
     .catch(next);
 });
+
+router.put('/', function(req, res, next) {
+  Carrito.update({cantidad: req.body.cantidad}, {where: {productoId: req.body.userId, userId: req.body.productoId}})
+  .then(data => res.json({updated: true}))
+  .catch(next);
+})
+
+// router.put('/items/:id', (req, res, next) => { //Editá un ítem buscándolo a partir de su id
+//   Item.findById(req.params.id)
+//     .then(item => item.update(req.body))
+//     .then(() => res.sendStatus(204))
+//     .catch(next);
+// });
+//
+// router.delete('/items/:id', (req, res, next) => { // Elimina el item buscándolo por su id.
+//   Item.findById(req.params.id)
+//     .then(item => item.destroy())
+//     .then(() => res.sendStatus(204))
+//     .catch(next);
+// });
