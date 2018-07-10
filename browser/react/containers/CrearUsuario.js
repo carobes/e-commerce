@@ -46,6 +46,7 @@ class TextFields extends React.Component {
       password:'',
       passValidate: '',
       emailCheck: true,
+      errormsg: '',
       gralCheck: false
     };
     this.handleSubmit = this.handleSubmit.bind(this) 
@@ -67,6 +68,7 @@ class TextFields extends React.Component {
     this.setState({
       [name]: event.target.value,
       gralCheck: check,
+      errormsg:'',
       emailCheck: echeck
     });
   };
@@ -82,21 +84,28 @@ class TextFields extends React.Component {
     }
     axios.post('/api/users/new',usuario)
     .then(res => res.data)
-    .then(user => {this.props.history.push(`/accounts/user/${user.id}`)})
+    .then(user => {
+      if(user[1]) {
+        this.props.history.goBack(-2)
+        return this.props.history.push('/login')
+      }
+      this.setState({
+        emailCheck: user[1],
+        errormsg: 'Usuario ya registrado'
+      })
+    })
   }
   
 
   render() {
     const { classes } = this.props;
-    const {nombre,apellido,edad,mail,password,passValidate,emailCheck,gralCheck} = this.state
+    const {nombre,apellido,edad,mail,password,passValidate,emailCheck,gralCheck,errormsg} = this.state
 
     return (
       <div> <h1 className={classes.title}>Crear Usuario</h1>
         <form className={classes.container} autoComplete="off">
-          <Grid container spacing={16}>
-            <Grid item md={3} xs={1}>
-            </Grid>
-            <Grid item md={6} xs={10}>
+          <Grid container spacing={16} justify='center'>
+            <Grid item md={6} xs={8}>
               <TextField
                 required
                 id="nombre"
@@ -134,6 +143,7 @@ class TextFields extends React.Component {
                 id="mail"
                 label="E-Mail"
                 className={classes.textField}
+                helperText={!emailCheck ? errormsg : ''}
                 value={mail}
                 type="email"
                 onChange={this.handleChange("mail")}
