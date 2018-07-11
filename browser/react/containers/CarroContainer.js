@@ -6,21 +6,6 @@ import InputDataToGenOrder from '../components/data_for_gen_order';
 
 import { Grid } from '@material-ui/core'
 
-let id = 0;
-function createData(name, precio, cantidad) {
-  id += 1;
-  let subtotal = cantidad * precio;
-  return { id, name, precio, cantidad, subtotal};
-}
-
-const datos = [
-  createData('Computador Portatil Lenovo', 1000, 1),
-  createData('Camara Fotografica Cannon', 100, 1),
-  createData('Bolso Playero', 200, 1),
-  createData('Pedazo de Bosta', 1, 1),
-  createData('Camisa con mangas largas JH', 200, 1),
-];
-
 function validateEmail(email) {
   var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
   return re.test(email);
@@ -64,23 +49,12 @@ class CarroContainer extends React.Component{
 
   handleAdd = id => event => { // debo llamar la ruta para actualizar un item en carrito
     store.dispatch(updateItemInCart('increment', this.state.userId, this.state.data.carrito.list_items[id].carrito.productoId));
-    //store.dispatch(updateItemInCart('increment', '2', '2'));
-    // let index = this.state.data.carrito.list_items.indexOf(this.state.data.carrito.list_items[id]);
-    // let nuevo_state_data = this.state.data.carrito.list_items.slice();
-    // nuevo_state_data[index]['carrito']['cantidad']++;
-    // //nuevo_state_data[index]['subtotal'] = nuevo_state_data[index]['precio'] * nuevo_state_data[index]['cantidad'];
-    // this.setState({ data: nuevo_state_data }, () => this.sumaTotal());
+
   }
 
   handleSubstract = id => event => { // debo llamar la ruta para actualizar un item en carrito
     store.dispatch(updateItemInCart('decrement', this.state.userId, this.state.data.carrito.list_items[id].carrito.productoId));
-    // let index = this.state.data.carrito.list_items.indexOf(this.state.data.carrito.list_items[id]);
-    // let nuevo_state_data = this.state.data.carrito.list_items.slice();
-    // if (nuevo_state_data[index]['carrito']['cantidad'] > 1){
-    //   nuevo_state_data[index]['carrito']['cantidad']--;
-    //   //nuevo_state_data[index]['subtotal'] = nuevo_state_data[index]['precio'] * nuevo_state_data[index]['cantidad'];
-    //   this.setState({ data: nuevo_state_data }, () => this.sumaTotal());
-    // }
+  
   }
 
   handleDrop = id => event => { // debo llamar la ruta para actualizar un item en carrito

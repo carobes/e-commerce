@@ -61,14 +61,10 @@ router.put('/decrement', function(req, res, next) {
   .then(itemsCarrito => res.json(itemsCarrito.usercarrito))
   .catch(next);
 })
-
-router.delete('/', function(req, res, next) {
+// elimina un item del carrito de un usuarioId
+router.delete('/delete', function(req, res, next) {
   Carrito.findOne({where: {productoId: req.body.itemId, userId: req.body.userId}})
-  .then(productoEnCarrito)
+  .then(productoEnCarrito => productoEnCarrito.destroy())
+  .then(() => res.sendStatus(204))
+  .catch(next);
 })
-// router.delete('/items/:id', (req, res, next) => { // Elimina el item buscándolo por su id.
-//   Item.findById(req.params.id)
-//     .then(item => item.destroy())
-//     .then(() => res.sendStatus(204))
-//     .catch(next);
-// });
