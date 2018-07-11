@@ -64,7 +64,6 @@ function SelectWrapped(props) {
       clearRenderer={() => <ClearIcon />}
       valueComponent={valueProps => {
         const { value, children, onRemove } = valueProps;
-        console.log(valueProps)
 
         const onDelete = event => {
           event.preventDefault();
@@ -218,8 +217,8 @@ class IntegrationReactSelect extends React.Component {
 
   handleOptions = () => {
     return this.props.categs.map(categ => ({
-      value: categ,
-      label: categ,
+      value: categ.categoria,
+      label: categ.categoria,
     }));
   }
 
@@ -232,7 +231,7 @@ class IntegrationReactSelect extends React.Component {
           inputComponent={SelectWrapped}
           value={selectedCats}
           onChange={this.props.onCatChange}
-          placeholder="Seleccionar categoría/s"
+          placeholder="Seleccionar categoría/s*"
           name="react-select-chip"
           inputProps={{
             classes,

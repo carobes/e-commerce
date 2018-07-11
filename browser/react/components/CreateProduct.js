@@ -113,7 +113,6 @@ handleChange = name => event => {
     
     
     render() {  
-      // console.log(this.state.categorias.length)
       const { classes, categList } = this.props;
       const { nombre, descripcion, precio, disponibilidad, imagenes, gralCheck, urlCheck } = this.state
       return (
