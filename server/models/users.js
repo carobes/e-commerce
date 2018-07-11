@@ -37,11 +37,16 @@ const Users = db.define('users', {
         allowNull:false
     }
 },{
+    getterMethods: {
+        nombreApellido() {
+            return this.nombre + ' ' + this.apellido
+        }
+    },
     hooks:{
         beforeCreate: (users,options) => {
             users.password = Users.hashPassword(users.password)
         }
-    }
+     }
 })
 
 Users.authenticate = function authenticate (username,password){

@@ -12,6 +12,7 @@ import LoginForm from './LoginForm'
 import SingleOrder from '../components/SingleProduct'
 import CreateProductContainer from './CreateProductContainer';
 import CarroContainer from './CarroContainer'
+import OrdersContainer from './OrdersContainer'
 
 export default class Main extends React.Component {
     constructor(props){
@@ -73,6 +74,10 @@ export default class Main extends React.Component {
                             <Route
                                 exact path='/orders/:id' render={() =>
                                     <SingleOrderContainer />
+                                } />
+                                   <Route
+                                exact path='/orders' render={() =>
+                                    <OrdersContainer />
                                 } />
                             <Redirect from="/" to="/products" />
                         </Switch>
