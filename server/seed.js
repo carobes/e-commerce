@@ -144,7 +144,7 @@ const ordenes = [
     fecha: 04/05/18,
     direccion: 'Av. Siempreviva 1234',
     mail: "soyelmaildelcheckout@gmail.com",
-    total: 450,
+    total: 500,
     productosOrdens: [
         {nombre: 'Producto 3',
         descripcion: 'Soy el producto tres',

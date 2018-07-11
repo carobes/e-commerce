@@ -1,4 +1,6 @@
 import React from 'react';
+import store from '../store'
+import { fetchItemsInCart } from '../action-creators/carrito'
 import Carro from '../components/Carro';
 import InputDataToGenOrder from '../components/data_for_gen_order';
 
@@ -27,12 +29,13 @@ function validateEmail(email) {
 class CarroContainer extends React.Component{
   constructor(props){
     super(props);
+    //this.state = store.getState();
     this.state = {
-      data: datos,
+      data: store.getState().carrito.list_items,
       total: 0,
       email: '',
       address: '',
-      userId: 1,
+      userId: 2,
       emailFlag: false
     };
     this.handleAdd = this.handleAdd.bind(this);
@@ -50,6 +53,13 @@ class CarroContainer extends React.Component{
       nuevo_total = nuevo_total + this.state.data[i]['subtotal'];
     }
     this.setState({ total: nuevo_total });
+  }
+
+  componentDidMount(){
+    this.unsubscribe = store.subscribe(() => {
+        this.setState({data: store.getState().carrito.list_items});
+    });
+    store.dispatch(fetchItemsInCart(this.state.userId));
   }
 
   componentWillMount(){
@@ -96,7 +106,12 @@ class CarroContainer extends React.Component{
     console.log('Generar orden de compra con el arreglo de Productos : ', this.state.data);
   }
 
+  componentWillUnmount() {
+      this.unsubscribe();
+  }
+
   render(){
+    console.log('Data q trae el REDUX: ',this.state.data);
     return (
       <div>
         <Carro data={this.state.data} address={this.state.address} total={this.state.total} handleAdd={this.handleAdd} handleSubstract={this.handleSubstract} handleDrop={this.handleDrop} genOrder={this.genOrder} emailFlag={this.state.emailFlag}/>

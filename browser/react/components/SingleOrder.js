@@ -150,7 +150,7 @@ function CustomizedTable({ classes, order }) {
       <Card className={classes.card2}>
         <br />
         <CardContent>
-          <Typography className={classes.pos2} variant="headline" component="h2"> Total: AR${total} 
+          <Typography className={classes.pos2} variant="headline" component="h2"> Total: AR${order.total} 
          </Typography> 
           <Typography className={classes.pos2} variant="headline" component="h1">
             Status: {stat.estado}

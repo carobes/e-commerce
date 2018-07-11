@@ -10,6 +10,15 @@ import TableRow from "@material-ui/core/TableRow";
 import Paper from "@material-ui/core/Paper";
 import Avatar from "@material-ui/core/Avatar";
 import IdUserCard from './IdUserCard';
+import Button from '@material-ui/core/Button';
+import FormControl from '@material-ui/core/FormControl';
+import InputLabel from '@material-ui/core/InputLabel';
+import MenuItem from '@material-ui/core/MenuItem';
+import Select from '@material-ui/core/Select';
+import AddIcon from '@material-ui/icons/Add';
+import Icon from '@material-ui/core/Icon';
+import DeleteIcon from '@material-ui/icons/Delete';
+import NavigationIcon from '@material-ui/icons/Navigation';
 
 const CustomTableCell = withStyles(theme => ({
   head: {
@@ -23,6 +32,24 @@ const CustomTableCell = withStyles(theme => ({
 
 
 const styles = theme => ({
+  button: {
+    margin: theme.spacing.unit,
+    backgroundColor: "#4286f4",
+    color: "white",
+    '&:hover': {
+      color: 'black'
+    },
+    fontSize: 10,
+    // display: 'block',
+    marginTop: theme.spacing.unit * 2,
+  },
+  formControl: {
+    margin: theme.spacing.unit,
+    minWidth: 120,
+  },
+  extendedIcon: {
+    marginRight: theme.spacing.unit,
+  },
   root: {
     width: "100%",
     marginTop: theme.spacing.unit * 3,
@@ -65,27 +92,19 @@ const styles = theme => ({
     color: "#fff",
     backgroundColor: "#6eb4ea",
     float: "left",
-    width: "75px",
-    height: "75px"
+    width: "50px",
+    height: "50px"
   },
   rowAvatar: {
     display: "flex",
     float: "right"
   },
-  buttonsFilter: {
-    backgroundColor: '#6eb4ea',
-    color: 'white',
-    '&:hover': {
-        color: 'white'
-    }
-}
 });
-
 
 function CustomizedTable({ classes, orders }) {
   const { productosOrdens, status, usuario } = orders; 
-  const pO = !productosOrdens ? [] : productosOrdens;
-  const usu = !usuario ? {} : usuario;
+  // const pO = !productosOrdens ? [] : productosOrdens;
+  // const usu = !usuario ? {} : usuario;
  
   return (
     
@@ -119,45 +138,46 @@ function CustomizedTable({ classes, orders }) {
                   <CustomTableCell>{data.fecha}</CustomTableCell>
                   <CustomTableCell numeric>{data.id}</CustomTableCell>
                   <CustomTableCell numeric> {data.total} </CustomTableCell>
-                  <CustomTableCell>{data.status.estado}</CustomTableCell>
+                  <CustomTableCell>      
+                    <form autoComplete="off">
+        <FormControl className={classes.formControl}>
+          <InputLabel htmlFor="demo-controlled-open-select">Estado</InputLabel>
+          <Select
+            // open={this.state.open}
+            // onClose={this.handleClose}
+            // onOpen={this.handleOpen}
+            value={orders.status}
+            // onChange={this.handleChange}
+            // inputProps={{
+            //   name: 'status',
+            //   id: 'demo-controlled-open-select',
+            // }}
+          >
+            <MenuItem value="Creado">Creado</MenuItem>
+            <MenuItem value={10}>Procesando</MenuItem>
+            <MenuItem value={20}>Cancelado</MenuItem>
+            <MenuItem value={30}>Completado</MenuItem>
+          </Select>
+        </FormControl>
+      </form></CustomTableCell>
                 </TableRow>
                     ))}
           </TableBody>
         </Table>
       </Paper>
       <br/>
-      {/* <TablePagination
-          component="div"
-          count={data.length} 
-          rowsPerPage={rowsPerPage}
-          page={page}
-          backIconButtonProps={{
-            'aria-label': 'Previous Page',
-          }}
-          nextIconButtonProps={{
-            'aria-label': 'Next Page',
-          }}
-          onChangePage={this.handleChangePage}
-          onChangeRowsPerPage={this.handleChangeRowsPerPage}
-        /> */}
-      {/* <Card className={classes.card2}>
-        <br />
-        <CardContent>
-          <Typography className={classes.pos2} variant="headline" component="h2">
-            Total: $ 
-         </Typography>
-          <Typography className={classes.pos2} variant="headline" component="h1">
-            Status: {stat.estado}
-          </Typography>
-          <Typography className={classes.pos2} variant="headline" component="h1">
-            mail de envío: {order.mail}
-          </Typography>
-          <Typography className={classes.pos2} variant="headline" component="h1">
-            dirección de envío: {order.direccion}
-          </Typography>
-          <br />
-        </CardContent>
-      </Card> */}
+      <Button variant="extendedFab" aria-label="delete" className={classes.button}>
+        Creado
+      </Button>
+      <Button variant="extendedFab" aria-label="delete" className={classes.button}>
+        Procesando
+      </Button>
+      <Button variant="extendedFab" aria-label="delete" className={classes.button}>
+        Cancelado
+      </Button>
+      <Button variant="extendedFab" aria-label="delete" className={classes.button}>
+        Completado
+      </Button>
     </div>
   );
 }
@@ -165,5 +185,6 @@ function CustomizedTable({ classes, orders }) {
 CustomizedTable.propTypes = {
   classes: PropTypes.object.isRequired
 };
+
 
 export default withStyles(styles)(CustomizedTable);

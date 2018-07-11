@@ -10,12 +10,11 @@ var Promise = require('bluebird');
 module.exports = router;
 // ruta get que devuelve los productos de un userId que estan en la canasta
 router.get('/:userId', function(req, res, next){
-    return Carrito.findAll({
-      where:{userId: req.params.userId}
+    return Users.findOne({
+      where:{id: req.params.userId},
+      include: [{ model: Producto, as:'usercarrito' }]
     })
-    .then(usuarioProductos => {
-      res.send(usuarioProductos);
-    })
+    .then(itemsCarrito => res.json(itemsCarrito.usercarrito))
     .catch(next);
 })
 // ruta post que inserta un productoId y un userId en la tabla carrito con la cantidad
@@ -31,7 +30,7 @@ router.post('/', function(req, res, next){
       return Carrito.findOrCreate({where:{cantidad: req.body.cantidad, productoId: foundProduct.id, userId: foundUser.id}})
     })
     .then((productoEnCarrito) => {
-      res.send(productoEnCarrito);
+      res.json(productoEnCarrito);
     })
     .catch(next);
 });
