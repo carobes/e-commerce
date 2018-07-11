@@ -61,7 +61,7 @@ function CustomizedTable(props) {
             return (
               <TableRow className={classes.row} key={n.id}>
                 <CustomTableCell component="th" scope="row">
-                  {n.name}
+                  {n.nombre}
                 </CustomTableCell>
                 <CustomTableCell numeric>
                   {n.precio}
@@ -70,12 +70,12 @@ function CustomizedTable(props) {
                   <Button mini color="primary" aria-label="add" className={classes.button} onClick={handleAdd(n.id)}>
                     <ArrowUpward />
                   </Button>
-                  <span className={classes.root}>{n.cantidad}</span>
+                  <span className={classes.root}>{n.carrito.cantidad}</span>
                   <Button mini color="primary" aria-label="substract" className={classes.button} onClick={handleSubstract(n.id)}>
                     <ArrowDownward />
                   </Button>
                 </CustomTableCell>
-                <CustomTableCell numeric>{n.subtotal}</CustomTableCell>
+                <CustomTableCell numeric>{n.precio * n.carrito.cantidad}</CustomTableCell>
                 <CustomTableCell>
                   <Button aria-label="delete" className={classes.button} onClick={handleDrop(n.id)}>
                     <DeleteIcon />
