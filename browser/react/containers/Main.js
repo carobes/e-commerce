@@ -15,72 +15,72 @@ import CarroContainer from './CarroContainer'
 import OrdersContainer from './OrdersContainer'
 
 export default class Main extends React.Component {
-    constructor(props){
-      super(props);
-      this.state = {
-        userId: 2,
-        num_elems_carro: 5, // traer el numero de elementos que existen en el carro de el usuario
-      }
+    constructor(props) {
+        super(props);
+        this.state = {
+            userId: 2,
+            num_elems_carro: 5, // traer el numero de elementos que existen en el carro de el usuario
+        }
     }
 
     render() {
         if (this.props.location.pathname === '/carro') {
-          return (
-            <div>
-              <Appbar num_elems_carro={this.state.num_elems_carro}/>
-              <br />
-              <Grid container spacing={16}>
-                <CarroContainer />
-              </Grid>
-            </div>
-          )
+            return (
+                <div>
+                    <Appbar num_elems_carro={this.state.num_elems_carro} />
+                    <br />
+                    <Grid container spacing={16}>
+                        <CarroContainer />
+                    </Grid>
+                </div>
+            )
         }
         return (
             <div>
-                <Appbar num_elems_carro={this.state.num_elems_carro} loggedUser={this.props.loggedUser} unlogUser={this.props.unlogUser}/>
+                <Appbar num_elems_carro={this.state.num_elems_carro} loggedUser={this.props.loggedUser} unlogUser={this.props.unlogUser} />
                 <br />
-                        <Switch>
-                            <Route
-                                exact path='/products' render={() =>
-                                <Grid container spacing={16}>
-                                    <Grid item xs={2}>
+                <Switch>
+                    <Route
+                        exact path='/products/:search?' render={() =>
+                            <Grid container spacing={16}>
+                                <Grid item xs={2}>
                                     <SidebarContainer />
-                                    </Grid>
-                                    <Grid item xs={10}>
-                                    <ProductsContainer />
-                                    </Grid>
                                 </Grid>
-                                } />
-                            <Route
-                                exact path='/products/new' render={() =>
-                                    <CreateProductContainer />
-                                } />
-                            <Route
-                                exact path='/products/:id' render={() =>
-                                    <SingleProductContainer />
-                                } />
-                            <Route
-                                exact path='/accounts/user/:id' render={() =>
-                                    <UserIdContainer />
-                                } />
-                            <Route
-                                exact path='/login' render={() =>
-                                    <LoginForm />
-                                } />
-                            <Route
-                                exact path='/accounts/new' render={() =>
-                                    <CrearUsuario />
-                                } />
-                            <Route
-                                exact path='/orders/:id' render={() =>
-                                    <SingleOrderContainer />
-                                } />
-                                   <Route
-                                exact path='/orders' render={() =>
-                                    <OrdersContainer />
-                                } />
-                            <Redirect from="/" to="/products" />
-                        </Switch>
+                                <Grid item xs={10}>
+                                    <ProductsContainer />
+                                </Grid>
+                            </Grid>
+                        } />
+                    <Route
+                        exact path='/products/new' render={() =>
+                            <CreateProductContainer />
+                        } />
+                    <Route
+                        exact path='/products/single/:id' render={() =>
+                            <SingleProductContainer />
+                        } />
+                    <Route
+                        exact path='/accounts/user/:id' render={() =>
+                            <UserIdContainer />
+                        } />
+                    <Route
+                        exact path='/login' render={() =>
+                            <LoginForm />
+                        } />
+                    <Route
+                        exact path='/accounts/new' render={() =>
+                            <CrearUsuario />
+                        } />
+                    <Route
+                        exact path='/orders/:id' render={() =>
+                            <SingleOrderContainer />
+                        } />
+                    <Route
+                        exact path='/orders' render={() =>
+                            <OrdersContainer />
+                        } />
+                    <Redirect from="/" to="/products" />
+                </Switch>
             </div>
         )
     }
