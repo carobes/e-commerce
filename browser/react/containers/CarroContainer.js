@@ -1,6 +1,6 @@
 import React from 'react';
 import store from '../store'
-import { fetchItemsInCart } from '../action-creators/carrito'
+import { fetchItemsInCart, updateItemInCart } from '../action-creators/carrito'
 import Carro from '../components/Carro';
 import InputDataToGenOrder from '../components/data_for_gen_order';
 
@@ -63,21 +63,24 @@ class CarroContainer extends React.Component{
   }
 
   handleAdd = id => event => { // debo llamar la ruta para actualizar un item en carrito
-    let index = this.state.data.carrito.list_items.indexOf(this.state.data.carrito.list_items[id]);
-    let nuevo_state_data = this.state.data.carrito.list_items.slice();
-    nuevo_state_data[index]['carrito']['cantidad']++;
-    //nuevo_state_data[index]['subtotal'] = nuevo_state_data[index]['precio'] * nuevo_state_data[index]['cantidad'];
-    this.setState({ data: nuevo_state_data }, () => this.sumaTotal());
+    store.dispatch(updateItemInCart('increment', this.state.userId, this.state.data.carrito.list_items[id].carrito.productoId));
+    //store.dispatch(updateItemInCart('increment', '2', '2'));
+    // let index = this.state.data.carrito.list_items.indexOf(this.state.data.carrito.list_items[id]);
+    // let nuevo_state_data = this.state.data.carrito.list_items.slice();
+    // nuevo_state_data[index]['carrito']['cantidad']++;
+    // //nuevo_state_data[index]['subtotal'] = nuevo_state_data[index]['precio'] * nuevo_state_data[index]['cantidad'];
+    // this.setState({ data: nuevo_state_data }, () => this.sumaTotal());
   }
 
   handleSubstract = id => event => { // debo llamar la ruta para actualizar un item en carrito
-    let index = this.state.data.carrito.list_items.indexOf(this.state.data.carrito.list_items[id]);
-    let nuevo_state_data = this.state.data.carrito.list_items.slice();
-    if (nuevo_state_data[index]['carrito']['cantidad'] > 1){
-      nuevo_state_data[index]['carrito']['cantidad']--;
-      //nuevo_state_data[index]['subtotal'] = nuevo_state_data[index]['precio'] * nuevo_state_data[index]['cantidad'];
-      this.setState({ data: nuevo_state_data }, () => this.sumaTotal());
-    }
+    store.dispatch(updateItemInCart('decrement', this.state.userId, this.state.data.carrito.list_items[id].carrito.productoId));
+    // let index = this.state.data.carrito.list_items.indexOf(this.state.data.carrito.list_items[id]);
+    // let nuevo_state_data = this.state.data.carrito.list_items.slice();
+    // if (nuevo_state_data[index]['carrito']['cantidad'] > 1){
+    //   nuevo_state_data[index]['carrito']['cantidad']--;
+    //   //nuevo_state_data[index]['subtotal'] = nuevo_state_data[index]['precio'] * nuevo_state_data[index]['cantidad'];
+    //   this.setState({ data: nuevo_state_data }, () => this.sumaTotal());
+    // }
   }
 
   handleDrop = id => event => { // debo llamar la ruta para actualizar un item en carrito
@@ -106,14 +109,13 @@ class CarroContainer extends React.Component{
   }
 
   render(){
-    console.log('UserId : ', this.state.users);
-    // if (this.state.data.carrito.list_items.length === 0){
-    //   return (
-    //     <div>
-    //       <h1>CARRO VACIO</h1>
-    //     </div>
-    //   )
-    // }
+    if (this.state.data.carrito.list_items.length === 0){
+      return (
+        <div>
+          <h1>CARRO VACIO</h1>
+        </div>
+      )
+    }
     return (
       <div>
         <Carro data={this.state.data.carrito.list_items} address={this.state.address} sumaTotal={this.sumaTotal} total={this.state.total} handleAdd={this.handleAdd} handleSubstract={this.handleSubstract} handleDrop={this.handleDrop} genOrder={this.genOrder} emailFlag={this.state.emailFlag}/>

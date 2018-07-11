@@ -35,19 +35,37 @@ router.post('/', function(req, res, next) {
     .catch(next);
 });
 
-router.put('/', function(req, res, next) {
-  Carrito.update({cantidad: req.body.cantidad}, {where: {productoId: req.body.userId, userId: req.body.productoId}})
-  .then(data => res.json({updated: true}))
+// incrementa cantidad de un item
+router.put('/increment', function(req, res, next) {
+  Carrito.findOne({where: {productoId: req.body.itemId, userId: req.body.userId}})
+  .then(productoEnCarrito => productoEnCarrito.increment(['cantidad'], {by:1}))
+  .then(() => Users.findOne({
+    where:{id: req.body.userId},
+    include: [{ model: Producto, as:'usercarrito' }]
+  }))
+  .then(itemsCarrito => res.json(itemsCarrito.usercarrito))
   .catch(next);
 })
 
-// router.put('/items/:id', (req, res, next) => { //Editá un ítem buscándolo a partir de su id
-//   Item.findById(req.params.id)
-//     .then(item => item.update(req.body))
-//     .then(() => res.sendStatus(204))
-//     .catch(next);
-// });
-//
+// decrementa cantidad de un item
+router.put('/decrement', function(req, res, next) {
+  Carrito.findOne({where: {productoId: req.body.itemId, userId: req.body.userId}})
+  .then(productoEnCarrito => {
+    if (productoEnCarrito.cantidad === 1) return res.json(productoEnCarrito.cantidad);
+    return productoEnCarrito.decrement(['cantidad'], {by:1})
+  })
+  .then(() => Users.findOne({
+    where:{id: req.body.userId},
+    include: [{ model: Producto, as:'usercarrito' }]
+  }))
+  .then(itemsCarrito => res.json(itemsCarrito.usercarrito))
+  .catch(next);
+})
+
+router.delete('/', function(req, res, next) {
+  Carrito.findOne({where: {productoId: req.body.itemId, userId: req.body.userId}})
+  .then(productoEnCarrito)
+})
 // router.delete('/items/:id', (req, res, next) => { // Elimina el item buscándolo por su id.
 //   Item.findById(req.params.id)
 //     .then(item => item.destroy())

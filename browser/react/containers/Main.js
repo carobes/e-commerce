@@ -34,7 +34,6 @@ export default class Main extends React.Component {
     }
 
     render() {
-      console.log(this.state.num_elems_carro);
         if (this.props.location.pathname === '/carro') {
           return (
             <div>

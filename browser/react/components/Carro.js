@@ -45,7 +45,6 @@ function CustomizedTable(props) {
   const { classes, data, sumaTotal, address, handleAdd, handleSubstract, handleDrop, genOrder, emailFlag } = props;
   let total = sumaTotal();
   const genOrderFlag = (address.length > 10 && emailFlag) ? false : true;
-  console.log('data : ', data);
   return (
     <Paper className={classes.root}>
       <Table className={classes.table}>
