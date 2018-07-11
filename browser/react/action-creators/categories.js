@@ -6,15 +6,18 @@ const receiveCategories = (categories) => ({
     categories
 });
 
-export const categoriesSelected = (catsel) => ({
+export const categoriesSelected = (selectedCat) => ({
     type: CATEGORIES_SELECTED,
-    catsel
+    selectedCat
 })
 
 export const fetchCategories = () => dispatch =>
     axios.get('/api/categories')
         .then(res => res.data)
-        .then(categories => dispatch(receiveCategories(categories)));
+        .then(resp => resp)
+        .then(categories => {
+            return dispatch(receiveCategories(categories))
+        });
 
 
 

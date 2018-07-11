@@ -3,14 +3,14 @@ const router = express.Router();
 const models = require('../models');
 const Productos = models.Producto;
 const Imagen = models.Imagen
-const Categoria = models.Categoria
+const Categoria = models.Categoria;
 
 
 module.exports = router;
 
-router.post('/new',function(req,res,next){
-    Productos.create(req.body, {include: [Imagen]})
-        .then(producto => {req.body.categorias.map(cat => Categoria.findOne({where:{categoria: cat}}).then(foundCat => producto.addCategory(foundCat.id))); return producto})
+router.post('/new', function (req, res, next) {
+    Productos.create(req.body, { include: [Imagen] })
+        .then(producto => { req.body.categorias.map(cat => Categoria.findOne({ where: { categoria: cat } }).then(foundCat => producto.addCategory(foundCat.id))); return producto })
         .then(producto => res.status(201).json(producto))
 })
 
@@ -22,6 +22,7 @@ router.get('/:id', function (req, res) {
         .then(producto => res.json(producto));
 });
 
+
 router.get('/search/:input', function (req, res) {
     Productos.findAll({
         where: {
@@ -29,22 +30,22 @@ router.get('/search/:input', function (req, res) {
                 $iLike: '%' + req.params.input + '%'
             }
         },
-        include: [Imagen]
+        include: [Imagen, { model: Categoria, as: 'Category', attributes: ['categoria'] }]
     })
         .then(producto => res.json(producto));
 });
 
 router.get('/', function (req, res) {
-    Productos.findAll({ include: [Imagen] })
+    Productos.findAll({ include: [Imagen, { model: Categoria, as: 'Category', attributes: ['categoria'] }] })
         .then(productos => res.json(productos));
 });
 
 
-function isLoggedIn(req, res, next){
-    if(req.isAuthenticated()){
-      return next()
-    }else{
-      res.json({status: 'no está loggeado'})
+function isLoggedIn(req, res, next) {
+    if (req.isAuthenticated()) {
+        return next()
+    } else {
+        res.json({ status: 'no está loggeado' })
     }
-  }
+}
 

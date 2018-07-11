@@ -33,7 +33,7 @@ export default withStyles(styles)(props => {
                             <CardContent>
                                 <Link to={`/products/${product.id}`}>
                                     <Typography gutterBottom variant="headline" component="h2">
-                                            {product.nombre}
+                                        {product.nombre}
                                     </Typography>
                                 </Link>
                                 <Typography component="p">
@@ -41,10 +41,10 @@ export default withStyles(styles)(props => {
                                 </Typography>
                             </CardContent>
                             <CardActions className={classes.padre}>
-                                <IconButton  size="small" color="secondary">
+                                <IconButton size="small" color="secondary">
                                     <AddShoppingCart />
                                 </IconButton>
-                                <Typography  variant='title' color='primary' component="p">
+                                <Typography variant='title' color='primary' component="p">
                                     {product.precio}$
                                 </Typography>
                             </CardActions>

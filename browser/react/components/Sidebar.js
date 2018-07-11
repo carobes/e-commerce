@@ -14,51 +14,50 @@ import FormHelperText from '@material-ui/core/FormHelperText';
 import Checkbox from '@material-ui/core/Checkbox';
 
 const styles = theme => ({
- button: {
-   margin: theme.spacing.unit,
+  button: {
+    margin: theme.spacing.unit,
 
- },
- button2: {
-   backgroundColor: '#6eb4ea',
-   color: 'white',
-   '&:hover': {
-     color: 'white'
-   }
- },
- extendedIcon: {
-   marginRight: theme.spacing.unit,
- },
+  },
+  button2: {
+    backgroundColor: '#6eb4ea',
+    color: 'white',
+    '&:hover': {
+      color: 'white'
+    }
+  },
+  extendedIcon: {
+    marginRight: theme.spacing.unit,
+  },
 });
 
 
-function Sidebar({ categorias, classes, handleChange, handleSubmit }) {
- return (
-   <FormControl component="fieldset">
-     <FormLabel component="legend">Selecciona Categorías</FormLabel>
-     <FormGroup>
-       {Object.keys(categorias).map(etiqueta => (
-         <FormControlLabel key={etiqueta}
-           control={
-             <Checkbox
-               checked={categorias[etiqueta]}
-               onChange={handleChange(etiqueta)}
-               value={etiqueta}
-             />
-           }
-           label={etiqueta}
-         />
-       ))}
-       <Button variant="contained" size="small" className={classes.button2} onClick={handleSubmit}>
-         Filtrar
+
+function Sidebar({ classes, categories, catCheckBox, handleChange }) {
+  return (
+    <FormControl component="fieldset">
+      <FormLabel component="legend">Selecciona Categorías</FormLabel>
+      <FormGroup>
+        {!Object.keys(catCheckBox).length ? null : categories.map(etiqueta => (
+          <FormControlLabel key={etiqueta.id}
+            control={
+              <Checkbox
+                checked={catCheckBox[etiqueta.categoria]}
+                onChange={handleChange(etiqueta.categoria)}
+                value={etiqueta.categoria}
+              />
+            }
+            label={etiqueta.categoria}
+          />
+        ))}
+        <Button variant="contained" size="small" className={classes.button2} >
+          Filtrar
        </Button>
-     </FormGroup>
-     <FormHelperText> <br></br> Se cuidadoso...</FormHelperText>
-   </FormControl>
- )
+      </FormGroup>
+    </FormControl>
+  )
 }
 
-Sidebar.propTypes = {
- classes: PropTypes.object.isRequired,
-};
-
 export default withStyles(styles)(Sidebar);
+
+//handleChange, handleSubmit 
+//onClick={handleSubmit}

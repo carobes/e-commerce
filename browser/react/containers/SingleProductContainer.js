@@ -26,4 +26,4 @@ class SingleProductContainer extends React.Component {
     }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(withRouter(SingleProductContainer))
+export default connect(mapStateToProps, mapDispatchToProps)(withRouter(SingleProductContainer));
