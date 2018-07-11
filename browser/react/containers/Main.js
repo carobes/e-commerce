@@ -1,15 +1,18 @@
 import React from 'react';
 import { Route, Link, Redirect, Switch } from 'react-router-dom';
-import Appbar from '../components/Appbar';
-import ProductsContainer from './ProductsContainer';
-import SidebarContainer from './SidebarContainer';
-import { Grid } from '@material-ui/core';
-import SingleProductContainer from './SingleProductContainer';
-import SingleOrderContainer from './SingleOrderContainer';
-import UserIdContainer from './UserIdContainer';
-import CrearUsuario from './CrearUsuario';
-import LoginForm from './LoginForm';
-import CarroContainer from './CarroContainer';
+
+import Appbar from '../components/Appbar'
+import ProductsContainer from './ProductsContainer'
+import SidebarContainer from './SidebarContainer'
+import { Grid } from '@material-ui/core'
+import SingleProductContainer from './SingleProductContainer'
+import SingleOrderContainer from './SingleOrderContainer'
+import UserIdContainer from './UserIdContainer'
+import CrearUsuario from './CrearUsuario'
+import OrdersContainer from './OrdersContainer'
+import LoginForm from './LoginForm'
+import CarroContainer from './CarroContainer'
+
 
 export default class Main extends React.Component {
     constructor(props){
@@ -65,6 +68,10 @@ export default class Main extends React.Component {
                             <Route
                                 exact path='/orders/:id' render={() =>
                                     <SingleOrderContainer />
+                                } />
+                                   <Route
+                                exact path='/orders' render={() =>
+                                    <OrdersContainer />
                                 } />
                             <Redirect from="/" to="/products" />
                         </Switch>

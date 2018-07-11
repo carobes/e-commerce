@@ -129,6 +129,7 @@ const ordenes = [
     fecha: 08/08/18,
     direccion: 'Av. Siempreviva 1234',
     mail: "soyelmaildelcheckout@gmail.com",
+    total: 20,
     productosOrdens: [
         {nombre: 'Producto 1',
         descripcion: 'Soy el producto uno',
@@ -143,11 +144,12 @@ const ordenes = [
     fecha: 04/05/18,
     direccion: 'Av. Siempreviva 1234',
     mail: "soyelmaildelcheckout@gmail.com",
+    total: 450,
     productosOrdens: [
         {nombre: 'Producto 3',
         descripcion: 'Soy el producto tres',
         precio: 150,
-        cantidad: 1},
+        cantidad: 3},
         {nombre: 'Producto 2',
         descripcion: 'Soy el producto dos',
         precio: 50,
@@ -161,6 +163,7 @@ const ordenes = [
     fecha: 07/01/18,
     direccion: 'Elm Street 1428',
     mail: "soyotromaildelcheckout@gmail.com",
+    total: 50,
     productosOrdens: [
         {nombre: 'Producto 2',
         descripcion: 'Soy el producto dos',

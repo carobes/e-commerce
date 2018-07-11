@@ -1,21 +1,21 @@
 import React from 'react';
-import store from '../store'
+import { connect } from 'react-redux'; 
 import SingleOrder from '../components/SingleOrder'
 import { fetchOrder } from '../action-creators/orders'
 import { withRouter } from 'react-router'
 
-export default withRouter(class SingleOrderContainer extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = store.getState();
-    }
 
+const mapStateToProps = ({ orders }) => ({
+    selectedOrder: orders.selectedOrder,
+  })
+  
+  const mapDispatchToProps = (dispatch) => ({
+    fetchOrder: (id) => dispatch(fetchOrder(id))
+  })
+class SingleOrderContainer extends React.Component {
 
     componentDidMount() {
-        this.unsubscribe = store.subscribe(() => {
-            this.setState(store.getState());
-        });
-        store.dispatch(fetchOrder(this.props.match.params.id));
+        this.props.fetchOrder(this.props.match.params.id);
     }
 
     componentWillUnmount() {
@@ -23,6 +23,9 @@ export default withRouter(class SingleOrderContainer extends React.Component {
     }
 
     render() {
-        return <SingleOrder order={this.state.orders.selectedOrder} />
+        console.log(this.props.selectedOrder)
+        return <SingleOrder order={this.props.selectedOrder} />
     }
-})
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(withRouter(SingleOrderContainer))
