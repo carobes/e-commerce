@@ -12,7 +12,7 @@ export const categoriesSelected = (catsel) => ({
 })
 
 export const fetchCategories = () => dispatch =>
-    axios.get('COMPLETAR LA RUTA')
+    axios.get('/api/categories')
         .then(res => res.data)
         .then(categories => dispatch(receiveCategories(categories)));
 

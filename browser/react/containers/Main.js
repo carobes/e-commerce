@@ -1,6 +1,5 @@
 import React from 'react';
 import { Route, Link, Redirect, Switch } from 'react-router-dom';
-
 import Appbar from '../components/Appbar'
 import ProductsContainer from './ProductsContainer'
 import SidebarContainer from './SidebarContainer'
@@ -9,10 +8,11 @@ import SingleProductContainer from './SingleProductContainer'
 import SingleOrderContainer from './SingleOrderContainer'
 import UserIdContainer from './UserIdContainer'
 import CrearUsuario from './CrearUsuario'
-import OrdersContainer from './OrdersContainer'
 import LoginForm from './LoginForm'
+import SingleOrder from '../components/SingleProduct'
+import CreateProductContainer from './CreateProductContainer';
 import CarroContainer from './CarroContainer'
-
+import OrdersContainer from './OrdersContainer'
 
 export default class Main extends React.Component {
     constructor(props){
@@ -39,15 +39,21 @@ export default class Main extends React.Component {
             <div>
                 <Appbar num_elems_carro={this.state.num_elems_carro} loggedUser={this.props.loggedUser} unlogUser={this.props.unlogUser}/>
                 <br />
-                <Grid container spacing={16}>
-                    <Grid item xs={2}>
-                        <SidebarContainer />
-                    </Grid>
-                    <Grid item xs={10}>
                         <Switch>
                             <Route
                                 exact path='/products' render={() =>
+                                <Grid container spacing={16}>
+                                    <Grid item xs={2}>
+                                    <SidebarContainer />
+                                    </Grid>
+                                    <Grid item xs={10}>
                                     <ProductsContainer />
+                                    </Grid>
+                                </Grid>
+                                } />
+                            <Route
+                                exact path='/products/new' render={() =>
+                                    <CreateProductContainer />
                                 } />
                             <Route
                                 exact path='/products/:id' render={() =>
@@ -75,8 +81,6 @@ export default class Main extends React.Component {
                                 } />
                             <Redirect from="/" to="/products" />
                         </Switch>
-                    </Grid>
-                </Grid>
             </div>
         )
     }

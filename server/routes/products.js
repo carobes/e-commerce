@@ -3,10 +3,16 @@ const router = express.Router();
 const models = require('../models');
 const Productos = models.Producto;
 const Imagen = models.Imagen
+const Categoria = models.Categoria
 
 
 module.exports = router;
 
+router.post('/new',function(req,res,next){
+    Productos.create(req.body, {include: [Imagen]})
+        .then(producto => {req.body.categorias.map(cat => Categoria.findOne({where:{categoria: cat}}).then(foundCat => producto.addCategory(foundCat.id))); return producto})
+        .then(producto => res.status(201).json(producto))
+})
 
 router.get('/:id', function (req, res) {
     Productos.findOne({
