@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom'
 import { AppBar, Toolbar, Typography } from '@material-ui/core';
-import Login from './Login';
+import LoginBtn from '../containers/LoginBtn';
 import Carrito from './Carrito'
 import Search from './Search'
 import { withStyles } from '@material-ui/core/styles';
@@ -23,7 +23,7 @@ const styles = {
 }
 
 export default withStyles(styles)(props => {
-    const { classes, setSearch, search, handleSubmit } = props
+    const { classes, setSearch, search, handleSubmit, num_elems_carro} = props
     return (
         <div>
             <AppBar className={classes.colorBar} position="static" color="inherit">
@@ -35,8 +35,10 @@ export default withStyles(styles)(props => {
                     </Link>
                     <SearchContainer />
                     <div className={[classes.padre, classes.align].join(' ')}>
-                        <Carrito />
-                        <Login />
+                      <Link to={'/carro'} style={{ textDecoration: 'none', color: 'white' }}>
+                        <Carrito num_elems_carro={num_elems_carro}/>
+                        </Link>
+                        <LoginBtn />
                     </div>
                 </Toolbar>
             </AppBar>

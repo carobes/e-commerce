@@ -12,7 +12,7 @@ export const categoriesSelected = (selectedCat) => ({
 })
 
 export const fetchCategories = () => dispatch =>
-    axios.get('/api/products/categories')
+    axios.get('/api/categories')
         .then(res => res.data)
         .then(resp => resp)
         .then(categories => {

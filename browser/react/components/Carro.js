@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+
 import { withStyles } from '@material-ui/core/styles';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
@@ -41,8 +42,8 @@ const styles = theme => ({
 });
 
 function CustomizedTable(props) {
-  const { classes, data, total, handleAdd, handleSubstract, handleDrop, genOrder } = props;
-
+  const { classes, data, address, total, handleAdd, handleSubstract, handleDrop, genOrder, emailFlag } = props;
+  const genOrderFlag = (address.length > 10 && emailFlag) ? false : true;
   return (
     <Paper className={classes.root}>
       <Table className={classes.table}>
@@ -60,7 +61,7 @@ function CustomizedTable(props) {
             return (
               <TableRow className={classes.row} key={n.id}>
                 <CustomTableCell component="th" scope="row">
-                  {n.name}
+                  {n.nombre}
                 </CustomTableCell>
                 <CustomTableCell numeric>
                   {n.precio}
@@ -69,12 +70,12 @@ function CustomizedTable(props) {
                   <Button mini color="primary" aria-label="add" className={classes.button} onClick={handleAdd(n.id)}>
                     <ArrowUpward />
                   </Button>
-                  <span className={classes.root}>{n.cantidad}</span>
+                  <span className={classes.root}>{n.carrito.cantidad}</span>
                   <Button mini color="primary" aria-label="substract" className={classes.button} onClick={handleSubstract(n.id)}>
                     <ArrowDownward />
                   </Button>
                 </CustomTableCell>
-                <CustomTableCell numeric>{n.subtotal}</CustomTableCell>
+                <CustomTableCell numeric>{n.precio * n.carrito.cantidad}</CustomTableCell>
                 <CustomTableCell>
                   <Button aria-label="delete" className={classes.button} onClick={handleDrop(n.id)}>
                     <DeleteIcon />
@@ -89,7 +90,7 @@ function CustomizedTable(props) {
             <CustomTableCell numeric>{''}</CustomTableCell>
             <CustomTableCell numeric>{'TOTAL : '+total}</CustomTableCell>
             <CustomTableCell>
-              <Button aria-label="shop" className={classes.button}>
+              <Button aria-label="shop" className={classes.button} disabled={genOrderFlag}>
                 <ShopTwo onClick={genOrder}/>
               </Button>
             </CustomTableCell>

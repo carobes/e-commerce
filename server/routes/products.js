@@ -8,10 +8,11 @@ const Categoria = models.Categoria;
 
 module.exports = router;
 
-router.get('/categories', function (req, res) {
-    Categoria.findAll()
-        .then(categorias => res.json(categorias));
-});
+router.post('/new', function (req, res, next) {
+    Productos.create(req.body, { include: [Imagen] })
+        .then(producto => { req.body.categorias.map(cat => Categoria.findOne({ where: { categoria: cat } }).then(foundCat => producto.addCategory(foundCat.id))); return producto })
+        .then(producto => res.status(201).json(producto))
+})
 
 router.get('/:id', function (req, res) {
     Productos.findOne({
@@ -39,4 +40,12 @@ router.get('/', function (req, res) {
         .then(productos => res.json(productos));
 });
 
+
+function isLoggedIn(req, res, next) {
+    if (req.isAuthenticated()) {
+        return next()
+    } else {
+        res.json({ status: 'no está loggeado' })
+    }
+}
 
