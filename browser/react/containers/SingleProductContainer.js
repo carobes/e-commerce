@@ -20,7 +20,6 @@ class SingleProductContainer extends React.Component {
     }
 
     render() {
-        console.log(this.props.selectedProduct)
         return (
             <SingleProduct product={this.props.selectedProduct} />
         )

@@ -54,8 +54,8 @@ class TextFields extends React.Component {
     this.state = {
       nombre: '',
       descripcion: '',
-      precio: '',
-      disponibilidad: '',
+      precio: 0,
+      disponibilidad: 0,
       imagenes: [],
       categorias: '',
       urlCheck: true,
@@ -97,18 +97,16 @@ handleChange = name => event => {
     
     handleSubmit(evt){
       evt.preventDefault();
-      const product = [{
-        nombre: this.state.nombre,
-        descripcion: this.state.descripcion,
-        precio: this.state.precio,
-        disponibilidad: this.state.disponibilidad
-      },
-      {
-        include: [Imagen]
-      }]
-      axios.post('/api/products/new',product)
-      .then(res => res.data)
-      .then(user => {this.props.history.push(`/accounts/user/${user.id}`)})
+      const product = {
+            nombre: this.state.nombre,
+            descripcion: this.state.descripcion,
+            precio: this.state.precio,
+            disponibilidad: this.state.disponibilidad,
+            imagens: [{ruta:this.state.imagenes}],
+            categorias: this.state.categorias.split(',')
+        }
+      axios.post('/api/products/new', product)
+      .then(product => {this.props.history.push(`/products/${product.data.id}`)})
     }
     
     

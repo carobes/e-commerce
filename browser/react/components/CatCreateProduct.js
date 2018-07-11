@@ -211,9 +211,6 @@ class IntegrationReactSelect extends React.Component {
     multi: null,
   };
 
-  // handleChange = value => {
-  //   this.props.onCatChange(value);
-  // };
 
   handleOptions = () => {
     return this.props.categs.map(categ => ({
