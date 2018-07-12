@@ -17,6 +17,12 @@ const ProductosOrden = db.define('productosOrden', {
     cantidad: {
         type: Sequelize.INTEGER
     }
+},{
+    getterMethods: {
+        subtotal() {
+            return this.cantidad*this.precio
+        }
+    }
 });
 
 module.exports = ProductosOrden;

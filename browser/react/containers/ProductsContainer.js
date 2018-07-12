@@ -1,29 +1,39 @@
 import React from 'react';
-import store from '../store'
+import { connect } from 'react-redux';
 import { fetchProducts } from '../action-creators/products'
 import Products from '../components/Products'
 
-export default class ProductsContainer extends React.Component {
+const mapStateToProps = ({ products, categories }) => ({
+    productsList: products.productsList,
+    selectedCategories: categories.selectedCategories
+})
 
-    constructor(props) {
-        super(props);
-        this.state = store.getState();
-    }
-    
+const mapDispatchToProps = (dispatch) => ({
+    fetchProducts: () => dispatch(fetchProducts())
+})
+
+
+class ProductsContainer extends React.Component {
 
     componentDidMount() {
-        this.unsubscribe = store.subscribe(() => {
-            this.setState(store.getState());
-        });
-        store.dispatch(fetchProducts());
-    }
-
-    componentWillUnmount() {
-        this.unsubscribe();
+        this.props.fetchProducts()
     }
 
     render() {
-        return <Products products={this.state.products.productsList} />
+        console.log(this.props.productsList)
+        var productListFiltered = []
+        if (this.props.productsList.length && this.props.productsList[0].Category[0].categoria) {
+            this.props.productsList.map(product => {
+                for (var i = 0; i < product.Category.length; i++) {
+                    product.Category[i] = product.Category[i].categoria
+                }
+            })
+        }
+        productListFiltered = this.props.productsList.filter(prod => this.props.selectedCategories.some(cat => prod.Category.includes(cat)))
+
+        return <Products products={productListFiltered} />
     }
 
 }
+
+export default connect(mapStateToProps, mapDispatchToProps)(ProductsContainer);

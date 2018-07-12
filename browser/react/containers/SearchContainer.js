@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { fetchSearch } from '../action-creators/products'
+import { fetchSearch, fetchProducts } from '../action-creators/products'
 import { withRouter } from 'react-router'
 import Search from '../components/Search'
 
@@ -9,7 +9,8 @@ const mapStateToProps = () => ({
 })
 
 const mapDispatchToProps = (dispatch) => ({
-    fetchSearch: (input) => dispatch(fetchSearch(input))
+    fetchSearch: (input) => dispatch(fetchSearch(input)),
+    fetchProducts: () => dispatch(fetchProducts())
 })
 
 class SearchContainer extends React.Component {
@@ -27,7 +28,12 @@ class SearchContainer extends React.Component {
 
     handleSubmit(e) {
         e.preventDefault()
-        this.props.fetchSearch(this.state.search);
+        if (this.state.search === '') {
+            this.props.history.push('/products')
+        } else {
+            this.props.fetchSearch(this.state.search).then(() => this.props.history.push('/products'))
+        }
+
     }
 
 

@@ -96,6 +96,10 @@ router.post('/', function (req, res, next) {
   .catch(next);
 })
 
+router.get('/', function (req, res) {
+    Ordenes.findAll( {include: [ProductosOrden, { model: Estado, as:'status' }, { model: Users, as:'usuario' }]})
+        .then(ordenes => res.json(ordenes));
+});
 // router.get('/', function (req, res) {
 //     Ordenes.findAll({ include: [Imagens] })
 //         .then(ordenes => res.json(ordenes));

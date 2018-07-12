@@ -4,7 +4,7 @@ const db = require('./db');
 
 const Ordenes = db.define('ordenes', {
     fecha: {
-        type: Sequelize.DATE,
+        type: Sequelize.DATEONLY,
         allowNull: false
 
     },
@@ -18,8 +18,11 @@ const Ordenes = db.define('ordenes', {
         validate: {
             isEmail: true
         },
+      },
+    total: {
+        type: Sequelize.FLOAT,
+        allowNull: false
     }
-
 
 });
 
