@@ -64,6 +64,6 @@ app.use((err, req, res, next) => {
   res.status(500).send(err);
 });
 
-db.sync({ force: false })
+db.sync({ force: true })
   .then(() => app.listen(3000, () => console.log('Listening on PORT 3000')))
   .then(() => seed())
