@@ -20,16 +20,16 @@ export default class Main extends React.Component {
     constructor(props){
       super(props);
       this.state = {
-        userId: 2,
-        num_elems_carro: store.getState().carrito.list_items, // traer el numero de elementos que existen en el carro de el usuario
+        userId: 0,
+        num_elems_carro: [], // traer el numero de elementos que existen en el carro de el usuario
       }
     }
 
     componentDidMount(){
       this.unsubscribe = store.subscribe(() => {
-          this.setState({num_elems_carro: store.getState().carrito.list_items});
+          this.setState({num_elems_carro: store.getState().carrito.list_items, userId: store.getState().users.loggedUser.id});
       });
-      store.dispatch(fetchItemsInCart(this.state.userId));
+      if (this.state.userId != 0) store.dispatch(fetchItemsInCart(this.state.userId));
     }
 
     componentWillUnmount() {

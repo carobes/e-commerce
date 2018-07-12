@@ -65,6 +65,6 @@ router.put('/decrement', function(req, res, next) {
 router.delete('/delete', function(req, res, next) {
   Carrito.findOne({where: {productoId: req.body.itemId, userId: req.body.userId}})
   .then(productoEnCarrito => productoEnCarrito.destroy())
-  .then(() => res.sendStatus(204))
+  .then(result => res.json(result))
   .catch(next);
 })
