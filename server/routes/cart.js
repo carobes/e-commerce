@@ -12,6 +12,9 @@ module.exports = router;
 router.get('/:userId', function(req, res, next){
     return Users.findOne({
       where:{id: req.params.userId},
+      order: [
+        ['usercarrito','id', 'ASC'] // ordena por productoId
+      ],
       include: [{ model: Producto, as:'usercarrito' }]
     })
     .then(itemsCarrito => res.json(itemsCarrito.usercarrito))
