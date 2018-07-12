@@ -12,6 +12,9 @@ module.exports = router;
 router.get('/:userId', function(req, res, next){
     return Users.findOne({
       where:{id: req.params.userId},
+      order: [
+        ['usercarrito','id', 'ASC'] // ordena por productoId
+      ],
       include: [{ model: Producto, as:'usercarrito' }]
     })
     .then(itemsCarrito => res.json(itemsCarrito.usercarrito))
@@ -65,6 +68,6 @@ router.put('/decrement', function(req, res, next) {
 router.delete('/delete', function(req, res, next) {
   Carrito.findOne({where: {productoId: req.body.itemId, userId: req.body.userId}})
   .then(productoEnCarrito => productoEnCarrito.destroy())
-  .then(() => res.sendStatus(204))
+  .then(result => res.json(result))
   .catch(next);
 })

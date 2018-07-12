@@ -3,22 +3,41 @@ import { connect } from 'react-redux';
 import { fetchProducts } from '../action-creators/products'
 import Products from '../components/Products'
 import { withRouter } from 'react-router'
+import axios from 'axios';
 
 
-const mapStateToProps = ({ products, categories }) => ({
+const mapStateToProps = ({ products, categories, users }) => ({
     productsList: products.productsList,
-    selectedCategories: categories.selectedCategories
+    selectedCategories: categories.selectedCategories,
+    userId: users.loggedUser.id
 })
 
 const mapDispatchToProps = (dispatch) => ({
     fetchProducts: () => dispatch(fetchProducts())
 })
 
-
 class ProductsContainer extends React.Component {
+    constructor(props){
+      super(props);
+      this.handleAddItemInCart = this.handleAddItemInCart.bind(this);
+    }
 
     componentDidMount() {
         if (!this.props.match.params.search) return this.props.fetchProducts()
+    }
+
+    handleAddItemInCart = (itemId) => (event) => {
+      let product_to_add = {
+        usuario: this.props.userId,
+        producto: itemId,
+        cantidad: 1,
+      };
+      if (product_to_add.usuario) {
+        axios.post('/api/carrito', product_to_add)
+        .then(addedProduct => console.log('Añadido : ', addedProduct))
+        .catch(err => console.log('Fallo'));
+      }
+      else console.log('No esta loggeado'); // hacer que se guarde en la memoria del navegador.
     }
 
     render() {
@@ -32,7 +51,7 @@ class ProductsContainer extends React.Component {
         }
         productListFiltered = this.props.productsList.filter(prod => this.props.selectedCategories.some(cat => prod.Category.includes(cat)))
 
-        return <Products products={productListFiltered} />
+        return <Products products={productListFiltered} handleAddItemInCart={this.handleAddItemInCart} />
     }
 
 }

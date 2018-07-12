@@ -68,17 +68,17 @@ function CustomizedTable(props) {
                   {n.precio}
                 </CustomTableCell>
                 <CustomTableCell>
-                  <Button mini color="primary" aria-label="add" className={classes.button} onClick={handleAdd(i)}>
+                  <Button mini color="primary" aria-label="add" className={classes.button} onClick={handleAdd(n.id)}>
                     <ArrowUpward />
                   </Button>
                   <span className={classes.root}>{n.carrito.cantidad}</span>
-                  <Button mini color="primary" aria-label="substract" className={classes.button} onClick={handleSubstract(i)}>
+                  <Button mini color="primary" aria-label="substract" className={classes.button} onClick={handleSubstract(n.id)}>
                     <ArrowDownward />
                   </Button>
                 </CustomTableCell>
                 <CustomTableCell numeric>{n.precio * n.carrito.cantidad}</CustomTableCell>
                 <CustomTableCell>
-                  <Button aria-label="delete" className={classes.button} onClick={handleDrop(i)}>
+                  <Button aria-label="delete" className={classes.button} onClick={handleDrop(n.id)}>
                     <DeleteIcon />
                   </Button>
                 </CustomTableCell>
