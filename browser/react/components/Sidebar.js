@@ -1,11 +1,5 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
-import Paper from '@material-ui/core/Paper';
-import Grid from '@material-ui/core/Grid';
-
-import Button from '@material-ui/core/Button';
-
 import FormLabel from '@material-ui/core/FormLabel';
 import FormControl from '@material-ui/core/FormControl';
 import FormGroup from '@material-ui/core/FormGroup';
@@ -30,8 +24,6 @@ const styles = theme => ({
   },
 });
 
-
-
 function Sidebar({ classes, categories, catCheckBox, handleChange }) {
   return (
     <FormControl component="fieldset">
@@ -49,9 +41,7 @@ function Sidebar({ classes, categories, catCheckBox, handleChange }) {
             label={etiqueta.categoria}
           />
         ))}
-        <Button variant="contained" size="small" className={classes.button2} >
-          Filtrar
-       </Button>
+
       </FormGroup>
     </FormControl>
   )
@@ -59,5 +49,3 @@ function Sidebar({ classes, categories, catCheckBox, handleChange }) {
 
 export default withStyles(styles)(Sidebar);
 
-//handleChange, handleSubmit 
-//onClick={handleSubmit}
