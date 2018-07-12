@@ -12,6 +12,7 @@ import FormGroup from '@material-ui/core/FormGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import FormHelperText from '@material-ui/core/FormHelperText';
 import Checkbox from '@material-ui/core/Checkbox';
+import CreateCategoryContainer from '../containers/CreateCategoryContainer';
 
 const styles = theme => ({
   button: {
@@ -49,9 +50,10 @@ function Sidebar({ classes, categories, catCheckBox, handleChange }) {
             label={etiqueta.categoria}
           />
         ))}
-        <Button variant="contained" size="small" className={classes.button2} >
+        {/* <Button variant="contained" size="small" className={classes.button2} >
           Filtrar
-       </Button>
+       </Button> */}
+       <CreateCategoryContainer/>
       </FormGroup>
     </FormControl>
   )
