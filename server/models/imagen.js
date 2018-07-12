@@ -6,7 +6,7 @@ const DataTypes = db.Sequelize;
 const Imagen = db.define('imagen', {
 
   ruta: {
-    type: DataTypes.STRING,
+    type: DataTypes.TEXT,
     allowNull: false
   }
 

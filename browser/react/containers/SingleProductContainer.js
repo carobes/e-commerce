@@ -20,11 +20,10 @@ class SingleProductContainer extends React.Component {
     }
 
     render() {
-        console.log(this.props.selectedProduct)
         return (
             <SingleProduct product={this.props.selectedProduct} />
         )
     }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(withRouter(SingleProductContainer))
+export default connect(mapStateToProps, mapDispatchToProps)(withRouter(SingleProductContainer));

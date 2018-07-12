@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { RECEIVE_PRODUCTS, RECEIVE_PRODUCT, SEARCH_INPUT } from '../constants';
+import { RECEIVE_PRODUCTS, RECEIVE_PRODUCT } from '../constants';
 
 const receiveProducts = (products) => ({
     type: RECEIVE_PRODUCTS,

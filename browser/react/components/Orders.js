@@ -101,13 +101,13 @@ const styles = theme => ({
   },
 });
 
-function CustomizedTable({ classes, orders }) {
+function CustomizedTable({ classes, orders, estados, handleChange, orderMap, handleClose, handleOpen, open }) {
   const { productosOrdens, status, usuario } = orders; 
   // const pO = !productosOrdens ? [] : productosOrdens;
   // const usu = !usuario ? {} : usuario;
- 
+  
   return (
-    
+  !orders.length ? <div>Loading...</div> :  
     <div>
       <br />
       <Card className={classes.card}>
@@ -141,22 +141,23 @@ function CustomizedTable({ classes, orders }) {
                   <CustomTableCell>      
                     <form autoComplete="off">
         <FormControl className={classes.formControl}>
-          <InputLabel htmlFor="demo-controlled-open-select">Estado</InputLabel>
           <Select
-            // open={this.state.open}
-            // onClose={this.handleClose}
-            // onOpen={this.handleOpen}
-            value={orders.status}
-            // onChange={this.handleChange}
-            // inputProps={{
-            //   name: 'status',
-            //   id: 'demo-controlled-open-select',
-            // }}
+            open={open[data.id]}
+            onClose={handleClose}
+            onOpen={handleOpen}
+            value={orderMap[data.id]}
+            onChange={handleChange}
+            inputProps={{
+              name: `${data.id}`,
+              id: 'demo-controlled-open-select',
+            }}
           >
-            <MenuItem value="Creado">Creado</MenuItem>
+          {estados.map(estado => <MenuItem key={estado.id} value={estado.id}>{estado.estado}</MenuItem>
+)}
+            {/* <MenuItem value="Creado">Creado</MenuItem>
             <MenuItem value={10}>Procesando</MenuItem>
             <MenuItem value={20}>Cancelado</MenuItem>
-            <MenuItem value={30}>Completado</MenuItem>
+            <MenuItem value={30}>Completado</MenuItem> */}
           </Select>
         </FormControl>
       </form></CustomTableCell>
@@ -166,7 +167,7 @@ function CustomizedTable({ classes, orders }) {
         </Table>
       </Paper>
       <br/>
-      <Button variant="extendedFab" aria-label="delete" className={classes.button}>
+      {/* <Button variant="extendedFab" aria-label="delete" className={classes.button}>
         Creado
       </Button>
       <Button variant="extendedFab" aria-label="delete" className={classes.button}>
@@ -177,7 +178,7 @@ function CustomizedTable({ classes, orders }) {
       </Button>
       <Button variant="extendedFab" aria-label="delete" className={classes.button}>
         Completado
-      </Button>
+      </Button> */}
     </div>
   );
 }
