@@ -13,31 +13,44 @@ import SingleOrder from '../components/SingleProduct'
 import CreateProductContainer from './CreateProductContainer';
 import CarroContainer from './CarroContainer'
 import OrdersContainer from './OrdersContainer'
+import { fetchItemsInCart } from '../action-creators/carrito'
+import store from '../store'
 
 export default class Main extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            userId: 2,
-            num_elems_carro: 5, // traer el numero de elementos que existen en el carro de el usuario
-        }
+    constructor(props){
+      super(props);
+      this.state = {
+        userId: 2,
+        num_elems_carro: store.getState().carrito.list_items, // traer el numero de elementos que existen en el carro de el usuario
+      }
+    }
+
+    componentDidMount(){
+      this.unsubscribe = store.subscribe(() => {
+          this.setState({num_elems_carro: store.getState().carrito.list_items});
+      });
+      store.dispatch(fetchItemsInCart(this.state.userId));
+    }
+
+    componentWillUnmount() {
+        this.unsubscribe();
     }
 
     render() {
         if (this.props.location.pathname === '/carro') {
-            return (
-                <div>
-                    <Appbar num_elems_carro={this.state.num_elems_carro} />
-                    <br />
-                    <Grid container spacing={16}>
-                        <CarroContainer />
-                    </Grid>
-                </div>
-            )
+          return (
+            <div>
+              <Appbar num_elems_carro={this.state.num_elems_carro.length}/>
+              <br />
+              <Grid container spacing={16}>
+                <CarroContainer />
+              </Grid>
+            </div>
+          )
         }
         return (
             <div>
-                <Appbar num_elems_carro={this.state.num_elems_carro} loggedUser={this.props.loggedUser} unlogUser={this.props.unlogUser} />
+                <Appbar num_elems_carro={this.state.num_elems_carro.length} loggedUser={this.props.loggedUser} unlogUser={this.props.unlogUser}/>
                 <br />
                 <Switch>
                     <Route

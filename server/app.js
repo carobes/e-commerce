@@ -56,7 +56,7 @@ app.use('/api', routes);
 
 app.use('/', function (req, res, next) {
   const indexFilePath = path.resolve(`${__dirname}/../browser/index.html`)
-  res.sendfile(indexFilePath)
+  res.sendFile(indexFilePath)
 })
 
 app.use((err, req, res, next) => {
@@ -64,6 +64,6 @@ app.use((err, req, res, next) => {
   res.status(500).send(err);
 });
 
-db.sync({ force: true })
+db.sync({ force: false })
   .then(() => app.listen(3000, () => console.log('Listening on PORT 3000')))
   .then(() => seed())

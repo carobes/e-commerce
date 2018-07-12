@@ -21,7 +21,7 @@ router.get('/:userId', function(req, res, next){
 // recibe un json de la forma { usuario: id, producto: id, cantidad: 1}
 // devuelve un status 200 en exito, y un array de todos los objetos que estan en ese momento en
 // el carrito
-router.post('/', function(req, res, next){
+router.post('/', function(req, res, next) {
     Promise.all([
       Producto.findOne({where:{id: req.body.producto}}),
       Users.findOne({where:{id: req.body.usuario}})
@@ -34,3 +34,37 @@ router.post('/', function(req, res, next){
     })
     .catch(next);
 });
+
+// incrementa cantidad de un item
+router.put('/increment', function(req, res, next) {
+  Carrito.findOne({where: {productoId: req.body.itemId, userId: req.body.userId}})
+  .then(productoEnCarrito => productoEnCarrito.increment(['cantidad'], {by:1}))
+  .then(() => Users.findOne({
+    where:{id: req.body.userId},
+    include: [{ model: Producto, as:'usercarrito' }]
+  }))
+  .then(itemsCarrito => res.json(itemsCarrito.usercarrito))
+  .catch(next);
+})
+
+// decrementa cantidad de un item
+router.put('/decrement', function(req, res, next) {
+  Carrito.findOne({where: {productoId: req.body.itemId, userId: req.body.userId}})
+  .then(productoEnCarrito => {
+    if (productoEnCarrito.cantidad === 1) return res.json(productoEnCarrito.cantidad);
+    return productoEnCarrito.decrement(['cantidad'], {by:1})
+  })
+  .then(() => Users.findOne({
+    where:{id: req.body.userId},
+    include: [{ model: Producto, as:'usercarrito' }]
+  }))
+  .then(itemsCarrito => res.json(itemsCarrito.usercarrito))
+  .catch(next);
+})
+// elimina un item del carrito de un usuarioId
+router.delete('/delete', function(req, res, next) {
+  Carrito.findOne({where: {productoId: req.body.itemId, userId: req.body.userId}})
+  .then(productoEnCarrito => productoEnCarrito.destroy())
+  .then(() => res.sendStatus(204))
+  .catch(next);
+})
