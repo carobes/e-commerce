@@ -2,6 +2,8 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { fetchProducts } from '../action-creators/products'
 import Products from '../components/Products'
+import { withRouter } from 'react-router'
+
 
 const mapStateToProps = ({ products, categories }) => ({
     productsList: products.productsList,
@@ -16,11 +18,10 @@ const mapDispatchToProps = (dispatch) => ({
 class ProductsContainer extends React.Component {
 
     componentDidMount() {
-        this.props.fetchProducts()
+        if (!this.props.match.params.search) return this.props.fetchProducts()
     }
 
     render() {
-        console.log(this.props.productsList)
         var productListFiltered = []
         if (this.props.productsList.length && this.props.productsList[0].Category[0].categoria) {
             this.props.productsList.map(product => {
@@ -36,4 +37,4 @@ class ProductsContainer extends React.Component {
 
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(ProductsContainer);
+export default connect(mapStateToProps, mapDispatchToProps)(withRouter(ProductsContainer));

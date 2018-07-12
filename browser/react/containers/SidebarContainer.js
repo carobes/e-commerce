@@ -20,10 +20,6 @@ class SidebarContainer extends React.Component {
       catCheckBox: {
       }
     }
-
-    //filtros: []
-    // this.handleChange = this.handleChange.bind(this);
-    // this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   handleChange = name => event => {
@@ -42,14 +38,6 @@ class SidebarContainer extends React.Component {
       this.props.categoriesSelected(arrAux)
     }
   };
-
-  // handleSubmit = event => {
-  //   event.preventDefault();
-  //   const categorias = this.state.categorias;
-  //   let filtros_arr = Object.keys(categorias).filter(categoria => { if (categorias[categoria]) return categoria });
-  //   this.setState({ filtros: filtros_arr }, () => console.log(this.state.filtros));
-  // };
-
   componentDidMount() {
     this.props.fetchCategories()
       .then(data => {

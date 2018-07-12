@@ -1,25 +1,10 @@
 import React from 'react';
 import store from '../store'
-import { fetchItemsInCart } from '../action-creators/carrito'
+import { fetchItemsInCart, updateItemInCart } from '../action-creators/carrito'
 import Carro from '../components/Carro';
 import InputDataToGenOrder from '../components/data_for_gen_order';
 
 import { Grid } from '@material-ui/core'
-
-let id = 0;
-function createData(name, precio, cantidad) {
-  id += 1;
-  let subtotal = cantidad * precio;
-  return { id, name, precio, cantidad, subtotal};
-}
-
-const datos = [
-  createData('Computador Portatil Lenovo', 1000, 1),
-  createData('Camara Fotografica Cannon', 100, 1),
-  createData('Bolso Playero', 200, 1),
-  createData('Pedazo de Bosta', 1, 1),
-  createData('Camisa con mangas largas JH', 200, 1),
-];
 
 function validateEmail(email) {
   var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
@@ -31,7 +16,7 @@ class CarroContainer extends React.Component{
     super(props);
     //this.state = store.getState();
     this.state = {
-      data: store.getState().carrito.list_items,
+      data: store.getState(),
       total: 0,
       email: '',
       address: '',
@@ -47,48 +32,35 @@ class CarroContainer extends React.Component{
   }
 
   sumaTotal(){
-    let nuevo_total = 0;
-    let data_length = this.state.data.length;
+    let total = 0;
+    let data_length = this.state.data.carrito.list_items.length;
     for (let i=0; i < data_length; i++){
-      nuevo_total = nuevo_total + this.state.data[i]['subtotal'];
+      total = total + (this.state.data.carrito.list_items[i]['carrito']['cantidad'] * this.state.data.carrito.list_items[i]['precio']);
     }
-    this.setState({ total: nuevo_total });
+    return total;
   }
 
   componentDidMount(){
     this.unsubscribe = store.subscribe(() => {
-        this.setState({data: store.getState().carrito.list_items});
+        this.setState({data: store.getState()});
     });
     store.dispatch(fetchItemsInCart(this.state.userId));
   }
 
-  componentWillMount(){
-    this.sumaTotal();
+  handleAdd = id => event => { // debo llamar la ruta para actualizar un item en carrito
+    store.dispatch(updateItemInCart('increment', this.state.userId, this.state.data.carrito.list_items[id].carrito.productoId));
+
   }
 
-  handleAdd = id => event => {
-    let index = this.state.data.indexOf(this.state.data[id-1]);
-    let nuevo_state_data = this.state.data.slice();
-    nuevo_state_data[index]['cantidad']++;
-    nuevo_state_data[index]['subtotal'] = nuevo_state_data[index]['precio'] * nuevo_state_data[index]['cantidad'];
-    this.setState({ data: nuevo_state_data }, () => this.sumaTotal());
+  handleSubstract = id => event => { // debo llamar la ruta para actualizar un item en carrito
+    store.dispatch(updateItemInCart('decrement', this.state.userId, this.state.data.carrito.list_items[id].carrito.productoId));
+  
   }
 
-  handleSubstract = id => event => {
-    let index = this.state.data.indexOf(this.state.data[id-1]);
-    let nuevo_state_data = this.state.data.slice();
-    if (nuevo_state_data[index]['cantidad'] > 1){
-      nuevo_state_data[index]['cantidad']--;
-      nuevo_state_data[index]['subtotal'] = nuevo_state_data[index]['precio'] * nuevo_state_data[index]['cantidad'];
-      this.setState({ data: nuevo_state_data }, () => this.sumaTotal());
-    }
-  }
-
-  handleDrop = id => event => {
-    let nuevo_state_data = this.state.data.slice();
+  handleDrop = id => event => { // debo llamar la ruta para actualizar un item en carrito
+    let nuevo_state_data = this.state.data.carrito.list_items.slice();
     if (nuevo_state_data.length === 1) nuevo_state_data = [];
-    nuevo_state_data.splice(id-1, 1);
-    console.log(nuevo_state_data);
+    nuevo_state_data.carrito.list_items.splice(id, 1);
     this.setState({ data: nuevo_state_data }, () => this.sumaTotal());
   }
 
@@ -103,7 +75,7 @@ class CarroContainer extends React.Component{
   }
 
   genOrder = event => {
-    console.log('Generar orden de compra con el arreglo de Productos : ', this.state.data);
+    console.log('Generar orden de compra con el arreglo de Productos : ', this.state.data.carrito.list_items);
   }
 
   componentWillUnmount() {
@@ -111,10 +83,16 @@ class CarroContainer extends React.Component{
   }
 
   render(){
-    console.log('Data q trae el REDUX: ',this.state.data);
+    if (this.state.data.carrito.list_items.length === 0){
+      return (
+        <div>
+          <h1>CARRO VACIO</h1>
+        </div>
+      )
+    }
     return (
       <div>
-        <Carro data={this.state.data} address={this.state.address} total={this.state.total} handleAdd={this.handleAdd} handleSubstract={this.handleSubstract} handleDrop={this.handleDrop} genOrder={this.genOrder} emailFlag={this.state.emailFlag}/>
+        <Carro data={this.state.data.carrito.list_items} address={this.state.address} sumaTotal={this.sumaTotal} total={this.state.total} handleAdd={this.handleAdd} handleSubstract={this.handleSubstract} handleDrop={this.handleDrop} genOrder={this.genOrder} emailFlag={this.state.emailFlag}/>
         <InputDataToGenOrder handleChange={this.handleChange} emailFlag={this.state.emailFlag}/>
       </div>
     );
