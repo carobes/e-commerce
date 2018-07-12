@@ -13,11 +13,11 @@ const styles = {
 };
 
 export default withStyles(styles)(props => {
-    const { classes, num_elems_carro } = props
+    const { classes, num_elems_carro, enabled } = props
 
     return (
         <div>
-            <IconButton className={classes.button} aria-label="Add to shopping cart">
+            <IconButton className={classes.button} disabled={enabled} aria-label="Add to shopping cart">
               <Badge className={classes.margin} badgeContent={num_elems_carro} color="primary">
                 <ShoppingCart />
               </Badge>
