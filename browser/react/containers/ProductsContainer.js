@@ -4,6 +4,7 @@ import { fetchProducts } from '../action-creators/products'
 import Products from '../components/Products'
 import { withRouter } from 'react-router'
 import axios from 'axios';
+import { fetchItemsInCart } from '../action-creators/carrito'
 
 
 const mapStateToProps = ({ products, categories, users }) => ({
@@ -13,7 +14,8 @@ const mapStateToProps = ({ products, categories, users }) => ({
 })
 
 const mapDispatchToProps = (dispatch) => ({
-    fetchProducts: () => dispatch(fetchProducts())
+    fetchProducts: () => dispatch(fetchProducts()),
+    fetchItemsInCart: (id) => dispatch(fetchItemsInCart(id))
 })
 
 class ProductsContainer extends React.Component {
@@ -27,6 +29,7 @@ class ProductsContainer extends React.Component {
     }
 
     handleAddItemInCart = (itemId) => (event) => {
+        event.preventDefault()
       let product_to_add = {
         usuario: this.props.userId,
         producto: itemId,
@@ -34,7 +37,7 @@ class ProductsContainer extends React.Component {
       };
       if (product_to_add.usuario) {
         axios.post('/api/carrito', product_to_add)
-        .then(addedProduct => console.log('Añadido : ', addedProduct))
+        .then(() => this.props.fetchItemsInCart(this.props.userId))
         .catch(err => console.log('Ya existe este item'));
       }
       else console.log('No esta loggeado'); // hacer que se guarde en la memoria del navegador.

@@ -10,50 +10,46 @@ import SingleOrderContainer from './SingleOrderContainer'
 import UserIdContainer from './UserIdContainer'
 import CrearUsuario from './CrearUsuario'
 import LoginForm from './LoginForm'
-import SingleOrder from '../components/SingleProduct'
 import CreateProductContainer from './CreateProductContainer';
 import CarroContainer from './CarroContainer'
 import OrdersContainer from './OrdersContainer'
 import { fetchItemsInCart } from '../action-creators/carrito'
-import store from '../store'
+import { connect } from 'react-redux';
 
 const style = {
-    margin: 0,
-    top: 'auto',
-    right: 20,
-    bottom: 20,
-    left: 'auto',
-    position: 'fixed',
+    button:{
+        margin: 0,
+        top: 'auto',
+        right: 20,
+        bottom: 20,
+        left: 'auto',
+        position: 'fixed',
+    }
 };
 
-export default withStyles(style)(class Main extends React.Component {
+const mapStateToProps = ({ users, carrito }) => ({
+    loggedUser: users.loggedUser,
+    numElemsCarro: carrito.list_items
+})
+
+const mapDispatchToProps = (dispatch) => ({
+    itemsInCart: (id) => dispatch(fetchItemsInCart(id)),
+    unlogUser: () => dispatch(unlogUser())
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(withStyles(style)(class Main extends React.Component {
     constructor(props){
       super(props);
       this.state = {
-        userId: store.getState().users.loggedUser.id,
-        num_elems_carro: [], // traer el numero de elementos que existen en el carro de el usuario
         enabled: false
       }
     }
 
-    componentDidMount(){
-        this.unsubscribe = store.subscribe(() => {
-            this.setState({
-              num_elems_carro: store.getState().carrito.list_items
-            })
-          });
-        if (this.state.userId) store.dispatch(fetchItemsInCart(this.state.userId));
-        if (this.state.userId) this.setState({enabled: true});
-    }
-
-    componentWillUnmount() {
-        this.unsubscribe();
-    }
-
+    
     render() {
         const {classes} = this.props
-      let num_items = this.state.num_elems_carro.length;
-        if (this.props.location.pathname === '/carro') { // si esta logeado o no ...
+      let num_items = this.props.numElemsCarro.length;
+      if (this.props.location.pathname === '/carro') { // si esta logeado o no ...
           return (
             <div>
               <Appbar num_elems_carro={num_items}/>
@@ -66,7 +62,7 @@ export default withStyles(style)(class Main extends React.Component {
         }
         return (
             <div>
-                <Appbar num_elems_carro={this.state.num_elems_carro.length} loggedUser={this.props.loggedUser} unlogUser={this.props.unlogUser} enabled={this.state.enabled}/>
+                <Appbar num_elems_carro={this.props.numElemsCarro.length} loggedUser={this.props.loggedUser} unlogUser={this.props.unlogUser} enabled={this.state.enabled}/>
                 <br />
                 <Switch>
                     <Route
@@ -110,10 +106,10 @@ export default withStyles(style)(class Main extends React.Component {
                         } />
                     <Redirect from="/" to="/products" />
                 </Switch>
-                <Button variant="fab" color="primary" aria-label="add" className={classes.button}>
+                {(this.props.loggedUser.admin)?<Button variant="fab" color="primary" aria-label="add" className={classes.button} component={Link} to={'/products/admin/new'}>
                     <AddIcon />
-                </Button>
+                </Button>:null}
             </div>
         )
     }
-})
+}))

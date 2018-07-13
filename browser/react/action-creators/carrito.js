@@ -11,14 +11,14 @@ const num_items_in_cart = (current_total) => ({
     current_total
 })
 
-export const fetchItemsInCart = (userId) => dispatch =>
+export const fetchItemsInCart = (userId) => dispatch => {
     axios.get(`/api/carrito/${userId}`)
     .then(res => res.data)
     .then(items => {
         dispatch(products_in_cart(items));
         dispatch(num_items_in_cart(items.length));
       }
-    );
+    )}
 
 export const updateItemInCart = (action, userId, itemId) => dispatch =>
   axios.put(`/api/carrito/${action}`,{
