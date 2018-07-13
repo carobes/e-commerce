@@ -162,7 +162,7 @@ function CustomizedTable({ classes, orders, estados, handleChange, orderMap, han
                   <CustomTableCell>{data.usuario.nombreApellido}</CustomTableCell>
                   <CustomTableCell>{data.fecha}</CustomTableCell>
                   
-                    <CustomTableCell numeric><Link to={`/orders/${data.id}`}>{data.id}</Link></CustomTableCell>
+                    <CustomTableCell numeric><Link to={`/orders/single/${data.id}`}>{data.id}</Link></CustomTableCell>
                   
                   <CustomTableCell numeric> {data.total} </CustomTableCell>
                   <CustomTableCell>
