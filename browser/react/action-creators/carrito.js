@@ -6,7 +6,7 @@ const products_in_cart = (items) => ({
     items
 });
 
-export const current_total = (current_total) => ({
+const num_items_in_cart = (current_total) => ({
     type: CURRENT_TOTAL,
     current_total
 })
@@ -14,7 +14,11 @@ export const current_total = (current_total) => ({
 export const fetchItemsInCart = (userId) => dispatch =>
     axios.get(`/api/carrito/${userId}`)
     .then(res => res.data)
-    .then(items => dispatch(products_in_cart(items)));
+    .then(items => {
+        dispatch(products_in_cart(items));
+        dispatch(num_items_in_cart(items.length));
+      }
+    );
 
 export const updateItemInCart = (action, userId, itemId) => dispatch =>
   axios.put(`/api/carrito/${action}`,{
