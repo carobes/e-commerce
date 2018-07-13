@@ -13,6 +13,7 @@ export const CATEGORIES_SELECTED = 'CATEGORIES_SELECTED'
 
 //Users
 export const RECEIVE_USER = 'RECEIVE_USER';
+export const CLEAR_USER = 'CLEAR_USER'
 export const LOGGED_USER = 'LOGGED_USER';
 export const UNLOG_USER = 'UNLOG_USER';
 

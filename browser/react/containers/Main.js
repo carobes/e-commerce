@@ -13,6 +13,7 @@ import LoginForm from './LoginForm'
 import CreateProductContainer from './CreateProductContainer';
 import CarroContainer from './CarroContainer'
 import OrdersContainer from './OrdersContainer'
+import UsrMngmtContainer from './UsrMngmtContainer';
 import { fetchItemsInCart } from '../action-creators/carrito'
 import { connect } from 'react-redux';
 
@@ -95,6 +96,10 @@ export default connect(mapStateToProps, mapDispatchToProps)(withStyles(style)(cl
                     <Route
                         exact path='/accounts/new' render={() =>
                             <CrearUsuario />
+                        } />
+                    <Route
+                        exact path='/users/admin' render={() =>
+                            <UsrMngmtContainer />
                         } />
                     <Route
                         exact path='/orders/single/:id' render={() =>

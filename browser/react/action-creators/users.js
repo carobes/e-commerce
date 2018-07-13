@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { RECEIVE_USER, LOGGED_USER, UNLOG_USER } from '../constants';
+import { RECEIVE_USER, LOGGED_USER, UNLOG_USER, CLEAR_USER } from '../constants';
 
 const receiveUser = (user) => ({
     type: RECEIVE_USER,
@@ -9,6 +9,10 @@ const receiveUser = (user) => ({
 const loggedUser = (user) => ({
     type: LOGGED_USER,
     user
+})
+
+export const clearSelectedUser = () => ({
+    type: CLEAR_USER,
 })
 
 export const fetchUser = id => dispatch =>
@@ -24,3 +28,8 @@ export const logUser = id => dispatch =>
 export const unlogUser = () => dispatch =>
     axios.get('/api/logout')
         .then(data => dispatch({type: UNLOG_USER}))
+
+export const fetchSearch = input => dispatch =>
+    axios.get(`/api/users/search/${input}`)
+        .then(res => res.data)
+        .then(user => {if (user) return dispatch(receiveUser(user))});
