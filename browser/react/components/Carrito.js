@@ -8,7 +8,7 @@ import Badge from '@material-ui/core/Badge';
 
 const styles = {
     button: {
-        color: "white"
+        color: "white",
     },
 };
 
@@ -17,7 +17,7 @@ export default withStyles(styles)(props => {
 
     return (
         <div>
-            <IconButton className={classes.button} disabled={enabled} aria-label="Add to shopping cart">
+            <IconButton className={classes.button} aria-label="Add to shopping cart">
               <Badge className={classes.margin} badgeContent={num_elems_carro} color="primary">
                 <ShoppingCart />
               </Badge>
