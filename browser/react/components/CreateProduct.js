@@ -106,7 +106,7 @@ handleChange = name => event => {
             categorias: this.state.categorias.split(',')
         }
       axios.post('/api/products/new', product)
-      .then(product => {this.props.history.push(`/products/${product.data.id}`)})
+      .then(product => {this.props.history.push(`/products/single/${product.data.id}`)})
     }
     
     

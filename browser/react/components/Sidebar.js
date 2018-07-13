@@ -25,7 +25,7 @@ const styles = theme => ({
   },
 });
 
-function Sidebar({ classes, categories, catCheckBox, handleChange }) {
+function Sidebar({ classes, categories, catCheckBox, handleChange, admin }) {
   return (
     <FormControl component="fieldset">
       <FormLabel component="legend">Selecciona Categorías</FormLabel>
@@ -42,7 +42,7 @@ function Sidebar({ classes, categories, catCheckBox, handleChange }) {
             label={etiqueta.categoria}
           />
         ))}
-       <CreateCategoryContainer/>
+       {(admin)?<CreateCategoryContainer/>:null}
       </FormGroup>
     </FormControl>
   )

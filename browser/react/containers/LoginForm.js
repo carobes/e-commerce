@@ -9,6 +9,7 @@ import Button from '@material-ui/core/Button';
 import axios from 'axios';
 import { connect } from 'react-redux';
 import { logUser } from '../action-creators/users'
+import { fetchItemsInCart } from '../action-creators/carrito'
 
 
 const styles = theme => ({
@@ -54,7 +55,8 @@ const mapStateToProps = () => ({
 })
 
 const mapDispatchToProps = (dispatch) => ({
-  logUser: (user) => dispatch(logUser(user))
+  logUser: (user) => dispatch(logUser(user)),
+  itemsInCart: (id) => dispatch(fetchItemsInCart(id)),
 
 })
 
@@ -104,11 +106,14 @@ class TextFields extends React.Component {
     .then(res => res.data)
     .then(data => {
       if(data.success) {
-        this.props.logUser(data.user.id)  
-        return this.props.history.goBack()
+        // this.props.itemsInCart(data.user.id) 
+        this.props.logUser(data.user.id) 
+        this.props.history.goBack()
+        return data
       }
-      this.setState(data.info)  
+      this.setState(data.info)
     })
+    .then(data => this.props.itemsInCart(data.user.id))
     .catch(err => err)
   }
 
