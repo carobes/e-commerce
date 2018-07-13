@@ -18,6 +18,11 @@ function ahora(){ // devuelve la fecha actual para poder ingresar una orden nuev
   return (day + "/" + month + "/" + year);
 }
 
+router.get('/estados', function (req, res) {
+  Estado.findAll({attributes: ['estado','id']})
+  .then(estados => res.json(estados))
+})
+
 router.get('/:id', function (req, res) {
    console.log("entro en el axios")
    Ordenes.findOne({
@@ -26,6 +31,15 @@ router.get('/:id', function (req, res) {
     })
         .then(orden => {console.log("orden en el axios", orden);res.json(orden)});
 });
+
+
+router.put('/estados', function (req, res){
+  Ordenes.findById(req.body.orderId)
+  .then(foundOrder => foundOrder.setStatus(req.body.statusId)
+  .then(foundOrder=> res.json(foundOrder))
+  )
+})
+
 // aqui hago la ruta POST a /api/orders para guardar una orden nueva en la tabla orders DJVR
 
 // esto recibo del componente carrito
@@ -100,7 +114,4 @@ router.get('/', function (req, res) {
     Ordenes.findAll( {include: [ProductosOrden, { model: Estado, as:'status' }, { model: Users, as:'usuario' }]})
         .then(ordenes => res.json(ordenes));
 });
-// router.get('/', function (req, res) {
-//     Ordenes.findAll({ include: [Imagens] })
-//         .then(ordenes => res.json(ordenes));
-// });
+

@@ -23,7 +23,7 @@ const styles = {
 }
 
 export default withStyles(styles)(props => {
-    const { classes, setSearch, search, handleSubmit, num_elems_carro} = props
+    const { classes, setSearch, search, handleSubmit, num_elems_carro, enabled} = props
     return (
         <div>
             <AppBar className={classes.colorBar} position="static" color="inherit">
@@ -36,7 +36,7 @@ export default withStyles(styles)(props => {
                     <SearchContainer />
                     <div className={[classes.padre, classes.align].join(' ')}>
                       <Link to={'/carro'} style={{ textDecoration: 'none', color: 'white' }}>
-                        <Carrito num_elems_carro={num_elems_carro}/>
+                        <Carrito num_elems_carro={num_elems_carro} enabled={enabled}/>
                         </Link>
                         <LoginBtn />
                     </div>
