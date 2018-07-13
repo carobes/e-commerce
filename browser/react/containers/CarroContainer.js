@@ -3,6 +3,7 @@ import store from '../store'
 import { fetchItemsInCart, updateItemInCart } from '../action-creators/carrito'
 import Carro from '../components/Carro';
 import InputDataToGenOrder from '../components/data_for_gen_order';
+import axios from 'axios';
 
 import { Grid } from '@material-ui/core'
 
@@ -20,7 +21,7 @@ class CarroContainer extends React.Component{
       total: 0,
       email: '',
       address: '',
-      userId: 2,
+      userId: store.getState().users.loggedUser.id,
       emailFlag: false
     };
     this.handleAdd = this.handleAdd.bind(this);
@@ -41,41 +42,55 @@ class CarroContainer extends React.Component{
   }
 
   componentDidMount(){
-    this.unsubscribe = store.subscribe(() => {
-        this.setState({data: store.getState()});
-    });
-    store.dispatch(fetchItemsInCart(this.state.userId));
+      this.unsubscribe = store.subscribe(() => {
+          this.setState({
+            data: store.getState(), userId: store.getState().users.loggedUser.id
+          });
+      })
+      if (this.state.userId) store.dispatch(fetchItemsInCart(this.state.userId));
   }
 
-  handleAdd = id => event => { // debo llamar la ruta para actualizar un item en carrito
-    store.dispatch(updateItemInCart('increment', this.state.userId, this.state.data.carrito.list_items[id].carrito.productoId));
+  handleAdd = itemId => event => { // debo llamar la ruta para actualizar un item en carrito
+    store.dispatch(updateItemInCart('increment', this.state.userId, itemId));
 
   }
 
-  handleSubstract = id => event => { // debo llamar la ruta para actualizar un item en carrito
-    store.dispatch(updateItemInCart('decrement', this.state.userId, this.state.data.carrito.list_items[id].carrito.productoId));
-  
+  handleSubstract = itemId => event => { // debo llamar la ruta para actualizar un item en carrito
+    store.dispatch(updateItemInCart('decrement', this.state.userId, itemId));
+
   }
 
-  handleDrop = id => event => { // debo llamar la ruta para actualizar un item en carrito
-    let nuevo_state_data = this.state.data.carrito.list_items.slice();
-    if (nuevo_state_data.length === 1) nuevo_state_data = [];
-    nuevo_state_data.carrito.list_items.splice(id, 1);
-    this.setState({ data: nuevo_state_data }, () => this.sumaTotal());
+  handleDrop = itemId => event => { // debo llamar la ruta para actualizar un item en carrito
+    axios.delete('/api/carrito/delete', {data: {itemId: itemId, userId: this.state.userId} })
+    .then(res => store.dispatch(fetchItemsInCart(this.state.userId)));
   }
 
   handleChange = event => {
     const string = event.target.value;
     const key = event.target.id;
     if (key === 'input-email'){
-      this.setState({emailFlag: validateEmail(string)});
+      this.setState({emailFlag: validateEmail(string), email: string});
     }else{
       this.setState({address: string});
     }
   }
 
   genOrder = event => {
-    console.log('Generar orden de compra con el arreglo de Productos : ', this.state.data.carrito.list_items);
+    let suma = this.sumaTotal();
+    let items_array = this.state.data.carrito.list_items.map(item => ({
+      id: item.carrito.productoId,
+      cantidad: item.carrito.cantidad,
+      precio: item.precio
+    }));
+    axios.post('/api/orders', {
+      userId: this.state.userId,
+      total: suma,
+      email: this.state.email,
+      address: this.state.address,
+      items: items_array
+    })
+    .then(ordenCreated => console.log('Orden Creada : ', ordenCreated))
+    .catch(err => console.log('Error : ', err));
   }
 
   componentWillUnmount() {

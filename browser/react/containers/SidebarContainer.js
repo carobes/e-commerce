@@ -3,9 +3,10 @@ import { connect } from 'react-redux';
 import { fetchCategories, categoriesSelected } from '../action-creators/categories'
 import Sidebar from '../components/Sidebar';
 
-const mapStateToProps = ({ categories }) => ({
+const mapStateToProps = ({ categories, users }) => ({
   categoriesList: categories.categoriesList,
-  selectedCategories: categories.selectedCategories
+  selectedCategories: categories.selectedCategories,
+  loggedUser: users.loggedUser
 })
 
 const mapDispatchToProps = (dispatch) => ({
@@ -55,7 +56,7 @@ class SidebarContainer extends React.Component {
 
   render() {
     return (
-      <Sidebar categories={this.props.categoriesList} catCheckBox={this.state.catCheckBox} handleChange={this.handleChange} />
+      <Sidebar categories={this.props.categoriesList} catCheckBox={this.state.catCheckBox} handleChange={this.handleChange} admin={this.props.loggedUser.admin} />
     );
   }
 }

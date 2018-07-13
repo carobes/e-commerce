@@ -16,7 +16,7 @@ const styles = {
 }
 
 export default withStyles(styles)(props => {
-    const { classes, products } = props
+    const { classes, products, handleAddItemInCart } = props
     return (
         <div>
             <Grid container spacing={16}>
@@ -41,7 +41,7 @@ export default withStyles(styles)(props => {
                                 </Typography>
                             </CardContent>
                             <CardActions className={classes.padre}>
-                                <IconButton size="small" color="secondary">
+                                <IconButton onClick={handleAddItemInCart(product.id)} size="small" color="secondary">
                                     <AddShoppingCart />
                                 </IconButton>
                                 <Typography variant='title' color='primary' component="p">

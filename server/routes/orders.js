@@ -32,6 +32,7 @@ router.get('/:id', function (req, res) {
         .then(orden => {console.log("orden en el axios", orden);res.json(orden)});
 });
 
+
 router.put('/estados', function (req, res){
   Ordenes.findById(req.body.orderId)
   .then(foundOrder => foundOrder.setStatus(req.body.statusId)
