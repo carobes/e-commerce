@@ -42,7 +42,8 @@ const styles = theme => ({
 });
 
 function CustomizedTable(props) {
-  const { classes, data, address, total, handleAdd, handleSubstract, handleDrop, genOrder, emailFlag } = props;
+  const { classes, data, sumaTotal, address, handleAdd, handleSubstract, handleDrop, genOrder, emailFlag } = props;
+  let total = sumaTotal();
   const genOrderFlag = (address.length > 10 && emailFlag) ? false : true;
   return (
     <Paper className={classes.root}>
@@ -57,7 +58,7 @@ function CustomizedTable(props) {
           </TableRow>
         </TableHead>
         <TableBody>
-          {data.map(n => {
+          {data.map((n,i) => {
             return (
               <TableRow className={classes.row} key={n.id}>
                 <CustomTableCell component="th" scope="row">

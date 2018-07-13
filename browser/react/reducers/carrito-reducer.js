@@ -8,7 +8,7 @@ const initialState = {
 export default (state = initialState, action) => {
     switch(action.type) {
         case ITEMS_IN_CART:
-            return Object.assign({}, state, {list_items: action.items});
+            return Object.assign({}, state, {list_items: [...action.items]});
         case CURRENT_TOTAL:
             return Object.assign({}, state, {total: action.total})
         default:

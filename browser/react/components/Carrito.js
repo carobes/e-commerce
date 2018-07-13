@@ -8,12 +8,12 @@ import Badge from '@material-ui/core/Badge';
 
 const styles = {
     button: {
-        color: "white"
+        color: "white",
     },
 };
 
 export default withStyles(styles)(props => {
-    const { classes, num_elems_carro } = props
+    const { classes, num_elems_carro, enabled } = props
 
     return (
         <div>

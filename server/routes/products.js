@@ -8,7 +8,7 @@ const Reviews = models.Reviews;
 
 module.exports = router;
 
-router.post('/new', function (req, res, next) {
+router.post('/new',function (req, res, next) {
     Productos.create(req.body, { include: [Imagen] })
         .then(producto => { req.body.categorias.map(cat => Categoria.findOne({ where: { categoria: cat } }).then(foundCat => producto.addCategory(foundCat.id))); return producto })
         .then(producto => res.status(201).json(producto))
