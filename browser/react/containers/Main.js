@@ -9,10 +9,10 @@ import SingleOrderContainer from './SingleOrderContainer'
 import UserIdContainer from './UserIdContainer'
 import CrearUsuario from './CrearUsuario'
 import LoginForm from './LoginForm'
-import SingleOrder from '../components/SingleProduct'
 import CreateProductContainer from './CreateProductContainer';
 import CarroContainer from './CarroContainer'
 import OrdersContainer from './OrdersContainer'
+import UsrMngmtContainer from './UsrMngmtContainer';
 
 export default class Main extends React.Component {
     constructor(props) {
@@ -70,6 +70,10 @@ export default class Main extends React.Component {
                     <Route
                         exact path='/accounts/new' render={() =>
                             <CrearUsuario />
+                        } />
+                    <Route
+                        exact path='/users/admin' render={() =>
+                            <UsrMngmtContainer />
                         } />
                     <Route
                         exact path='/orders/:id' render={() =>
