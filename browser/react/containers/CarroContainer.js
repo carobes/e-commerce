@@ -42,10 +42,12 @@ class CarroContainer extends React.Component{
   }
 
   componentDidMount(){
-    this.unsubscribe = store.subscribe(() => {
-        this.setState({data: store.getState(), userId: store.getState().users.loggedUser.id});
-    });
-    store.dispatch(fetchItemsInCart(this.state.userId));
+      this.unsubscribe = store.subscribe(() => {
+          this.setState({
+            data: store.getState(), userId: store.getState().users.loggedUser.id
+          });
+      })
+      if (this.state.userId) store.dispatch(fetchItemsInCart(this.state.userId));
   }
 
   handleAdd = itemId => event => { // debo llamar la ruta para actualizar un item en carrito
@@ -60,22 +62,35 @@ class CarroContainer extends React.Component{
 
   handleDrop = itemId => event => { // debo llamar la ruta para actualizar un item en carrito
     axios.delete('/api/carrito/delete', {data: {itemId: itemId, userId: this.state.userId} })
-    .then(res => store.dispatch(fetchItemsInCart(this.state.userId)))
-    .catch(err => console.log('Fallo'));
+    .then(res => store.dispatch(fetchItemsInCart(this.state.userId)));
   }
 
   handleChange = event => {
     const string = event.target.value;
     const key = event.target.id;
     if (key === 'input-email'){
-      this.setState({emailFlag: validateEmail(string)});
+      this.setState({emailFlag: validateEmail(string), email: string});
     }else{
       this.setState({address: string});
     }
   }
 
   genOrder = event => {
-    console.log('Generar orden de compra con el arreglo de Productos : ', this.state.data.carrito.list_items);
+    let suma = this.sumaTotal();
+    let items_array = this.state.data.carrito.list_items.map(item => ({
+      id: item.carrito.productoId,
+      cantidad: item.carrito.cantidad,
+      precio: item.precio
+    }));
+    axios.post('/api/orders', {
+      userId: this.state.userId,
+      total: suma,
+      email: this.state.email,
+      address: this.state.address,
+      items: items_array
+    })
+    .then(ordenCreated => console.log('Orden Creada : ', ordenCreated))
+    .catch(err => console.log('Error : ', err));
   }
 
   componentWillUnmount() {

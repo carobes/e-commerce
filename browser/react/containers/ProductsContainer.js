@@ -35,7 +35,7 @@ class ProductsContainer extends React.Component {
       if (product_to_add.usuario) {
         axios.post('/api/carrito', product_to_add)
         .then(addedProduct => console.log('Añadido : ', addedProduct))
-        .catch(err => console.log('Fallo'));
+        .catch(err => console.log('Ya existe este item'));
       }
       else console.log('No esta loggeado'); // hacer que se guarde en la memoria del navegador.
     }

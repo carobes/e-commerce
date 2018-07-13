@@ -30,16 +30,20 @@ export default withStyles(style)(class Main extends React.Component {
     constructor(props){
       super(props);
       this.state = {
-        userId: 0,
+        userId: store.getState().users.loggedUser.id,
         num_elems_carro: [], // traer el numero de elementos que existen en el carro de el usuario
+        enabled: false
       }
     }
 
     componentDidMount(){
-      this.unsubscribe = store.subscribe(() => {
-          this.setState({num_elems_carro: store.getState().carrito.list_items, userId: store.getState().users.loggedUser.id});
-      });
-      if (this.state.userId != 0) store.dispatch(fetchItemsInCart(this.state.userId));
+        this.unsubscribe = store.subscribe(() => {
+            this.setState({
+              num_elems_carro: store.getState().carrito.list_items
+            })
+          });
+        if (this.state.userId) store.dispatch(fetchItemsInCart(this.state.userId));
+        if (this.state.userId) this.setState({enabled: true});
     }
 
     componentWillUnmount() {
@@ -47,12 +51,12 @@ export default withStyles(style)(class Main extends React.Component {
     }
 
     render() {
-        const {classes} = this.props;
-        
-        if (this.props.location.pathname === '/carro') {
-            return (
-                <div>
-              <Appbar num_elems_carro={this.state.num_elems_carro.length}/>
+        const {classes} = this.props
+      let num_items = this.state.num_elems_carro.length;
+        if (this.props.location.pathname === '/carro') { // si esta logeado o no ...
+          return (
+            <div>
+              <Appbar num_elems_carro={num_items}/>
               <br />
               <Grid container spacing={16}>
                 <CarroContainer />
@@ -62,7 +66,7 @@ export default withStyles(style)(class Main extends React.Component {
         }
         return (
             <div>
-                <Appbar num_elems_carro={this.state.num_elems_carro.length} loggedUser={this.props.loggedUser} unlogUser={this.props.unlogUser}/>
+                <Appbar num_elems_carro={this.state.num_elems_carro.length} loggedUser={this.props.loggedUser} unlogUser={this.props.unlogUser} enabled={this.state.enabled}/>
                 <br />
                 <Switch>
                     <Route
