@@ -1,5 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
+import { Link } from 'react-router-dom';
 import { Typography, Card, CardContent } from "@material-ui/core";
 import { withStyles } from "@material-ui/core/styles";
 import Table from "@material-ui/core/Table";
@@ -8,7 +9,6 @@ import TableCell from "@material-ui/core/TableCell";
 import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
 import Paper from "@material-ui/core/Paper";
-import Avatar from "@material-ui/core/Avatar";
 import IdUserCard from './IdUserCard';
 
 const CustomTableCell = withStyles(theme => ({
@@ -21,11 +21,6 @@ const CustomTableCell = withStyles(theme => ({
   }
 }))(TableCell);
 
-const user = {
-  nombre: "Toni",
-  apellido: "Pastafrola",
-  mail: "toni48@pastafrola5.com"
-};
 const styles = theme => ({
   root: {
     width: "100%",
@@ -85,36 +80,11 @@ function CustomizedTable({ classes, order }) {
   const stat = !status ? {} : status;
   const usu = !usuario ? {} : usuario;
   // const total = !productosOrdens ? [] : productosOrdens.map(data => data.subtotal).reduce((prev, next) => prev + next); 
-
-  console.log("ver que hace pO", pO, "order", order, "productosOrden", productosOrdens)
+console.log("order", order)
+  
   return (
     <div>
       <br />
-
-      {/* <Card className={classes.card}>
-        <div className={classes.rowAvatar}>
-          <Avatar className={classes.avatar}>
-            {usu.nombre + usu.apellido}
-          </Avatar>
-        </div>
-        <br />
-        <CardContent>
-          <Typography className={classes.pos} variant="headline" component="h1">
-            {user.nombre}
-          </Typography>
-          <Typography variant="headline" component="h2">
-            {user.apellido}
-          </Typography>
-          <br/>
-          <Typography
-            className={classes.title}
-            variant="headline"
-            component="h2"
-          >
-           mail: {order.mail}
-          </Typography>
-        </CardContent>
-      </Card> */}
       <IdUserCard user={usu}/>
       <Paper className={classes.root}>
         <Table className={classes.table}>
@@ -131,7 +101,7 @@ function CustomizedTable({ classes, order }) {
               {pO.map(data => (
                 <TableRow className={classes.row} key={data.id}>
                   <CustomTableCell component="th" scope="row">
-                    {data.nombre}
+                  <Link to={`/products/single/${data.id}`}>{data.nombre}</Link>
                   </CustomTableCell>
                   <CustomTableCell>{data.descripcion}</CustomTableCell>
                   <CustomTableCell numeric>

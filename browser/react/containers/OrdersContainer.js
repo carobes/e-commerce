@@ -19,14 +19,20 @@ class OrdersContainer extends React.Component {
         this.state = {
             estados: [],
             orderMap:{},
-            open:{}
+            open:{},
+            filterUser:0,
+            filter: 0
         }
         this.handleChange = this.handleChange.bind(this)
+        this.handdleFilter = this.handleFilter.bind(this)
         // this.handleClose = this.handleClose.bind(this)
         // this.handleOpen = this.handleOpen.bind(this)
-        // this.handleSubmit = this.handleSubmit.bind(this) 
+        this.handleSubmit = this.handleSubmit.bind(this) 
       }
     componentDidMount() {
+        if (this.props.match.params.userId) {
+            this.setState({filterUser:this.props.match.params.userId})
+        }
         Promise.resolve(this.props.fetchOrders())
             .then((res)=>{
                 var orderMap = {}
@@ -43,15 +49,24 @@ class OrdersContainer extends React.Component {
                 this.setState({estados})})
         }
 
-    componentWillUnmount() {
-        this.unsubscribe();
-    }
-
     handleChange = event => {
-        var auxOM = Object.assign({},this.state.orderMap)
+        var auxOM = Object.a
+        router.get('/user/:id', function (req, res) {
+          console.log("entro en el axios")
+          Ordenes.findOne({
+               where: { id: req.params.id },
+               include: [ProductosOrden, { model: Estado, as:'status' }, { model: Users, as:'usuario' }]
+           })
+               .then(orden => {console.log("orden en el axios", orden);res.json(orden)});
+        });ssign({},this.state.orderMap)
         auxOM[event.target.name] = event.target.value
         this.setState({orderMap:auxOM });
       };
+    
+    handleFilter = event => {
+        event.preventDefault()
+        this.setState({filter: event.target.value})
+    }
     
     handleClose = event => {
         var auxOpen = Object.assign({},this.state.open)
@@ -64,11 +79,18 @@ class OrdersContainer extends React.Component {
         auxOpen[event.target.name] = true
         this.setState({ open: auxOpen });
     };
+    handleSubmit = ({orderId,statusId}) => {
+        axios.put('/api/orders/estados', ({
+            orderId,
+            statusId
+            }))
+            .then(()=> this.props.fetchOrders())
+        }
 
     render() {
-
-        console.log(this.state.orderMap)
-        return <Orders orders={this.props.orderList} estados={this.state.estados} handleChange={this.handleChange} handleClose={this.handleClose} handleOpen={this.handleOpen} open={this.state.open} orderMap={this.state.orderMap}/>
+        var auxOrderList = this.state.filter === 0 ? this.props.orderList : this.props.orderList.filter(order => order.statusId === this.state.filter )
+        auxOrderList = this.state.filterUser === 0 ? auxOrderList : auxOrderList.filter(order => order.usuarioId == this.state.filterUser)
+        return <Orders orders={auxOrderList} estados={this.state.estados} handleChange={this.handleChange} handleClose={this.handleClose} handleOpen={this.handleOpen} open={this.state.open} orderMap={this.state.orderMap} handleSubmit={this.handleSubmit} handleFilter={this.handleFilter} filter={this.state.filter}/>
     }
 
 }

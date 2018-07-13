@@ -1,7 +1,8 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { Typography, Card, CardContent } from "@material-ui/core";
+import { Typography, Card, CardContent, IconButton, Button } from "@material-ui/core";
 import { withStyles } from "@material-ui/core/styles";
+import { Link } from 'react-router-dom';
 import Table from "@material-ui/core/Table";
 import TableBody from "@material-ui/core/TableBody";
 import TableCell from "@material-ui/core/TableCell";
@@ -9,16 +10,12 @@ import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
 import Paper from "@material-ui/core/Paper";
 import Avatar from "@material-ui/core/Avatar";
-import IdUserCard from './IdUserCard';
-import Button from '@material-ui/core/Button';
+import Check from '@material-ui/icons/Check';
 import FormControl from '@material-ui/core/FormControl';
-import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
 import Select from '@material-ui/core/Select';
-import AddIcon from '@material-ui/icons/Add';
-import Icon from '@material-ui/core/Icon';
-import DeleteIcon from '@material-ui/icons/Delete';
-import NavigationIcon from '@material-ui/icons/Navigation';
+import { withRouter } from 'react-router';
+
 
 const CustomTableCell = withStyles(theme => ({
   head: {
@@ -42,6 +39,9 @@ const styles = theme => ({
     fontSize: 10,
     // display: 'block',
     marginTop: theme.spacing.unit * 2,
+    },
+    tick: {
+      color: 'green'
   },
   formControl: {
     margin: theme.spacing.unit,
@@ -99,15 +99,40 @@ const styles = theme => ({
     display: "flex",
     float: "right"
   },
+  container: {
+    display: "flex"
+  }
+  
 });
 
-function CustomizedTable({ classes, orders, estados, handleChange, orderMap, handleClose, handleOpen, open }) {
-  const { productosOrdens, status, usuario } = orders; 
+function CustomizedTable({ classes, orders, estados, handleChange, orderMap, handleClose, handleOpen, open, handleSubmit, handleFilter, filter }) {
+  const { productosOrdens, status, usuario } = orders;
   // const pO = !productosOrdens ? [] : productosOrdens;
   // const usu = !usuario ? {} : usuario;
-  
   return (
-  !orders.length ? <div>Loading...</div> :  
+    <div>
+      <form autoComplete="off">
+        <FormControl className={classes.formControl}>
+          <Select
+                // open={open[orders.id]}
+                // onClose={handleClose}
+                // onOpen={handleOpen}
+                value={filter}
+                onChange={handleFilter}
+                inputProps={{
+                  name: `filter`,
+                  id: 'demo-controlled-open-select',
+                }}
+              >
+            <MenuItem key={0} value={0}>Todos los Estados</MenuItem>              
+
+              {estados.map(estado => 
+              <MenuItem key={estado.id} value={estado.id}>{estado.estado}</MenuItem>
+            )}
+          </Select> 
+        </FormControl>
+      </form>
+  {!orders.length ? <div>No se encontraron resultados</div> :  
     <div>
       <br />
       <Card className={classes.card}>
@@ -125,60 +150,60 @@ function CustomizedTable({ classes, orders, estados, handleChange, orderMap, han
               <CustomTableCell>Usuario</CustomTableCell>
               <CustomTableCell>Fecha de la Orden</CustomTableCell>
               <CustomTableCell>Número de Orden</CustomTableCell>
-              <CustomTableCell numeric> Total (en AR$)</CustomTableCell>
-              <CustomTableCell numeric>Status</CustomTableCell>
+              <CustomTableCell> Total (AR$)</CustomTableCell>
+              <CustomTableCell>Status</CustomTableCell>
+              <CustomTableCell>Aplicar cambios</CustomTableCell>
             </TableRow>
           </TableHead>
           <TableBody>
               {orders.map(data => (
                 <TableRow className={classes.row} key={data.id}>
-                  <CustomTableCell>  <div className={classes.rowAvatar}><Avatar className={classes.avatar}>
-{data.usuario.nombre[0] + data.usuario.apellido[0]}</Avatar></div></CustomTableCell>
+                  <CustomTableCell>  <div className={classes.rowAvatar}><Avatar className={classes.avatar}>{data.usuario.nombre[0] + data.usuario.apellido[0]}</Avatar></div></CustomTableCell>
                   <CustomTableCell>{data.usuario.nombreApellido}</CustomTableCell>
                   <CustomTableCell>{data.fecha}</CustomTableCell>
-                  <CustomTableCell numeric>{data.id}</CustomTableCell>
+                  
+                    <CustomTableCell numeric><Link to={`/orders/${data.id}`}>{data.id}</Link></CustomTableCell>
+                  
                   <CustomTableCell numeric> {data.total} </CustomTableCell>
-                  <CustomTableCell>      
+                  <CustomTableCell>
                     <form autoComplete="off">
-        <FormControl className={classes.formControl}>
-          <Select
-            open={open[data.id]}
-            onClose={handleClose}
-            onOpen={handleOpen}
-            value={orderMap[data.id]}
-            onChange={handleChange}
-            inputProps={{
-              name: `${data.id}`,
-              id: 'demo-controlled-open-select',
-            }}
-          >
-          {estados.map(estado => <MenuItem key={estado.id} value={estado.id}>{estado.estado}</MenuItem>
-)}
-            {/* <MenuItem value="Creado">Creado</MenuItem>
-            <MenuItem value={10}>Procesando</MenuItem>
-            <MenuItem value={20}>Cancelado</MenuItem>
-            <MenuItem value={30}>Completado</MenuItem> */}
-          </Select>
-        </FormControl>
-      </form></CustomTableCell>
+                        <div className={classes.container}>
+                          <FormControl className={classes.formControl}>
+                          <Select
+                                open={open[data.id]}
+                                onClose={handleClose}
+                                onOpen={handleOpen}
+                                value={orderMap[data.id]}
+                                onChange={handleChange}
+                                inputProps={{
+                                  name: `${data.id}`,
+                                  id: 'demo-controlled-open-select',
+                                }}
+                              >
+                              {estados.map(estado => 
+                              <MenuItem key={estado.id} value={estado.id}>{estado.estado}</MenuItem>
+                            )}              
+                          </Select>
+                          </FormControl>
+                        </div>
+                    </form>
+                  </CustomTableCell>
+                  <CustomTableCell>
+        {data.status.id !== orderMap[data.id] ? 
+        <div>
+          <IconButton onClick={()=>handleSubmit({orderId: data.id,statusId:orderMap[data.id]})}>
+            <Check  className={classes.tick}/>
+          </IconButton> 
+        </div>
+        : null}
+                  </CustomTableCell>
                 </TableRow>
                     ))}
           </TableBody>
         </Table>
       </Paper>
       <br/>
-      {/* <Button variant="extendedFab" aria-label="delete" className={classes.button}>
-        Creado
-      </Button>
-      <Button variant="extendedFab" aria-label="delete" className={classes.button}>
-        Procesando
-      </Button>
-      <Button variant="extendedFab" aria-label="delete" className={classes.button}>
-        Cancelado
-      </Button>
-      <Button variant="extendedFab" aria-label="delete" className={classes.button}>
-        Completado
-      </Button> */}
+    </div>}
     </div>
   );
 }
@@ -188,4 +213,4 @@ CustomizedTable.propTypes = {
 };
 
 
-export default withStyles(styles)(CustomizedTable);
+export default withRouter(withStyles(styles)(CustomizedTable));

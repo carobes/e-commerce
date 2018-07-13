@@ -31,7 +31,7 @@ class SearchContainer extends React.Component {
         if (this.state.search === '') {
             this.props.history.push('/products')
         } else {
-            this.props.fetchSearch(this.state.search).then(() => this.props.history.push('/products'))
+            this.props.fetchSearch(this.state.search).then(() => this.props.history.push('/products/search'))
         }
 
     }

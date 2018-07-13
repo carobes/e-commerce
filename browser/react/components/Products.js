@@ -24,14 +24,14 @@ export default withStyles(styles)(props => {
                     <Grid key={product.id} item xs={4}>
 
                         <Card className={classes.card}>
-                            <Link to={`/products/${product.id}`}>
+                            <Link to={`/products/single/${product.id}`}>
                                 <CardMedia
                                     className={classes.media}
                                     image={product.imagens[0].ruta}
                                 />
                             </Link>
                             <CardContent>
-                                <Link to={`/products/${product.id}`}>
+                                <Link to={`/products/single/${product.id}`}>
                                     <Typography gutterBottom variant="headline" component="h2">
                                         {product.nombre}
                                     </Typography>

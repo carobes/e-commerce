@@ -42,7 +42,8 @@ const styles = theme => ({
 });
 
 function CustomizedTable(props) {
-  const { classes, data, address, total, handleAdd, handleSubstract, handleDrop, genOrder, emailFlag } = props;
+  const { classes, data, sumaTotal, address, handleAdd, handleSubstract, handleDrop, genOrder, emailFlag } = props;
+  let total = sumaTotal();
   const genOrderFlag = (address.length > 10 && emailFlag) ? false : true;
   return (
     <Paper className={classes.root}>
@@ -57,7 +58,7 @@ function CustomizedTable(props) {
           </TableRow>
         </TableHead>
         <TableBody>
-          {data.map(n => {
+          {data.map((n,i) => {
             return (
               <TableRow className={classes.row} key={n.id}>
                 <CustomTableCell component="th" scope="row">
@@ -67,17 +68,17 @@ function CustomizedTable(props) {
                   {n.precio}
                 </CustomTableCell>
                 <CustomTableCell>
-                  <Button mini color="primary" aria-label="add" className={classes.button} onClick={handleAdd(n.id)}>
+                  <Button mini color="primary" aria-label="add" className={classes.button} onClick={handleAdd(i)}>
                     <ArrowUpward />
                   </Button>
                   <span className={classes.root}>{n.carrito.cantidad}</span>
-                  <Button mini color="primary" aria-label="substract" className={classes.button} onClick={handleSubstract(n.id)}>
+                  <Button mini color="primary" aria-label="substract" className={classes.button} onClick={handleSubstract(i)}>
                     <ArrowDownward />
                   </Button>
                 </CustomTableCell>
                 <CustomTableCell numeric>{n.precio * n.carrito.cantidad}</CustomTableCell>
                 <CustomTableCell>
-                  <Button aria-label="delete" className={classes.button} onClick={handleDrop(n.id)}>
+                  <Button aria-label="delete" className={classes.button} onClick={handleDrop(i)}>
                     <DeleteIcon />
                   </Button>
                 </CustomTableCell>
