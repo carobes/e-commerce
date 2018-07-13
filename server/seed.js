@@ -126,7 +126,7 @@ const estados =  [{
 
 const ordenes = [
   {detalle: {
-    fecha: 08/08/18,
+    fecha: new Date("2018/08/18"),
     direccion: 'Av. Siempreviva 1234',
     mail: "soyelmaildelcheckout@gmail.com",
     total: 20,
@@ -141,10 +141,10 @@ const ordenes = [
   usuario: "Alan",
   estado: "Completado"},
   {detalle: {
-    fecha: 04/05/18,
+    fecha: new Date("2018/06/30"),
     direccion: 'Av. Siempreviva 1234',
     mail: "soyelmaildelcheckout@gmail.com",
-    total: 450,
+    total: 500,
     productosOrdens: [
         {nombre: 'Producto 3',
         descripcion: 'Soy el producto tres',
@@ -160,7 +160,7 @@ const ordenes = [
   usuario: "Alan",
   estado: "Cancelado"},
   {detalle: {
-    fecha: 07/01/18,
+    fecha: new Date("2018/01/07"),
     direccion: 'Elm Street 1428',
     mail: "soyotromaildelcheckout@gmail.com",
     total: 50,

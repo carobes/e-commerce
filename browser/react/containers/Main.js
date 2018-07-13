@@ -97,11 +97,11 @@ export default connect(mapStateToProps, mapDispatchToProps)(withStyles(style)(cl
                             <CrearUsuario />
                         } />
                     <Route
-                        exact path='/orders/:id' render={() =>
+                        exact path='/orders/single/:id' render={() =>
                             <SingleOrderContainer />
                         } />
                     <Route
-                        exact path='/orders' render={() =>
+                        exact path='/orders/:userId?' render={() =>
                             <OrdersContainer />
                         } />
                     <Redirect from="/" to="/products" />

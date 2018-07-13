@@ -1,10 +1,11 @@
-
 import React from 'react';
 import { Typography, Card, CardContent } from '@material-ui/core'
 import { withStyles } from '@material-ui/core/styles'
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import IdUserCard from './IdUserCard';
+import { Link } from 'react-router-dom';
+
 
 const styles = {
     card: {
@@ -50,7 +51,7 @@ export default withStyles(styles)(props => {
             <br />
             <IdUserCard user={props.user} />
             <br />
-            <Button className={classes.buttonOrden} size="medium" >
+            <Button className={classes.buttonOrden} size="medium" component={Link} to={`/orders/${props.user.id}`} >
                 Mis Ordenes
             </Button>
         </div>

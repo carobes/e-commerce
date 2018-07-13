@@ -1,7 +1,8 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { Typography, Card, CardContent } from "@material-ui/core";
+import { Typography, Card, CardContent, IconButton, Button } from "@material-ui/core";
 import { withStyles } from "@material-ui/core/styles";
+import { Link } from 'react-router-dom';
 import Table from "@material-ui/core/Table";
 import TableBody from "@material-ui/core/TableBody";
 import TableCell from "@material-ui/core/TableCell";
@@ -9,7 +10,12 @@ import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
 import Paper from "@material-ui/core/Paper";
 import Avatar from "@material-ui/core/Avatar";
-import IdUserCard from './IdUserCard';
+import Check from '@material-ui/icons/Check';
+import FormControl from '@material-ui/core/FormControl';
+import MenuItem from '@material-ui/core/MenuItem';
+import Select from '@material-ui/core/Select';
+import { withRouter } from 'react-router';
+
 
 const CustomTableCell = withStyles(theme => ({
   head: {
@@ -23,6 +29,27 @@ const CustomTableCell = withStyles(theme => ({
 
 
 const styles = theme => ({
+  button: {
+    margin: theme.spacing.unit,
+    backgroundColor: "#4286f4",
+    color: "white",
+    '&:hover': {
+      color: 'black'
+    },
+    fontSize: 10,
+    // display: 'block',
+    marginTop: theme.spacing.unit * 2,
+    },
+    tick: {
+      color: 'green'
+  },
+  formControl: {
+    margin: theme.spacing.unit,
+    minWidth: 120,
+  },
+  extendedIcon: {
+    marginRight: theme.spacing.unit,
+  },
   root: {
     width: "100%",
     marginTop: theme.spacing.unit * 3,
@@ -65,30 +92,47 @@ const styles = theme => ({
     color: "#fff",
     backgroundColor: "#6eb4ea",
     float: "left",
-    width: "75px",
-    height: "75px"
+    width: "50px",
+    height: "50px"
   },
   rowAvatar: {
     display: "flex",
     float: "right"
   },
-  buttonsFilter: {
-    backgroundColor: '#6eb4ea',
-    color: 'white',
-    '&:hover': {
-        color: 'white'
-    }
-}
+  container: {
+    display: "flex"
+  }
+  
 });
 
-
-function CustomizedTable({ classes, orders }) {
-  const { productosOrdens, status, usuario } = orders; 
-  const pO = !productosOrdens ? [] : productosOrdens;
-  const usu = !usuario ? {} : usuario;
- 
+function CustomizedTable({ classes, orders, estados, handleChange, orderMap, handleClose, handleOpen, open, handleSubmit, handleFilter, filter }) {
+  const { productosOrdens, status, usuario } = orders;
+  // const pO = !productosOrdens ? [] : productosOrdens;
+  // const usu = !usuario ? {} : usuario;
   return (
-    
+    <div>
+      <form autoComplete="off">
+        <FormControl className={classes.formControl}>
+          <Select
+                // open={open[orders.id]}
+                // onClose={handleClose}
+                // onOpen={handleOpen}
+                value={filter}
+                onChange={handleFilter}
+                inputProps={{
+                  name: `filter`,
+                  id: 'demo-controlled-open-select',
+                }}
+              >
+            <MenuItem key={0} value={0}>Todos los Estados</MenuItem>              
+
+              {estados.map(estado => 
+              <MenuItem key={estado.id} value={estado.id}>{estado.estado}</MenuItem>
+            )}
+          </Select> 
+        </FormControl>
+      </form>
+  {!orders.length ? <div>No se encontraron resultados</div> :  
     <div>
       <br />
       <Card className={classes.card}>
@@ -106,58 +150,60 @@ function CustomizedTable({ classes, orders }) {
               <CustomTableCell>Usuario</CustomTableCell>
               <CustomTableCell>Fecha de la Orden</CustomTableCell>
               <CustomTableCell>Número de Orden</CustomTableCell>
-              <CustomTableCell numeric> Total (en AR$)</CustomTableCell>
-              <CustomTableCell numeric>Status</CustomTableCell>
+              <CustomTableCell> Total (AR$)</CustomTableCell>
+              <CustomTableCell>Status</CustomTableCell>
+              <CustomTableCell>Aplicar cambios</CustomTableCell>
             </TableRow>
           </TableHead>
           <TableBody>
               {orders.map(data => (
                 <TableRow className={classes.row} key={data.id}>
-                  <CustomTableCell>  <div className={classes.rowAvatar}><Avatar className={classes.avatar}>
-{data.usuario.nombre[0] + data.usuario.apellido[0]}</Avatar></div></CustomTableCell>
+                  <CustomTableCell>  <div className={classes.rowAvatar}><Avatar className={classes.avatar}>{data.usuario.nombre[0] + data.usuario.apellido[0]}</Avatar></div></CustomTableCell>
                   <CustomTableCell>{data.usuario.nombreApellido}</CustomTableCell>
                   <CustomTableCell>{data.fecha}</CustomTableCell>
-                  <CustomTableCell numeric>{data.id}</CustomTableCell>
+                  
+                    <CustomTableCell numeric><Link to={`/orders/${data.id}`}>{data.id}</Link></CustomTableCell>
+                  
                   <CustomTableCell numeric> {data.total} </CustomTableCell>
-                  <CustomTableCell>{data.status.estado}</CustomTableCell>
+                  <CustomTableCell>
+                    <form autoComplete="off">
+                        <div className={classes.container}>
+                          <FormControl className={classes.formControl}>
+                          <Select
+                                open={open[data.id]}
+                                onClose={handleClose}
+                                onOpen={handleOpen}
+                                value={orderMap[data.id]}
+                                onChange={handleChange}
+                                inputProps={{
+                                  name: `${data.id}`,
+                                  id: 'demo-controlled-open-select',
+                                }}
+                              >
+                              {estados.map(estado => 
+                              <MenuItem key={estado.id} value={estado.id}>{estado.estado}</MenuItem>
+                            )}              
+                          </Select>
+                          </FormControl>
+                        </div>
+                    </form>
+                  </CustomTableCell>
+                  <CustomTableCell>
+        {data.status.id !== orderMap[data.id] ? 
+        <div>
+          <IconButton onClick={()=>handleSubmit({orderId: data.id,statusId:orderMap[data.id]})}>
+            <Check  className={classes.tick}/>
+          </IconButton> 
+        </div>
+        : null}
+                  </CustomTableCell>
                 </TableRow>
                     ))}
           </TableBody>
         </Table>
       </Paper>
       <br/>
-      {/* <TablePagination
-          component="div"
-          count={data.length} 
-          rowsPerPage={rowsPerPage}
-          page={page}
-          backIconButtonProps={{
-            'aria-label': 'Previous Page',
-          }}
-          nextIconButtonProps={{
-            'aria-label': 'Next Page',
-          }}
-          onChangePage={this.handleChangePage}
-          onChangeRowsPerPage={this.handleChangeRowsPerPage}
-        /> */}
-      {/* <Card className={classes.card2}>
-        <br />
-        <CardContent>
-          <Typography className={classes.pos2} variant="headline" component="h2">
-            Total: $ 
-         </Typography>
-          <Typography className={classes.pos2} variant="headline" component="h1">
-            Status: {stat.estado}
-          </Typography>
-          <Typography className={classes.pos2} variant="headline" component="h1">
-            mail de envío: {order.mail}
-          </Typography>
-          <Typography className={classes.pos2} variant="headline" component="h1">
-            dirección de envío: {order.direccion}
-          </Typography>
-          <br />
-        </CardContent>
-      </Card> */}
+    </div>}
     </div>
   );
 }
@@ -166,4 +212,5 @@ CustomizedTable.propTypes = {
   classes: PropTypes.object.isRequired
 };
 
-export default withStyles(styles)(CustomizedTable);
+
+export default withRouter(withStyles(styles)(CustomizedTable));
