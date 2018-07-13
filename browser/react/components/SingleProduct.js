@@ -7,6 +7,7 @@ import GridList from '@material-ui/core/GridList';
 import GridListTile from '@material-ui/core/GridListTile';
 import GridListTileBar from '@material-ui/core/GridListTileBar';
 
+
 const styles = {
     media: {
         height: 0,
@@ -53,11 +54,14 @@ const styles = {
 export default withStyles(styles)(props => {
     const { classes } = props
     const imgGrid = !props.product.imagens ? [] : props.product.imagens.slice(1)
+    // const rating = props.product.reviews && props.product.reviews.reduce((total, review) => {
+    //     return total + review.rating;
+    // }, 0) / props.product.reviews.length;
     return (
 
         <div>
             <Grid container spacing={16}>
-                <Grid item xs={6}>
+                <Grid item xs={4}>
                     <Card className={classes.card}>
                         <CardMedia
                             className={classes.media}
@@ -66,20 +70,18 @@ export default withStyles(styles)(props => {
                     </Card>
                     <br />
                     <div className={classes.root}>
-                        <GridList className={classes.gridList} cols={2.5}>
+                        <GridList className={classes.gridList} cols={1}>
                             {imgGrid.map(data => (
                                 <GridListTile key={data.id}>
                                     <img src={data.ruta} />
                                     <GridListTileBar
-
                                     />
                                 </GridListTile>
                             ))}
                         </GridList>
                     </div>
                 </Grid>
-                <Grid item xs={6}>
-
+                <Grid item xs={8}>
                     <Card className={classes.card}>
                         <CardContent>
                             <Typography className={classes.title} variant="headline" component="h2">
@@ -96,13 +98,15 @@ export default withStyles(styles)(props => {
                             <IconButton size="small" color="secondary">
                                 <AddShoppingCart />
                             </IconButton>
-                            <IconButton className={classes.buttonStar} size="small" >
-                                <Star />
-                            </IconButton>
+                            <Typography component="p">
+                            </Typography>
                         </CardActions>
+
                     </Card>
+
                 </Grid>
             </Grid>
+
         </div>
     )
 })
