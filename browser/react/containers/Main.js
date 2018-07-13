@@ -3,7 +3,8 @@ import { Route, Link, Redirect, Switch } from 'react-router-dom';
 import Appbar from '../components/Appbar'
 import ProductsContainer from './ProductsContainer'
 import SidebarContainer from './SidebarContainer'
-import { Grid } from '@material-ui/core'
+import { Grid, Button, withStyles } from '@material-ui/core'
+import AddIcon from '@material-ui/icons/Add'
 import SingleProductContainer from './SingleProductContainer'
 import SingleOrderContainer from './SingleOrderContainer'
 import UserIdContainer from './UserIdContainer'
@@ -16,7 +17,16 @@ import OrdersContainer from './OrdersContainer'
 import { fetchItemsInCart } from '../action-creators/carrito'
 import store from '../store'
 
-export default class Main extends React.Component {
+const style = {
+    margin: 0,
+    top: 'auto',
+    right: 20,
+    bottom: 20,
+    left: 'auto',
+    position: 'fixed',
+};
+
+export default withStyles(style)(class Main extends React.Component {
     constructor(props){
       super(props);
       this.state = {
@@ -37,9 +47,11 @@ export default class Main extends React.Component {
     }
 
     render() {
+        const {classes} = this.props;
+        
         if (this.props.location.pathname === '/carro') {
-          return (
-            <div>
+            return (
+                <div>
               <Appbar num_elems_carro={this.state.num_elems_carro.length}/>
               <br />
               <Grid container spacing={16}>
@@ -65,7 +77,7 @@ export default class Main extends React.Component {
                             </Grid>
                         } />
                     <Route
-                        exact path='/products/new' render={() =>
+                        exact path='/products/admin/new' render={() =>
                             <CreateProductContainer />
                         } />
                     <Route
@@ -94,7 +106,10 @@ export default class Main extends React.Component {
                         } />
                     <Redirect from="/" to="/products" />
                 </Switch>
+                <Button variant="fab" color="primary" aria-label="add" className={classes.button}>
+                    <AddIcon />
+                </Button>
             </div>
         )
     }
-}
+})
